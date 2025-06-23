@@ -1,0 +1,805 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\weatheranalysis.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:weatheranalysis.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\resources\\styles\\colors.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:resources\\styles\\colors.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ShanmuganSekar\\AppData\\Local\\Temp\\.vsdbgsrc\\e4bbbf2e4ac744e4bf31ceba9a65b0e17206a561\\Resources_Styles_Styles.xaml.sg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\desktop\\weatheranalysisview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\desktop\\weatheranalysisview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ShanmuganSekar\\AppData\\Local\\Temp\\.vsdbgsrc\\918b189f0078c1d96464fe1d492a640afd17d657\\Views_Desktop_WeatherAnalysisView.xaml.sg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\datastore\\datastore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:datastore\\datastore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\mainpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\mainpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\desktop\\weatheranalysisview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\desktop\\weatheranalysisview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\mobile\\forecast\\weatherandroidview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\mobile\\forecast\\weatherandroidview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\mobile\\forecast\\weatherandroidview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\mobile\\forecast\\weatherandroidview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\view\\weatheranalysisviewdemo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:view\\weatheranalysisviewdemo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\view\\weatheranalysisviewdemo.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:view\\weatheranalysisviewdemo.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\mobile\\forecast\\monthly.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\mobile\\forecast\\monthly.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\mobile\\forecast\\hourlyview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\mobile\\forecast\\hourlyview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\desktop\\forecastpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\desktop\\forecastpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\desktop\\trendspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\desktop\\trendspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\desktop\\trendspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\desktop\\trendspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\desktop\\weatherview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\desktop\\weatherview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\desktop\\forecastpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\desktop\\forecastpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\desktop\\hourlypage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\desktop\\hourlypage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\desktop\\monthlypage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\desktop\\monthlypage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\desktop\\weatherview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\desktop\\weatherview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\json\\historicdata-los angeles.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:json\\historicdata-los angeles.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\model\\datamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:model\\datamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\dailyforecastviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\dailyforecastviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\datainfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\datainfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\dayweatherinfoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\dayweatherinfoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\historicalweatherviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\historicalweatherviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\hourlyforecastviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\hourlyforecastviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\locationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\locationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\mapsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\mapsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\settingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\settingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\summaryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\summaryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\todayweathertileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\todayweathertileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\weather\\weatherdatapointviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\weather\\weatherdatapointviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\viewmodel\\viewmodellocator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:viewmodel\\viewmodellocator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\views\\mobile\\forecast\\hourlyview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:views\\mobile\\forecast\\hourlyview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|d:\\weatheranalysiscore\\maui-weather-analysis\\weatheranalysis\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75470260-979D-A0BE-63AE-C531C3709F5F}|WeatherAnalysis.csproj|solutionrelative:mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{13b29bd0-3807-335c-9cad-ba55364c29cb}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Resources_Styles_Styles.xaml.sg.cs",
+              "DocumentMoniker": "C:\\Users\\ShanmuganSekar\\AppData\\Local\\Temp\\.vsdbgsrc\\e4bbbf2e4ac744e4bf31ceba9a65b0e17206a561\\Resources_Styles_Styles.xaml.sg.cs",
+              "ToolTip": "C:\\Users\\ShanmuganSekar\\AppData\\Local\\Temp\\.vsdbgsrc\\e4bbbf2e4ac744e4bf31ceba9a65b0e17206a561\\Resources_Styles_Styles.xaml.sg.cs [Read Only]",
+              "ViewState": "AgIAABEAAAAAAAAAAAAewB4AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T17:34:47.29Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Views_Desktop_WeatherAnalysisView.xaml.sg.cs",
+              "DocumentMoniker": "C:\\Users\\ShanmuganSekar\\AppData\\Local\\Temp\\.vsdbgsrc\\918b189f0078c1d96464fe1d492a640afd17d657\\Views_Desktop_WeatherAnalysisView.xaml.sg.cs",
+              "ToolTip": "C:\\Users\\ShanmuganSekar\\AppData\\Local\\Temp\\.vsdbgsrc\\918b189f0078c1d96464fe1d492a640afd17d657\\Views_Desktop_WeatherAnalysisView.xaml.sg.cs [Read Only]",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAiwE4AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T17:29:45.317Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "WeatherAnalysisView.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\WeatherAnalysisView.xaml",
+              "RelativeDocumentMoniker": "Views\\Desktop\\WeatherAnalysisView.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\WeatherAnalysisView.xaml",
+              "RelativeToolTip": "Views\\Desktop\\WeatherAnalysisView.xaml",
+              "ViewState": "AgIAACQBAAAAAAAAAAAIwC8BAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T13:31:27.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Colors.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Resources\\Styles\\Colors.xaml",
+              "RelativeDocumentMoniker": "Resources\\Styles\\Colors.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Resources\\Styles\\Colors.xaml",
+              "RelativeToolTip": "Resources\\Styles\\Colors.xaml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAIwB8AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T17:31:27.524Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WeatherAnalysis",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\WeatherAnalysis.csproj",
+              "RelativeDocumentMoniker": "WeatherAnalysis.csproj",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\WeatherAnalysis.csproj",
+              "RelativeToolTip": "WeatherAnalysis.csproj",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAmwEgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-23T12:54:40.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Styles.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Resources\\Styles\\Styles.xaml",
+              "RelativeDocumentMoniker": "Resources\\Styles\\Styles.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Resources\\Styles\\Styles.xaml",
+              "RelativeToolTip": "Resources\\Styles\\Styles.xaml",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAwAwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T17:31:23.344Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DataStore.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\DataStore\\DataStore.cs",
+              "RelativeDocumentMoniker": "DataStore\\DataStore.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\DataStore\\DataStore.cs",
+              "RelativeToolTip": "DataStore\\DataStore.cs",
+              "ViewState": "AgIAAOAAAAAAAAAAAAAwwOwAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T17:26:30.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "WeatherAndroidView.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Mobile\\Forecast\\WeatherAndroidView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Mobile\\Forecast\\WeatherAndroidView.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Mobile\\Forecast\\WeatherAndroidView.xaml.cs",
+              "RelativeToolTip": "Views\\Mobile\\Forecast\\WeatherAndroidView.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAYwAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:01:50.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MainPageViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\MainPageViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\MainPageViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\MainPageViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\MainPageViewModel.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAAAD0AAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:04:05.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "WeatherAnalysisView.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\WeatherAnalysisView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Desktop\\WeatherAnalysisView.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\WeatherAnalysisView.xaml.cs",
+              "RelativeToolTip": "Views\\Desktop\\WeatherAnalysisView.xaml.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAEgAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:32:36.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "WeatherAndroidView.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Mobile\\Forecast\\WeatherAndroidView.xaml",
+              "RelativeDocumentMoniker": "Views\\Mobile\\Forecast\\WeatherAndroidView.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Mobile\\Forecast\\WeatherAndroidView.xaml",
+              "RelativeToolTip": "Views\\Mobile\\Forecast\\WeatherAndroidView.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T17:01:10.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "MauiProgram.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\MauiProgram.cs",
+              "RelativeToolTip": "MauiProgram.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAABsAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:13:23.004Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:07:52.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "App.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T13:07:47.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AppShell.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\AppShell.xaml",
+              "RelativeDocumentMoniker": "AppShell.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\AppShell.xaml",
+              "RelativeToolTip": "AppShell.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T13:17:18.011Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "WeatherAnalysisViewDemo.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\View\\WeatherAnalysisViewDemo.xaml",
+              "RelativeDocumentMoniker": "View\\WeatherAnalysisViewDemo.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\View\\WeatherAnalysisViewDemo.xaml",
+              "RelativeToolTip": "View\\WeatherAnalysisViewDemo.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T17:03:40.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "WeatherAnalysisViewDemo.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\View\\WeatherAnalysisViewDemo.xaml.cs",
+              "RelativeDocumentMoniker": "View\\WeatherAnalysisViewDemo.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\View\\WeatherAnalysisViewDemo.xaml.cs",
+              "RelativeToolTip": "View\\WeatherAnalysisViewDemo.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T17:03:48.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ForecastPage.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\ForecastPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Desktop\\ForecastPage.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\ForecastPage.xaml",
+              "RelativeToolTip": "Views\\Desktop\\ForecastPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T13:07:14.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "HourlyView.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Mobile\\Forecast\\HourlyView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Mobile\\Forecast\\HourlyView.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Mobile\\Forecast\\HourlyView.xaml.cs",
+              "RelativeToolTip": "Views\\Mobile\\Forecast\\HourlyView.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:01:14.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Monthly.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Mobile\\Forecast\\Monthly.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Mobile\\Forecast\\Monthly.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Mobile\\Forecast\\Monthly.xaml.cs",
+              "RelativeToolTip": "Views\\Mobile\\Forecast\\Monthly.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:01:40.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "TrendsPage.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\TrendsPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Desktop\\TrendsPage.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\TrendsPage.xaml.cs",
+              "RelativeToolTip": "Views\\Desktop\\TrendsPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T16:59:42.112Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "TrendsPage.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\TrendsPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Desktop\\TrendsPage.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\TrendsPage.xaml",
+              "RelativeToolTip": "Views\\Desktop\\TrendsPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsBAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T16:58:39.035Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "WeatherView.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\WeatherView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Desktop\\WeatherView.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\WeatherView.xaml.cs",
+              "RelativeToolTip": "Views\\Desktop\\WeatherView.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:02:04.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "MonthlyPage.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\MonthlyPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Desktop\\MonthlyPage.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\MonthlyPage.xaml.cs",
+              "RelativeToolTip": "Views\\Desktop\\MonthlyPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:02:42.762Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "HourlyPage.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\HourlyPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Desktop\\HourlyPage.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\HourlyPage.xaml.cs",
+              "RelativeToolTip": "Views\\Desktop\\HourlyPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:02:52.767Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ForecastPage.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\ForecastPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Desktop\\ForecastPage.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\ForecastPage.xaml.cs",
+              "RelativeToolTip": "Views\\Desktop\\ForecastPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:03:01.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "WeatherView.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\WeatherView.xaml",
+              "RelativeDocumentMoniker": "Views\\Desktop\\WeatherView.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Desktop\\WeatherView.xaml",
+              "RelativeToolTip": "Views\\Desktop\\WeatherView.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T13:07:20.206Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "AppShell.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\AppShell.xaml.cs",
+              "RelativeDocumentMoniker": "AppShell.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\AppShell.xaml.cs",
+              "RelativeToolTip": "AppShell.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:07:58.664Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\MainPage.xaml",
+              "RelativeDocumentMoniker": "MainPage.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\MainPage.xaml",
+              "RelativeToolTip": "MainPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T13:07:36.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "HistoricData-Los Angeles.json",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Json\\HistoricData-Los Angeles.json",
+              "RelativeDocumentMoniker": "Json\\HistoricData-Los Angeles.json",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Json\\HistoricData-Los Angeles.json",
+              "RelativeToolTip": "Json\\HistoricData-Los Angeles.json",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-23T13:05:51.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "DataModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Model\\DataModel.cs",
+              "RelativeDocumentMoniker": "Model\\DataModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Model\\DataModel.cs",
+              "RelativeToolTip": "Model\\DataModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:05:05.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "DailyForecastViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\DailyForecastViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\DailyForecastViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\DailyForecastViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\DailyForecastViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:04:56.045Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "DataInfo.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\DataInfo.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\DataInfo.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\DataInfo.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\DataInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:04:49.763Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "DayWeatherInfoViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\DayWeatherInfoViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\DayWeatherInfoViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\DayWeatherInfoViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\DayWeatherInfoViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:04:43.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "HistoricalWeatherViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\HistoricalWeatherViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\HistoricalWeatherViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\HistoricalWeatherViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\HistoricalWeatherViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:04:30.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "HourlyForecastViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\HourlyForecastViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\HourlyForecastViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\HourlyForecastViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\HourlyForecastViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:04:20.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "LocationViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\LocationViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\LocationViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\LocationViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\LocationViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:04:11.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "MapsViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\MapsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\MapsViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\MapsViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\MapsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:03:57.367Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "SettingsViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\SettingsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\SettingsViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\SettingsViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\SettingsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:03:51.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "SummaryViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\SummaryViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\SummaryViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\SummaryViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\SummaryViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:03:43.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "TodayWeatherTileViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\TodayWeatherTileViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\TodayWeatherTileViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\TodayWeatherTileViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\TodayWeatherTileViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:03:29.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "WeatherDataPointViewModel.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\WeatherDataPointViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\Weather\\WeatherDataPointViewModel.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\Weather\\WeatherDataPointViewModel.cs",
+              "RelativeToolTip": "ViewModel\\Weather\\WeatherDataPointViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:03:21.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "ViewModelLocator.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\ViewModelLocator.cs",
+              "RelativeDocumentMoniker": "ViewModel\\ViewModelLocator.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\ViewModel\\ViewModelLocator.cs",
+              "RelativeToolTip": "ViewModel\\ViewModelLocator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:03:15.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "HourlyView.xaml",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Mobile\\Forecast\\HourlyView.xaml",
+              "RelativeDocumentMoniker": "Views\\Mobile\\Forecast\\HourlyView.xaml",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\Views\\Mobile\\Forecast\\HourlyView.xaml",
+              "RelativeToolTip": "Views\\Mobile\\Forecast\\HourlyView.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-23T13:01:06.744Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "MainPage.xaml.cs",
+              "ToolTip": "D:\\WeatherAnalysisCore\\maui-weather-analysis\\WeatherAnalysis\\MainPage.xaml.cs",
+              "RelativeToolTip": "MainPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T13:00:57.673Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 286,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

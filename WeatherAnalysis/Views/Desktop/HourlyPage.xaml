@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherAnalysis.HourlyPage"
+             xmlns:datagrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:local="clr-namespace:WeatherAnalysis"
+             xmlns:converter="clr-namespace:WeatherAnalysis"
+             xmlns:viewModel="clr-namespace:WeatherAnalysis"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts">
+
+    <ContentView.Resources>
+        <local:DatetimeToStringConverter x:Key="datetimeToStringConverter" Format="ddd d" />
+        <local:CelsiusToFahrenheitConverter x:Key="CelsiusToFahrenheitConverter" />
+        <local:StringToImageConverter x:Key="StringToImageConverter"/>
+
+        <Color x:Key="gridLineLight">#E7E0EC</Color>
+        <Color x:Key="gridLineDark">#36323B</Color>
+
+        <Style TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}"/>
+            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"/>
+            <Setter Property="StrokeShape" Value="Rectangle"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+        
+        <Style TargetType="listview:ListViewItem">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="Background"
+                                        Value= "Transparent"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="Background"
+                                        Value= "Transparent"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentView.Resources>
+
+    <ScrollView Padding="0,16,0,0">
+        <VerticalStackLayout >
+
+            <!--Summary-->
+            <Border 
+            StrokeThickness="0" 
+            HeightRequest="410"
+            StrokeShape="RoundRectangle 10"
+            Padding="16">
+
+                <Grid RowDefinitions="20,32,278" RowSpacing="16">
+                    <Grid.BindingContext>
+                        <local:DayWeatherInfoViewModel />
+                    </Grid.BindingContext>
+
+                    <Label Grid.Row="0" Text="Summary" FontFamily="RobotoMedium" FontSize="14" VerticalOptions="Center" HorizontalOptions="Start" />
+                    <listview:SfListView Grid.Row="1" 
+                                         x:Name="categoryList"
+                                         Padding="0"
+                                         Orientation="Horizontal"
+                                         ItemSize="100"
+                                         SelectionBackground="Transparent"
+                                         ItemSpacing="0,0,8,0"
+                                         SelectionChanged="SfListView_SelectionChanged"
+                                         ItemsSource="{Binding Categories}">
+                        <listview:SfListView.BindingContext>
+                            <viewModel:SummaryViewModel x:Name="summaryViewModel"/>
+                        </listview:SfListView.BindingContext>
+
+                        <listview:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeThickness="0" StrokeShape="RoundRectangle 25" WidthRequest="100">
+                                    <Label Text="{Binding}" FontFamily="RobotoMedium" FontSize="14"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </listview:SfListView.ItemTemplate>
+                        <listview:SfListView.SelectedItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{AppThemeBinding Light={StaticResource WeatherAnalysisSegementColor}, Dark={StaticResource WeatherAnalysisSegmentDark}}"
+                                        StrokeThickness="0" StrokeShape="RoundRectangle 25" WidthRequest="100">
+                                    <Label Text="{Binding}" FontFamily="RobotoMedium" FontSize="14"
+                                   TextColor="{StaticResource WeatherAnalysisSelectionColor}"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </listview:SfListView.SelectedItemTemplate>
+
+                    </listview:SfListView>
+                    <chart:SfCartesianChart Grid.Row="2" x:Name="TemperatureChart" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
+
+                        <!--X Axis (Time)-->
+                        <chart:SfCartesianChart.XAxes>
+                            <chart:DateTimeAxis Interval="5" TickPosition="Outside"   EdgeLabelsDrawingMode="Shift" ShowMajorGridLines="False">
+                                <chart:DateTimeAxis.LabelStyle>
+                                    <chart:ChartAxisLabelStyle  LabelFormat="h tt" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray}, Dark={StaticResource White}}"/>
+                                </chart:DateTimeAxis.LabelStyle>
+                                <chart:DateTimeAxis.MinorTickStyle>
+                                    <chart:ChartAxisTickStyle Stroke="Transparent" StrokeWidth="0" />
+                                </chart:DateTimeAxis.MinorTickStyle>
+                            </chart:DateTimeAxis>
+                        </chart:SfCartesianChart.XAxes>
+
+
+                        <!--Y Axis (Temperature)-->
+
+                        <chart:SfCartesianChart.YAxes>
+                            <chart:NumericalAxis IsVisible="False" x:Name="summaryYAxis" EdgeLabelsVisibilityMode="Visible" Minimum="{Binding MinimumYValueChart}" Maximum="{Binding MaxYValue}" Interval="{Binding ChartInterval}" ShowMajorGridLines="True">
+                                <chart:NumericalAxis.MajorGridLineStyle>
+                                    <chart:ChartLineStyle Stroke="{AppThemeBinding Light={StaticResource gridLineLight},Dark={StaticResource gridLineDark}}" />
+                                </chart:NumericalAxis.MajorGridLineStyle>
+                            </chart:NumericalAxis>
+
+                        </chart:SfCartesianChart.YAxes>
+
+
+                        <!--Gradient Spline Series-->
+
+                        <chart:SplineAreaSeries x:Name="splineAreaSummary" ItemsSource="{Binding HourlyWeatherData}"
+                            XBindingPath="DateTime"
+                            YBindingPath="Temperature"
+                            StrokeWidth="2"        
+                            EnableTooltip="False"
+                            ShowTrackballLabel="True"
+                            Type="Cardinal"
+                            ShowDataLabels="True" >
+
+                            <chart:SplineAreaSeries.Fill>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Color="Orange" Offset="0.0" />
+                                    <GradientStop Color="Yellow" Offset="0.4" />
+                                    <GradientStop Color="LightYellow" Offset="0.7" />
+                                    <GradientStop Color="Transparent" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </chart:SplineAreaSeries.Fill>
+
+                            <chart:SplineAreaSeries.DataLabelSettings>
+
+                                <chart:CartesianDataLabelSettings   BarAlignment="Middle" UseSeriesPalette="False"  LabelPlacement="Outer">
+                                    <chart:CartesianDataLabelSettings.LabelStyle>
+                                        <chart:ChartDataLabelStyle  Stroke="Transparent" Background="Transparent" />
+                                    </chart:CartesianDataLabelSettings.LabelStyle>
+                                </chart:CartesianDataLabelSettings>
+                            </chart:SplineAreaSeries.DataLabelSettings>
+
+                            <chart:SplineAreaSeries.LabelTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Label HorizontalOptions="End" Margin="20,0,0,0" IsVisible="{Binding Item.DateTime, Converter={converter:LabelVisibilityConverter}, Mode=OneWay}"  Text="{Binding Item.Temperature, StringFormat='{0:0}°'}" FontSize="10" />
+                                    </Grid>
+                                </DataTemplate>
+                            </chart:SplineAreaSeries.LabelTemplate>
+                        </chart:SplineAreaSeries>
+
+                        <chart:SfCartesianChart.TrackballBehavior>
+                            <chart:ChartTrackballBehavior ActivationMode="TouchMove" ShowLine="True"  DisplayMode="NearestPoint" >
+                                <chart:ChartTrackballBehavior.LabelStyle>
+                                    <chart:ChartLabelStyle Background="White"
+                                         TextColor="Black" 
+                                         FontSize="15"                                          
+                                         CornerRadius="5"
+                                         StrokeWidth="2" 
+                                         Stroke="Gray"/>
+                                </chart:ChartTrackballBehavior.LabelStyle>
+                                <chart:ChartTrackballBehavior.LineStyle>
+                                    <chart:ChartLineStyle Stroke="{AppThemeBinding Light=Black, Dark=White}" StrokeDashArray="3" StrokeWidth="1"/>
+                                </chart:ChartTrackballBehavior.LineStyle>
+                            </chart:ChartTrackballBehavior>
+
+                        </chart:SfCartesianChart.TrackballBehavior>
+
+                    </chart:SfCartesianChart>
+
+                </Grid>
+
+            </Border>
+
+            <!--Date Tile-->
+
+            <Grid Padding="0,0,15,0" RowDefinitions="*"  Grid.Row="1" >
+
+                <ScrollView x:Name="scrollView" Grid.Row="0" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                    <listview:SfListView x:Name="forcastList"
+                                      ItemSize="76"
+                                      Grid.Row="0"
+                                      ItemsSource="{Binding HourlyForecasts}"
+                                      SelectedItem="{Binding SelectedTile}" 
+                                      HeightRequest="120"
+                                      Orientation="Horizontal"
+                                         IsScrollingEnabled="False"
+                                     HorizontalOptions="CenterAndExpand"
+                                      ItemSpacing="0,0,12,0"
+                                      ScrollBarVisibility="Never"
+                                      SelectionChangedCommand="{Binding SelectionChangedCommand}">
+
+                        <listview:SfListView.BindingContext>
+                            <local:HourlyForecastViewModel />
+                        </listview:SfListView.BindingContext>
+
+                        <listview:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border WidthRequest="76" HeightRequest="100" StrokeThickness="0" Padding="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10"/>
+                                    </Border.StrokeShape>
+
+                                    <Grid RowDefinitions="*,*,*">
+                                        <Label Grid.Row="0" Text="{Binding Date, Converter={StaticResource datetimeToStringConverter}}"
+HorizontalTextAlignment="Center" 
+VerticalTextAlignment="Center" 
+FontFamily="RobotoMedium"
+FontSize="14"/>
+                                        <Image Grid.Row="1" WidthRequest="36" HeightRequest="36" Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=16}"/>
+                                        <Label Grid.Row="2"
+                                    HorizontalTextAlignment="Center" 
+                                    VerticalTextAlignment="Center"
+                                    FontFamily="RobotoMedium"
+                                    FontSize="16"
+                                    Text="{Binding Temperature,StringFormat='{}{0:0}°'}"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </listview:SfListView.ItemTemplate>
+
+                        <listview:SfListView.SelectedItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisSelectionColor}, Dark={StaticResource WeatherAnalysisSelectionDark}}" 
+         WidthRequest="76" 
+         HeightRequest="100"
+         StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10"/>
+                                    </Border.StrokeShape>
+
+                                    <Grid RowDefinitions="*,*,*">
+                                        <Label Grid.Row="0" Text="{Binding Date, Converter={StaticResource datetimeToStringConverter}}" 
+                                                HorizontalTextAlignment="Center" 
+                                                VerticalTextAlignment="Center" 
+                                                TextColor="{StaticResource White}"
+                                                FontFamily="RobotoMedium"
+                                                FontSize="14" />
+                                        <Image Grid.Row="1" WidthRequest="36" HeightRequest="36" Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=16}" />
+                                        <Label Grid.Row="2" 
+                                    HorizontalTextAlignment="Center" 
+                                    VerticalTextAlignment="Center" 
+                                    TextColor="{StaticResource White}"
+                                    FontFamily="RobotoMedium"
+                                    FontSize="16"
+                                    Text="{Binding Temperature,StringFormat='{}{0:0}°'}"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </listview:SfListView.SelectedItemTemplate>
+
+                    </listview:SfListView>
+                </ScrollView>
+                
+                
+
+                <Grid RowDefinitions="*" HorizontalOptions="Start" Padding="4,0,4,0" x:Name="forecastLeftArrow" IsVisible="False" Grid.Row="0">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="forecastLeftArrow_Clicked" />
+                    </Grid.GestureRecognizers>
+                    <Border Stroke="Black" Grid.Row="0" StrokeThickness="0.2" VerticalOptions="Center"  WidthRequest="23" HeightRequest="23" Opacity="1" StrokeShape="RoundRectangle 20" BackgroundColor="{AppThemeBinding Light=#6750A4, Dark=#D0BCFF}" />
+                    <Label Grid.Row="0" Text="&#xe707;" Margin="0,0,2,0" TextColor="{AppThemeBinding Light=#FFFFFF, Dark=#381E72}" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Fill" FontSize="24"  VerticalOptions="Center"  />
+                </Grid>
+                
+                <Grid RowDefinitions="*" HorizontalOptions="End" Padding="4,0,0,0" x:Name="forecastRightArrow" Grid.Row="0">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Grid.GestureRecognizers>
+                    <Border Stroke="Black" Grid.Row="0" StrokeThickness="0.2" VerticalOptions="Center"  WidthRequest="23" HeightRequest="23" Opacity="1" StrokeShape="RoundRectangle 20" BackgroundColor="{AppThemeBinding Light=#6750A4, Dark=#D0BCFF}" />
+                    <Label Grid.Row="0" Text="&#xe706;" TextColor="{AppThemeBinding Light=#FFFFFF, Dark=#381E72}" Margin="1.8,0,0,0"  FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Fill" FontSize="24"  VerticalOptions="Center"  />
+                </Grid>
+
+            </Grid>
+
+            
+
+            <!--DataGrid-->
+            <Border StrokeThickness="0"
+                    StrokeShape="RoundRectangle 10">
+                <datagrid:SfDataGridContentView>
+                    <datagrid:SfDataGrid ItemsSource="{Binding HourlyWeatherData}"
+                                         x:Name="dataGrid"
+                                         HeightRequest="1000"
+                                         InputTransparent="True"
+                                         Margin="5,-2,5,0"
+                                         AutoGenerateColumnsMode="None"
+                                         ColumnWidthMode="Fill"
+                                         HeaderRowHeight="40"
+                                         RowHeight="40"
+                                         VerticalScrollBarVisibility="Never"
+                                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}">
+                        <datagrid:SfDataGrid.BindingContext>
+                            <local:DayWeatherInfoViewModel x:Name="viewModel"/>
+                        </datagrid:SfDataGrid.BindingContext>
+
+                        <datagrid:SfDataGrid.DefaultStyle>
+                            <datagrid:DataGridStyle RowFontSize="14" HeaderRowFontSize="14"/>
+                        </datagrid:SfDataGrid.DefaultStyle>
+
+                        <datagrid:SfDataGrid.Columns>
+                            <datagrid:DataGridTemplateColumn MappingName="DateTime"
+                                                             HeaderText="Time"
+                                                             HeaderTextAlignment="Start"
+                                                             CellTextAlignment="Start"
+                                                             HeaderLineBreakMode="NoWrap"
+                                                             CellPadding="0"                           
+                                                             LineBreakMode="NoWrap">
+                                <datagrid:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
+                                        <Label Text="{Binding DateTime, StringFormat='{0:h:mm tt}'}" 
+                        VerticalTextAlignment="Center"
+                        FontSize="14"
+                        HorizontalTextAlignment="Center"/>
+                                    </DataTemplate>
+                                </datagrid:DataGridTemplateColumn.CellTemplate>
+                                <datagrid:DataGridTemplateColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        <Setter Property="FontSize" Value="14"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTemplateColumn.HeaderStyle>
+
+                            </datagrid:DataGridTemplateColumn>
+
+                            <datagrid:DataGridTemplateColumn HeaderText="Weather"
+                                     HeaderTextAlignment="Start"
+                                     CellTextAlignment="Start"
+                                     HeaderPadding="0"
+                                     CellPadding="0"
+                                     MinimumWidth="120"
+                                     HeaderLineBreakMode="NoWrap">
+                                <datagrid:DataGridTemplateColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTemplateColumn.HeaderStyle>
+                                <datagrid:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
+                                        <StackLayout Orientation="Horizontal" Spacing="5">
+                                            <Image WidthRequest="20" HeightRequest="20"
+                                                   Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=24}" />
+                                            <Label Text="{Binding Weather}" 
+                                                   VerticalTextAlignment="Center"
+                                                   FontSize="13"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </datagrid:DataGridTemplateColumn.CellTemplate>
+                            </datagrid:DataGridTemplateColumn>
+
+                            <datagrid:DataGridTemplateColumn MappingName="Temperature"
+                                 HeaderText="Temperature"
+                                 CellTextAlignment="Start"
+                                 HeaderTextAlignment="Start"
+                                 HeaderLineBreakMode="NoWrap"
+                                 HeaderPadding="0"
+                                 CellPadding="0"
+                                 LineBreakMode="NoWrap">
+                                <datagrid:DataGridTemplateColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTemplateColumn.HeaderStyle>
+                                <datagrid:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
+                                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                            <Label.FormattedText>
+                                                <MultiBinding Converter="{StaticResource CelsiusToFahrenheitConverter}" ConverterParameter="{}{0:0}°">
+                                                    <Binding Path="Temperature"/>
+                                                    <Binding Path="IsCelsius"/>
+                                                </MultiBinding>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </DataTemplate>
+                                </datagrid:DataGridTemplateColumn.CellTemplate>
+                            </datagrid:DataGridTemplateColumn>
+
+                            <datagrid:DataGridTextColumn MappingName="DewPoint"
+                                 x:DataType="local:HourlyWeatherInfoModel"
+                                 HeaderText="Dew"
+                                 HeaderTextAlignment="Start"
+                                 CellTextAlignment="Start"
+                                 HeaderPadding="0"
+                                 CellPadding="0"
+                                 HeaderLineBreakMode="NoWrap"
+                                 DisplayBinding="{Binding DewPoint, StringFormat='{}{0:0}°'}">
+                                <datagrid:DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTextColumn.HeaderStyle>
+                            </datagrid:DataGridTextColumn>
+
+                            <datagrid:DataGridTextColumn MappingName="Humidity"
+                                 HeaderText="Humidity"
+                                 x:DataType="local:HourlyWeatherInfoModel"
+                                 HeaderTextAlignment="Start"
+                                 CellTextAlignment="Start"
+                                 HeaderLineBreakMode="NoWrap"
+                                 HeaderPadding="0"
+                                 CellPadding="0"
+                                 DisplayBinding="{Binding Humidity, StringFormat='{}{0:0}%'}">
+                                <datagrid:DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTextColumn.HeaderStyle>
+                            </datagrid:DataGridTextColumn>
+
+                            <datagrid:DataGridTextColumn MappingName="Feelslike"
+                                 HeaderText="Feelslike"
+                                 x:DataType="local:HourlyWeatherInfoModel"
+                                 HeaderTextAlignment="Start"
+                                 CellTextAlignment="Start"
+                                 HeaderPadding="0"
+                                 CellPadding="0"
+                                 HeaderLineBreakMode="NoWrap"
+                                 DisplayBinding="{Binding Feelslike, StringFormat='{}{0:0}°'}">
+                                <datagrid:DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTextColumn.HeaderStyle>
+                            </datagrid:DataGridTextColumn>
+
+                            <datagrid:DataGridTextColumn MappingName="Precipitation"
+                                 HeaderText="Precipitation"
+                                 x:DataType="local:HourlyWeatherInfoModel"
+                                 HeaderTextAlignment="Start"
+                                 CellTextAlignment="Start"
+                                 HeaderLineBreakMode="NoWrap"
+                                 HeaderPadding="0"
+                                 CellPadding="0"
+                                 DisplayBinding="{Binding Precipitation, StringFormat='{}{0:0.##} mm'}">
+                                <datagrid:DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTextColumn.HeaderStyle>
+                            </datagrid:DataGridTextColumn>
+
+                            <datagrid:DataGridTextColumn MappingName="Pressure"
+                                 HeaderText="Pressure"
+                                 x:DataType="local:HourlyWeatherInfoModel"
+                                 DisplayBinding="{Binding Pressure, StringFormat='{}{0:0} mb'}"
+                                 HeaderTextAlignment="Start"
+                                 CellTextAlignment="Start"
+                                 HeaderPadding="0"
+                                 CellPadding="0"
+                                 HeaderLineBreakMode="NoWrap">
+                                <datagrid:DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTextColumn.HeaderStyle>
+                            </datagrid:DataGridTextColumn>
+
+                            <datagrid:DataGridTextColumn MappingName="Visibility"
+                                 HeaderText="Visibility"
+                                 x:DataType="local:HourlyWeatherInfoModel"
+                                 DisplayBinding="{Binding Visibility, StringFormat='{}{0:0} mi'}"
+                                 HeaderTextAlignment="Center"
+                                 CellTextAlignment="Center"
+                                 HeaderPadding="0"
+                                 CellPadding="0"
+                                 HeaderLineBreakMode="NoWrap">
+                                <datagrid:DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTextColumn.HeaderStyle>
+                            </datagrid:DataGridTextColumn>
+
+                            <datagrid:DataGridTextColumn HeaderText="UVIndex"
+                                 MappingName="UVIndex"
+                                 x:DataType="local:HourlyWeatherInfoModel"
+                                 HeaderTextAlignment="Start"
+                                 CellTextAlignment="Start" 
+                                 HeaderPadding="0"
+                                 HeaderLineBreakMode="NoWrap"
+                                 CellPadding="0"
+                                 LineBreakMode="NoWrap">
+                                <datagrid:DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTextColumn.HeaderStyle>
+                            </datagrid:DataGridTextColumn>
+
+                            <datagrid:DataGridTextColumn MappingName="WindSpeed"
+                                 HeaderText="WindSpeed"
+                                 x:DataType="local:HourlyWeatherInfoModel"
+                                 HeaderTextAlignment="Start"
+                                 CellTextAlignment="Start"
+                                 HeaderPadding="0"
+                                 CellPadding="0"
+                                 HeaderLineBreakMode="NoWrap"
+                                 DisplayBinding="{Binding WindSpeed, StringFormat='{}{0:0} km/h'}">
+                                <datagrid:DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="datagrid:DataGridHeaderCell">
+                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                    </Style>
+                                </datagrid:DataGridTextColumn.HeaderStyle>
+                            </datagrid:DataGridTextColumn>
+                        </datagrid:SfDataGrid.Columns>
+
+                    </datagrid:SfDataGrid>
+                </datagrid:SfDataGridContentView>
+                
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
+    
+
+
+</ContentView>

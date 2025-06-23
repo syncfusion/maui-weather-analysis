@@ -1,0 +1,1019 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherAnalysis.WeatherView"
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+            xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
+            xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+            xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
+            xmlns:local="clr-namespace:WeatherAnalysis"
+            xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+            xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+            xmlns:viewModel="clr-namespace:WeatherAnalysis"
+            xmlns:converter="clr-namespace:WeatherAnalysis"
+            xmlns:imageExtension="clr-namespace:SampleBrowser.Maui.Base.Converters;assembly=SampleBrowser.Maui.Base" 
+            xmlns:button="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+            xmlns:bottomSheet="clr-namespace:Syncfusion.Maui.Toolkit.BottomSheet;assembly=Syncfusion.Maui.Toolkit"
+            xmlns:shapes="clr-namespace:Microsoft.Maui.Controls.Shapes;assembly=Microsoft.Maui.Controls"
+            xmlns:progressBar="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
+            xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+            xmlns:segmentedControl="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+             Title="WeatherView">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:VisibleConverter x:Key="VisibleConverter" />
+            <local:CelsiusToFahrenheitConverter x:Key="CelsiusToFahrenheitConverter" />
+            <local:StringToImageConverter x:Key="stringToImageConverter" />
+            <local:SplineValueConverter x:Key="splineValueonverter" />
+            <local:DatetimeToStringConverter x:Key="DatetimeToStringConverter" Format="ddd dd" />
+
+            <SolidColorBrush x:Key="EllipseStrokeColor">
+                <SolidColorBrush.Color>
+                    <AppThemeBinding Light="#FFFFFF" Dark="#1C1B1D" />
+                </SolidColorBrush.Color>
+            </SolidColorBrush>
+
+            <SolidColorBrush x:Key="LunarEllipseFillColor">
+                <SolidColorBrush.Color>
+                    <AppThemeBinding Light="#116DF9" Dark="#BF3B49" />
+                </SolidColorBrush.Color>
+            </SolidColorBrush>
+
+            <SolidColorBrush x:Key="solarEllipseFillColor">
+                <SolidColorBrush.Color>
+                    <AppThemeBinding Light="#E2227E" Dark="#C9588E" />
+                </SolidColorBrush.Color>
+            </SolidColorBrush>
+
+            <LinearGradientBrush x:Key="MinTemperatureGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#F4890B" Offset="0.0" />
+                <GradientStop Color="#00F4890B" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="TemperatureGradient" StartPoint="0,1" EndPoint="0,0">
+                <GradientStop Color="#00FFFFFF" Offset="0.0" />
+                <GradientStop Color="#00FFFFFF" Offset="0.6" />
+                <GradientStop Color="#66FF4500" Offset="0.8" />
+                <GradientStop Color="#CCFF4500" Offset="0.9" />
+                <GradientStop Color="#FFFF4500" Offset="1.0" />
+            </LinearGradientBrush>
+
+        </ResourceDictionary>
+
+        <Style TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light= White, Dark=Black}"/>
+            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"/>
+            <Setter Property="StrokeShape" Value="Rectangle"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+        
+        <Style TargetType="listview:ListViewItem">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="Background"
+                                Value= "Transparent"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <Color x:Key="TemperatureGradientStart">#F77015</Color>
+        <!-- Solid orange -->
+        <Color x:Key="TemperatureGradientStartDark">#F77015</Color>
+
+        <Color x:Key="TemperatureGradientEnd">#00F77015</Color>
+        <!-- Transparent -->
+        <Color x:Key="TemperatureGradientEndDark">#00F77015</Color>
+
+        <Color x:Key="gridLineLight">#E7E0EC</Color>
+        <Color x:Key="gridLineDark">#36323B</Color>
+
+
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}" Padding="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border StrokeThickness="0" Margin="0,10,0,0" Grid.Row="0" MaximumHeightRequest="650" VerticalOptions="StartAndExpand" BackgroundColor="{StaticResource WeatherAnalysisAzureBlue}" WidthRequest="360" StrokeShape="RoundRectangle 25">
+                <Border.Stroke>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#348AC7" Offset="0.1"/>
+                        <GradientStop Color="#84C3F3" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Border.Stroke>
+
+
+                <Grid>
+                    <!-- Background Image (Placed inside Border) -->
+                    <Image Source="{imageExtension:SfImageResource cloudbackground.png}" Opacity="0.15" Aspect="AspectFill" WidthRequest="360"  HeightRequest="650"  HorizontalOptions="Fill" VerticalOptions="Fill"/>
+
+                    <Grid Padding="16"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.BindingContext>
+                            <local:TodayWeatherTileViewModel />
+                        </Grid.BindingContext>
+
+                        <Grid Grid.Row="0" RowDefinitions="auto,auto,auto">
+                            <HorizontalStackLayout Grid.Row="0">
+                                <Label Text="&#xe76e;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" TextColor="{DynamicResource White}" WidthRequest="20" FontSize="25" VerticalOptions="Center" />
+                                <Label FontFamily="RobotoMedium" FontSize="16" Text="{Binding City}" VerticalOptions="Start" Margin="17,7,7,7" TextColor="{DynamicResource White}" />
+                            </HorizontalStackLayout>
+
+                            <Label Margin="0,10,0,10" FontSize="16" Grid.Row="1" FontFamily="Roboto" Text="Current Weather" TextColor="{DynamicResource White}"  />
+                            <Label Margin="0,0,0,10" Grid.Row="2" Text="{Binding Today, StringFormat='{}{0:hh:mm tt, ddd, dd MMM yyyy}'}"  FontFamily="RobotoMedium" FontSize="14" TextColor="{DynamicResource SeriesColorWhite}" VerticalOptions="Start" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,20,0,05" VerticalOptions="Start" ColumnDefinitions="auto,*" >
+                            <Grid.BindingContext>
+                                <local:DayWeatherInfoViewModel x:Name="dayWeatherViewModel" />
+                            </Grid.BindingContext>
+                            <Grid VerticalOptions="Start" ColumnDefinitions="*,*" Grid.Column="0">
+                                <Label FontSize="82"
+                                            Grid.Column="0"
+                                             FontFamily="RobotoMedium"
+                                             TextColor="{DynamicResource SeriesColorWhite}"
+                                             VerticalOptions="Start">
+                                    <Label.Text>
+                                        <MultiBinding Converter="{StaticResource Key=CelsiusToFahrenheitConverter}" ConverterParameter="{}{0:0}°">
+                                            <Binding Path="Temperature" Source="{x:Reference dayWeatherViewModel}" />
+                                            <Binding Path="IsCelsius" Source="{x:Reference dayWeatherViewModel}" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <Label TextColor="{DynamicResource SeriesColorWhite}" FontFamily="RobotoMedium" Grid.Column="1" x:Name="celsiusLabel" Text="{Binding Unit}" VerticalOptions="Start" Margin="05,0,0,0" FontSize="52" />
+                            </Grid>
+
+                            <Image Source="{Binding WeatherCollection, Converter={StaticResource stringToImageConverter}, ConverterParameter=76 , Source={x:Reference dayWeatherViewModel}}"
+            WidthRequest="80" HeightRequest="70" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1" Margin="0,0,10,0"/>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.BindingContext>
+                                <local:DayWeatherInfoViewModel />
+                            </Grid.BindingContext>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label FontFamily="RobotoMedium" FontSize="16" Margin="0,7,0,7" Grid.Row="0" Grid.ColumnSpan="2" Text="Mostly Sunny" TextColor="{DynamicResource White}" HorizontalOptions="Center" />
+                            <Label Margin="0,0,0,7" FontSize="14" FontFamily="Roboto" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Feelslike, StringFormat='Feels like {0}°'}" TextColor="{DynamicResource White}" HorizontalOptions="Center" />
+                            <Label Margin="0,7,0,7" FontSize="14" Grid.Row="2" FontFamily="Roboto" Grid.Column="0" Text="{Binding MinTemperature, StringFormat='Min Temp {0:0}°'}" HorizontalOptions="Start" TextColor="{DynamicResource White}" />
+                            <Label Margin="0,7,0,7" FontSize="14" Grid.Row="2" Grid.Column="1" FontFamily="Roboto" Text="{Binding MaxTemperature, StringFormat='Max Temp {0:0}°'}" HorizontalOptions="End" TextColor="{DynamicResource White}" />
+                        </Grid>
+
+                        <ScrollView Grid.Row="3" VerticalScrollBarVisibility="Never">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border StrokeThickness="0" BackgroundColor="#33FFFFFF" Margin="0,44,0,0" HeightRequest="56" WidthRequest="158" VerticalOptions="End" Grid.Row="0" Grid.Column="0" HorizontalOptions="StartAndExpand" StrokeShape="RoundRectangle 10"  >
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.BindingContext>
+                                            <local:DayWeatherInfoViewModel x:Name="dayWeatherinfoViewModelForHumidity"/>
+                                        </Grid.BindingContext>
+                                        <Label Grid.Column="0" TextColor="{DynamicResource White}" Grid.RowSpan="2" Text="&#xe703;" FontFamily="{OnPlatform Default ='Weather Analysis Font Icon', WinUI ='Weather Analysis Font Icon.ttf#Weather Analysis Font Icon'}" HorizontalOptions="Center" MinimumWidthRequest="24" MinimumHeightRequest="24" FontSize="25" VerticalOptions="Center" />
+
+                                        <Label FontFamily="RobotoMedium" FontSize="14" Text="Humidity" Margin="0,8,0,0" TextColor="{DynamicResource White}"  Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Text="{Binding Humidity ,StringFormat='{}{0:0}%', Source={x:Reference dayWeatherinfoViewModelForHumidity}}" FontSize="12" Margin="0,2,0,8" TextColor="{DynamicResource White}" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+                                    </Grid>
+
+
+                                </Border>
+
+                                <Border StrokeThickness="0" BackgroundColor="#33FFFFFF" VerticalOptions="End" HorizontalOptions="End" Grid.Row="0" Grid.Column="1" HeightRequest="56" WidthRequest="158" StrokeShape="RoundRectangle 10" >
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.BindingContext>
+                                            <local:DayWeatherInfoViewModel x:Name="dayWeatherinfoViewModelForRain"/>
+                                        </Grid.BindingContext>
+
+                                        <Label Text="&#xe793;" TextColor="{DynamicResource White}" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" FontSize="24" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.RowSpan="2"  />
+                                        <Label Text="Rain" FontSize="14" FontFamily="RobotoMedium" Margin="0,8,0,0" Grid.Column="1" TextColor="{DynamicResource White}" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Text="{Binding PrecipitationInMM, StringFormat='{}{0:0}° mm', Source={x:Reference dayWeatherinfoViewModelForRain}}" FontSize="12" Margin="0,2,0,8" TextColor="{DynamicResource White}" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+                                    </Grid>
+
+                                </Border>
+
+                                <Border StrokeThickness="0" BackgroundColor="#33FFFFFF" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,12,0,0" Grid.Row="1" Grid.Column="0" HeightRequest="56" WidthRequest="158" StrokeShape="RoundRectangle 10" >
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.BindingContext>
+                                            <local:DayWeatherInfoViewModel />
+                                        </Grid.BindingContext>
+
+                                        <Label Grid.Column="0" TextColor="{DynamicResource White}" Grid.RowSpan="2" Text="&#xe78f;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" HorizontalOptions="Center" MinimumWidthRequest="24" MinimumHeightRequest="24" FontSize="24" VerticalOptions="Center" />
+
+                                        <Label Text="Wind" FontSize="14" Margin="0,8,0,0" FontFamily="RobotoMedium" TextColor="{DynamicResource White}" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Text="{Binding WindSpeed, StringFormat='{}{0:0} km/h'}" Margin="0,2,0,8" TextColor="{DynamicResource White}" FontSize="12"  Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+
+                                    </Grid>
+                                </Border>
+
+                                <Border StrokeThickness="0" BackgroundColor="#33FFFFFF" VerticalOptions="Start" HorizontalOptions="End" Margin="0,12,0,0" Grid.Row="1" Grid.Column="1" HeightRequest="56" WidthRequest="158" StrokeShape="RoundRectangle 10" >
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.BindingContext>
+                                            <local:DayWeatherInfoViewModel />
+                                        </Grid.BindingContext>
+
+                                        <Label Grid.Column="0" TextColor="{DynamicResource White}" HorizontalOptions="Center" Grid.RowSpan="2" Text="&#xe702;" FontFamily="{OnPlatform Default ='Weather Analysis Font Icon', WinUI ='Weather Analysis Font Icon.ttf#Weather Analysis Font Icon'}" WidthRequest="25" FontSize="24" VerticalOptions="Center" />
+
+
+                                        <Label Text="Dew" FontSize="14" Margin="0,8,0,0" FontFamily="RobotoMedium" TextColor="{DynamicResource White}" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Text="{Binding Dew, StringFormat='{}{0:0}° C'}" FontSize="12" Margin="0,2,0,8" TextColor="{DynamicResource White}" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+
+                                    </Grid>
+
+                                </Border>
+
+                                <Border StrokeThickness="0" BackgroundColor="#33FFFFFF" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,12,0,0" Grid.Row="2" Grid.Column="0" HeightRequest="56" WidthRequest="158" StrokeShape="RoundRectangle 10"  >
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.BindingContext>
+                                            <local:DayWeatherInfoViewModel />
+                                        </Grid.BindingContext>
+
+                                        <Label Text="&#xe78e;" TextColor="{DynamicResource White}" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" FontSize="24" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.RowSpan="2"  />
+
+                                        <Label Text="UV Index" FontSize="14" Margin="0,8,0,0" FontFamily="RobotoMedium" TextColor="{DynamicResource White}" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Text="{Binding UVIndex}" FontSize="12" Margin="0,2,0,8" TextColor="{DynamicResource White}" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+
+                                    </Grid>
+
+                                </Border>
+
+                                <Border StrokeThickness="0" BackgroundColor="#33FFFFFF" VerticalOptions="Start" HorizontalOptions="End" Margin="0,12,0,0" Grid.Row="2" Grid.Column="1" HeightRequest="56" WidthRequest="158" StrokeShape="RoundRectangle 10" >
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.BindingContext>
+                                            <local:DayWeatherInfoViewModel />
+                                        </Grid.BindingContext>
+
+                                        <Label Grid.Column="0" TextColor="{DynamicResource White}" Grid.RowSpan="2" Text="&#xe701;" FontFamily="{OnPlatform Default ='Weather Analysis Font Icon', WinUI ='Weather Analysis Font Icon.ttf#Weather Analysis Font Icon'}" WidthRequest="27" FontSize="24" VerticalOptions="Center" />
+                                        <Label Text="Pressure" FontSize="14" FontFamily="RobotoMedium" Margin="0,8,0,0" TextColor="{DynamicResource White}" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Text="{Binding HourlyWeatherData[0].Pressure , StringFormat='{}{0:0}° mb'}" FontSize="12" Margin="0,2,0,8" TextColor="{DynamicResource White}" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+
+                                    </Grid>
+
+                                </Border>
+
+                                <Border StrokeThickness="0" BackgroundColor="#33FFFFFF" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,12,0,0" Grid.Row="3" Grid.Column="0" HeightRequest="56" WidthRequest="158" StrokeShape="RoundRectangle 10" >
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.BindingContext>
+                                            <local:DayWeatherInfoViewModel />
+                                        </Grid.BindingContext>
+
+                                        <Label Grid.Column="0" TextColor="{DynamicResource White}" Grid.RowSpan="2" Text="&#xe752;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Center" FontSize="24" VerticalOptions="Center" />
+                                        <Label Text="Visibility" FontSize="14" Margin="0,8,0,0" FontFamily="RobotoMedium" TextColor="{DynamicResource White}" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Text="{Binding HourlyWeatherData[0].Visibility, StringFormat='{}{0:0}° km'}" Margin="0,2,0,8" FontSize="12"  TextColor="{DynamicResource White}" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+
+                                    </Grid>
+
+                                </Border>
+
+                                <Border StrokeThickness="0" BackgroundColor="#33FFFFFF" HorizontalOptions="End" Margin="0,12,0,0" VerticalOptions="Start" Grid.Row="3" Grid.Column="1" HeightRequest="56" WidthRequest="158" StrokeShape="RoundRectangle 10" >
+
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.BindingContext>
+                                            <local:DayWeatherInfoViewModel />
+                                        </Grid.BindingContext>
+
+                                        <Label Grid.Column="0" TextColor="{DynamicResource White}" Grid.RowSpan="2" Text="&#xe795;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" HorizontalOptions="Center" FontSize="24" VerticalOptions="Center" />
+                                        <Label Text="Cloudiness" FontSize="14" FontFamily="RobotoMedium" Margin="0,8,0,0" TextColor="{DynamicResource White}" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Text="{Binding Humidity ,StringFormat='{}{0:0}%'}" Margin="0,2,0,8" FontSize="12" TextColor="{DynamicResource White}" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+                                    </Grid>
+
+                                </Border>
+                            </Grid>
+
+                        </ScrollView>
+                        
+                    </Grid>
+
+                </Grid>
+            </Border>
+
+
+            <ScrollView Orientation="Vertical" Grid.Column="1" Padding="0,0,20,0" VerticalScrollBarVisibility="Never">
+                <ScrollView.Resources>
+                    <Style TargetType="listview:ListViewItem">
+                        <Setter Property="VisualStateManager.VisualStateGroups">
+                            <VisualStateGroupList>
+                                <VisualStateGroup>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Property="Background"
+                                Value= "Transparent"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </Setter>
+                    </Style>
+                </ScrollView.Resources>
+                <Grid  RowDefinitions="*,*,*,*">
+                    <Grid Grid.Row="1" RowDefinitions="auto,auto,auto,auto">
+                        <Grid Padding="0,12,0,12" Grid.Row="1" x:Name="hourlyForecast">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="100" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.BindingContext>
+                                <local:DayWeatherInfoViewModel x:Name="dayWeatherInfo" />
+                            </Grid.BindingContext>
+
+							<Label Text="Hourly Forecast" FontFamily="RobotoMedium" FontSize="14" Grid.Row="0" HorizontalOptions="Start" />
+
+                            <Grid Grid.Row="1" RowDefinitions="*" >
+                                <ScrollView Grid.Column="0" Grid.Row="0" x:Name="HorizontalScrollView1" Orientation="Horizontal" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
+                                    <CollectionView ItemsSource="{Binding HourlyWeatherData}" SelectionMode="None" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
+
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="4" />
+                                        </CollectionView.ItemsLayout>
+
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border x:Name="ShowCaseBorder" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}" StrokeShape="RoundRectangle 10">
+
+                                                    <Grid Padding="0" WidthRequest="76" x:Name="GridContent" >
+
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*" />
+                                                            <RowDefinition Height="*" />
+                                                            <RowDefinition Height="*" />
+                                                        </Grid.RowDefinitions>
+
+                                                        <Label Text="{Binding DateTime, StringFormat='{0:h tt}'}" FontFamily="RobotoMedium" FontSize="12"  Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" />
+
+                                                        <Image Grid.Row="1" WidthRequest="36" HeightRequest="36" Source="{Binding Weather, Converter={StaticResource stringToImageConverter }, ConverterParameter=44}"   />
+
+                                                        <Label Grid.Row="2" FontFamily="RobotoMedium" VerticalOptions="Center"  FontSize="14"  HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                                            <Label.FormattedText>
+                                                                <MultiBinding Converter="{StaticResource CelsiusToFahrenheitConverter}"  ConverterParameter="{}{0:0}°">
+                                                                    <Binding Path="Temperature"   />
+                                                                    <Binding Path="IsCelsius" Source="{x:Reference dayWeatherInfo}" />
+                                                                </MultiBinding>
+                                                            </Label.FormattedText>
+                                                        </Label>
+
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </ScrollView>
+
+                                <Grid RowDefinitions="*" Grid.Row="0" HorizontalOptions="Start" Padding="2,0,4,0" x:Name="forecastLeftArrow" IsVisible="False">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="forecastLeftArrow_Clicked" />
+                                    </Grid.GestureRecognizers>
+                                    <Border Stroke="Black" Grid.Row="0" StrokeThickness="0.2" VerticalOptions="Center"  WidthRequest="23" HeightRequest="23" Opacity="1" StrokeShape="RoundRectangle 20" BackgroundColor="{AppThemeBinding Light=#6750A4, Dark=#D0BCFF}" />
+                                    <Label Grid.Row="0" Text="&#xe707;" TextColor="{AppThemeBinding Light=#FFFFFF, Dark=#381E72}" Margin="0,0,2,0" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" HorizontalOptions="Fill" FontSize="24"  VerticalOptions="Center"  />
+                                </Grid>
+
+                                <Grid RowDefinitions="*" Padding="4,0,2,0" HorizontalOptions="End" x:Name="forecastRightArrow" Grid.Row="0">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                    </Grid.GestureRecognizers>
+                                    <Border Stroke="Black" Grid.Row="0" StrokeThickness="0.2" VerticalOptions="Center"  WidthRequest="23" HeightRequest="23" Opacity="1" StrokeShape="RoundRectangle 20" BackgroundColor="{AppThemeBinding Light=#6750A4, Dark=#D0BCFF}" />
+                                    <Label Grid.Row="0" Text="&#xe706;" TextColor="{AppThemeBinding Light=#FFFFFF, Dark=#381E72}" Margin="1.8,0,0,0"  FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Fill" FontSize="24"  VerticalOptions="Center"  />
+                                </Grid>
+                            </Grid>
+                            
+                        </Grid>
+                    </Grid>
+
+                    <Border Grid.Row="2" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}" Margin="0,0,0,12" HeightRequest="425"  StrokeShape="RoundRectangle 10" >
+
+                        <Grid>
+                            <Grid.BindingContext>
+                                <viewModel:SummaryViewModel />
+                            </Grid.BindingContext>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60" />
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+							<Label Margin="16,16,0,16" FontSize="14" FontFamily="RobotoMedium" Text="Summary" VerticalOptions="Center" HorizontalOptions="Start" Grid.ColumnSpan="2" Grid.Row="0" />
+
+							<listview:SfListView x:Name="categoryList" ScrollBarVisibility="Never" Margin="16,0,0,0" SelectionChanged="SfListView_SelectionChanged" Orientation="Horizontal" ItemSize="100" Grid.Row="1" ItemSpacing="0,0,8,0" ItemsSource="{Binding Categories}" SelectionBackground="Transparent">
+                                <listview:SfListView.BindingContext>
+                                    <viewModel:SummaryViewModel x:Name="summaryViewModel"/>
+                                </listview:SfListView.BindingContext>
+
+                                <listview:SfListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border StrokeThickness="0" StrokeShape="RoundRectangle 25" WidthRequest="100">
+                                            <Label Text="{Binding}" FontFamily="RobotoMedium" FontSize="14" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </listview:SfListView.ItemTemplate>
+                                <listview:SfListView.SelectedItemTemplate>
+                                    <DataTemplate>
+                                        <Border HeightRequest="32" Background="{AppThemeBinding Light={StaticResource WeatherAnalysisSegementColor}, Dark={StaticResource WeatherAnalysisSegmentDark}}"
+     StrokeThickness="0" StrokeShape="RoundRectangle 25" WidthRequest="100">
+                                            <Label Text="{Binding}"
+                                                   FontFamily="RobotoMedium"
+                                                   FontSize="14"
+TextColor="{StaticResource WeatherAnalysisSelectionColor}"
+VerticalTextAlignment="Center" 
+HorizontalTextAlignment="Center"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </listview:SfListView.SelectedItemTemplate>
+
+                            </listview:SfListView>
+
+
+                            <Grid Grid.Row="2" Padding="16,10,16,10">
+                                <Grid.BindingContext>
+                                    <local:DayWeatherInfoViewModel x:Name="dayWeatherInfoForChart" />
+                                </Grid.BindingContext>
+                                <chart:SfCartesianChart  x:Name="TemperatureChart" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" >
+
+                                    <!--X Axis (Time)-->
+                                    <chart:SfCartesianChart.XAxes>
+                                        <chart:DateTimeAxis Interval="5" TickPosition="Outside"   EdgeLabelsDrawingMode="Shift" ShowMajorGridLines="False">
+                                            <chart:DateTimeAxis.LabelStyle>
+                                                <chart:ChartAxisLabelStyle  LabelFormat="h tt" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray}, Dark={StaticResource White}}" />
+                                            </chart:DateTimeAxis.LabelStyle>
+                                            <chart:DateTimeAxis.MinorTickStyle>
+                                                <chart:ChartAxisTickStyle Stroke="Transparent" StrokeWidth="0" />
+                                            </chart:DateTimeAxis.MinorTickStyle>
+                                        </chart:DateTimeAxis>
+                                    </chart:SfCartesianChart.XAxes>
+
+                                    <!--Y Axis (Temperature)-->
+                                    <chart:SfCartesianChart.YAxes>
+                                        <chart:NumericalAxis x:Name="summaryYAxis" IsVisible="False" EdgeLabelsVisibilityMode="Visible" Maximum="{Binding MaxYValue}" Minimum="{Binding MinimumYValueChart}" Interval="{Binding ChartInterval}" ShowMajorGridLines="True">
+                                            <chart:NumericalAxis.MajorGridLineStyle>
+                                                <chart:ChartLineStyle Stroke="{AppThemeBinding Light={StaticResource gridLineLight},Dark={StaticResource gridLineDark}}" />
+                                            </chart:NumericalAxis.MajorGridLineStyle>
+                                        </chart:NumericalAxis>
+                                    </chart:SfCartesianChart.YAxes>
+
+                                    <!--Gradient Spline Series-->
+                                    <chart:SplineAreaSeries x:Name="splineAreaSummary" ItemsSource="{Binding HourlyWeatherData}"
+                                                            XBindingPath="DateTime"
+                                                            YBindingPath="Temperature"
+                                                            StrokeWidth="2"        
+                                                            EnableTooltip="False"
+                                                            ShowTrackballLabel="True"
+                                                            Type="Cardinal"
+                                                            ShowDataLabels="True" >
+
+                                        <chart:SplineAreaSeries.Fill>
+                                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                                <GradientStop Color="Orange" Offset="0.0" />
+                                                <GradientStop Color="Yellow" Offset="0.4" />
+                                                <GradientStop Color="LightYellow" Offset="0.7" />
+                                                <GradientStop Color="Transparent" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </chart:SplineAreaSeries.Fill>
+
+                                        <chart:SplineAreaSeries.DataLabelSettings>
+                                            <chart:CartesianDataLabelSettings BarAlignment="Middle" UseSeriesPalette="False"  LabelPlacement="Outer">
+                                                <chart:CartesianDataLabelSettings.LabelStyle>
+                                                    <chart:ChartDataLabelStyle Stroke="Transparent" Background="Transparent" />
+                                                </chart:CartesianDataLabelSettings.LabelStyle>
+                                            </chart:CartesianDataLabelSettings>
+                                        </chart:SplineAreaSeries.DataLabelSettings>
+
+                                        <chart:SplineAreaSeries.LabelTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Label HorizontalOptions="End" Margin="20,0,0,2" IsVisible="{Binding Item.DateTime, Converter={ converter:LabelVisibilityConverter}, Mode=OneWay}"  Text="{Binding Item.Temperature, StringFormat='{0:0}°'}" FontSize="10" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </chart:SplineAreaSeries.LabelTemplate>
+                                    </chart:SplineAreaSeries>
+
+                                    <chart:SfCartesianChart.TrackballBehavior>
+                                        <chart:ChartTrackballBehavior ActivationMode="TouchMove" ShowLine="True" 
+                                      DisplayMode="NearestPoint" >
+                                            <chart:ChartTrackballBehavior.LabelStyle>
+                                                <chart:ChartLabelStyle Background="White"
+                                                                       TextColor="Black" FontSize="15"            
+                                                                       CornerRadius="5"
+                                                                       StrokeWidth="2" 
+                                                                       Stroke="Gray"/>
+                                            </chart:ChartTrackballBehavior.LabelStyle>
+                                            <chart:ChartTrackballBehavior.LineStyle>
+                                                <chart:ChartLineStyle Stroke="{AppThemeBinding Light=Black, Dark=White}"    StrokeDashArray="3"
+                              StrokeWidth="1"/>
+                                            </chart:ChartTrackballBehavior.LineStyle>
+                                        </chart:ChartTrackballBehavior>
+
+                                    </chart:SfCartesianChart.TrackballBehavior>
+
+                                </chart:SfCartesianChart>
+                            </Grid>
+
+                        </Grid>
+
+                    </Border>
+
+                    <Grid Grid.Row="3" ColumnSpacing="12" RowSpacing="12">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--Weather Life-->
+                        <Border StrokeThickness="0" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}" HorizontalOptions="Fill" Padding="10" VerticalOptions="Start" Grid.Row="0" Grid.Column="0" MinimumHeightRequest="256"  StrokeShape="RoundRectangle 20">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.BindingContext>
+                                    <local:DayWeatherInfoViewModel />
+                                </Grid.BindingContext>
+
+                                <Label Text="Weather Life" FontFamily="RobotoMedium" Grid.Row="0" Grid.ColumnSpan="2" Margin="16,16,0,12"  VerticalOptions="Start" />
+
+                                <Border StrokeThickness="0" Background="Transparent" VerticalOptions="Start" Grid.Row="1" Grid.Column="0" Margin="16,0,0,12" WidthRequest="180" HeightRequest="65"  StrokeShape="RoundRectangle 10" HorizontalOptions="Start"  >
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="55" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border x:Name="umberallaBorder" StrokeThickness="0" Margin="0,0,0,0" Opacity="0.15" VerticalOptions="Center" Grid.RowSpan="2" WidthRequest="40" HeightRequest="40" Grid.Column="0"  Background="{DynamicResource SeriesColor7}" StrokeShape="RoundRectangle 20">
+
+                                        </Border>
+                                        <Label Text="&#xe78f;" Grid.Column="0" Grid.RowSpan="2" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor7}" />
+
+                                        <Label Margin="8,0,0,0" Text="Umbrella" FontSize="12" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Margin="8,0,0,0" Text="{Binding UmbrellaRequired}" FontSize="14" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" FontFamily="RobotoMedium" Grid.Row="1"  />
+
+                                    </Grid>
+                                </Border>
+
+                                <Border StrokeThickness="0" Background="Transparent" VerticalOptions="Start" Grid.Row="1" Grid.Column="1" Margin="12,0,17,0" WidthRequest="180" HeightRequest="65" StrokeShape="RoundRectangle 10" HorizontalOptions="End"  >
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border StrokeThickness="0" VerticalOptions="Center" Grid.RowSpan="2" WidthRequest="40" HeightRequest="40" Grid.Column="0"  Background="{DynamicResource SeriesColor5}" Opacity="0.15" StrokeShape="RoundRectangle 20" />
+                                        <Label Grid.RowSpan="2" Grid.Column="0" Text="&#xe778;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor5}" />
+
+                                        <Label Margin="8,0,0,0" Text="Outdoors" FontSize="12" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Margin="8,0,0,0" Text="{Binding Outdoors}" FontSize="14" FontFamily="RobotoMedium" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+
+                                    </Grid>
+
+                                </Border>
+
+                                <Border StrokeThickness="0" Background="Transparent" VerticalOptions="Start" Grid.Row="2" Grid.Column="0" Margin="16,0,0,12" WidthRequest="180" HeightRequest="65" StrokeShape="RoundRectangle 10" HorizontalOptions="Start">
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border StrokeThickness="0" VerticalOptions="Center" Grid.RowSpan="2" WidthRequest="40" HeightRequest="40" Grid.Column="0"  Background="{DynamicResource WeatherAnalysisMulberryPink}" Opacity="0.15" StrokeShape="RoundRectangle 20">
+
+                                        </Border>
+                                        <Label Text="&#xe7a8;" Grid.Column="0" Grid.RowSpan="2" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource WeatherAnalysisPinkishRed}" />
+                                        <Label Margin="8,0,0,0" Text="Clothing" FontSize="12" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Margin="8,0,0,0" Text="{Binding ClothingSuggestion}" FontSize="14" FontFamily="RobotoMedium" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+
+                                    </Grid>
+
+                                </Border>
+
+                                <Border StrokeThickness="0" Background="Transparent" VerticalOptions="Start" Grid.Row="2" Grid.Column="1" Margin="12,0,17,0" WidthRequest="180" HeightRequest="65" StrokeShape="RoundRectangle 10" HorizontalOptions="End" >
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border StrokeThickness="0" VerticalOptions="Center" Grid.RowSpan="2" WidthRequest="40" HeightRequest="40" Grid.Column="0"  Background="{DynamicResource SeriesColor3}" Opacity="0.15" StrokeShape="RoundRectangle 20">
+
+                                        </Border>
+                                        <Label Text="&#xe78e;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" Grid.Column="0" Grid.RowSpan="2"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor3}" />
+                                        <Label Margin="8,0,0,0" Text="UV Index" FontSize="12" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Margin="8,0,0,0" Text="{Binding UVIndexState}" FontSize="14" FontFamily="RobotoMedium" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+
+                                    </Grid>
+
+                                </Border>
+
+                                <Border StrokeThickness="0" Background="Transparent" VerticalOptions="Start" Grid.Row="3" Grid.Column="0" Margin="16,0,0,0" WidthRequest="180" HeightRequest="65" StrokeShape="RoundRectangle 10" HorizontalOptions="Start" >
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border StrokeThickness="0" VerticalOptions="Center" Grid.RowSpan="2" WidthRequest="40" HeightRequest="40" Grid.Column="0"  Background="{StaticResource WeatherAnalysisCreamYellow}" Opacity="0.15" StrokeShape="RoundRectangle 20">
+
+                                        </Border>
+                                        <Label Grid.Column="0" TextColor="{DynamicResource WeatherAnalysisGoldenrodYellow}" Grid.RowSpan="2" Text="&#xe700;" FontFamily="{OnPlatform Default ='Weather Analysis Font Icon', WinUI ='Weather Analysis Font Icon.ttf#Weather Analysis Font Icon'}" WidthRequest="20" FontSize="20" VerticalOptions="Center" />
+                                        <Label Margin="8,0,0,0" Text="Wind Chill" FontSize="12" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Margin="8,0,0,0" Text="{Binding WindChill}" FontSize="14" FontFamily="RobotoMedium" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+
+                                    </Grid>
+
+                                </Border>
+
+                                <Border StrokeThickness="0" Background="Transparent" VerticalOptions="Start" Grid.Row="3" Grid.Column="1" Margin="12,0,17,0" WidthRequest="180" HeightRequest="65" StrokeShape="RoundRectangle 10" HorizontalOptions="End" >
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border StrokeThickness="0" VerticalOptions="Center" Grid.RowSpan="2" WidthRequest="40" HeightRequest="40" Grid.Column="0"  Background="{DynamicResource SeriesColor6}" Opacity="0.15" StrokeShape="RoundRectangle 20" />
+                                        <Label Text="&#xe78f;" Grid.Column="0" Grid.RowSpan="2" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor6}" />
+                                        <Label Margin="8,0,0,0" Text="Air Quality" FontSize="12" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
+                                        <Label Margin="8,0,0,0" Text="{Binding AirQuality}" FontSize="14" FontFamily="RobotoMedium" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
+
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!--Moon phase-->
+                        <Border StrokeThickness="0" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}" HorizontalOptions="Fill" VerticalOptions="Start" Grid.Row="0" Grid.Column="1" MinimumHeightRequest="256" StrokeShape="RoundRectangle 20">
+
+                            <Grid RowDefinitions="*,185,*" Margin="10">
+
+                                <Grid.BindingContext>
+                                    <local:DayWeatherInfoViewModel x:Name="dayWeatherInfoViewModel" />
+                                </Grid.BindingContext>
+
+                                <Label Margin="16,16,0,0" Text="Moon Phase" FontFamily="RobotoMedium" Grid.Row="0" />
+
+                                <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*,*,*" >
+
+                                    <Grid.BindingContext>
+                                        <local:DayWeatherInfoViewModel  />
+                                    </Grid.BindingContext>
+
+                                    <Image Source="{Binding MoonPhases[0].ImageSource}" HeightRequest="35"  Grid.Column="0" Margin="0,0,0,0"/>
+                                    <Image Source="{Binding MoonPhases[1].ImageSource}" HeightRequest="35"  Grid.Column="1" Margin="0,0,0,15" />
+                                    <Image Source="{Binding MoonPhases[2].ImageSource}" HeightRequest="35"  Grid.Column="2" Margin="0,0,0,30" />
+                                    <Image Source="{Binding MoonPhase, Converter={StaticResource stringToImageConverter}, ConverterParameter='Moon'}" HeightRequest="55"  Grid.Column="3" Margin="0,0,0,65"/>
+                                    <Image Source="{Binding MoonPhases[3].ImageSource}" HeightRequest="35"  Grid.Column="4" Margin="0,0,0,30"/>
+                                    <Image Source="{Binding MoonPhases[4].ImageSource}" HeightRequest="35"  Grid.Column="5" Margin="0,0,0,15"/>
+                                    <Image Source="{Binding MoonPhases[5].ImageSource}" HeightRequest="35" Grid.Column="6" Margin="0,0,0,0"/>
+                                </Grid>
+
+                                <Label Margin="0,0,0,27" x:Name="moonPhaseLabel" Text="{Binding MoonPhase}" FontSize="16" VerticalOptions="Center" Grid.Row="2" HorizontalOptions="Center" />
+                            </Grid>
+
+                        </Border>
+
+                        <!--Solar Cycles-->
+                        <Border StrokeThickness="0" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}" HorizontalOptions="Fill" VerticalOptions="Start"  Grid.Row="1" Grid.Column="0" HeightRequest="264" StrokeShape="RoundRectangle 20">
+
+                            <Grid RowDefinitions="40,*,50" Margin="10">
+
+                                <Grid.BindingContext>
+                                    <local:DayWeatherInfoViewModel />
+                                </Grid.BindingContext>
+
+                                <Label Margin="16,16,0,0" Text="Solar Cycle" FontFamily="RobotoMedium" Grid.Row="0" />
+                                <Grid Padding="25" Grid.Row="1">
+
+                                    <Grid.BindingContext>
+                                        <local:DayWeatherInfoViewModel />
+                                    </Grid.BindingContext>
+
+                                    <chart:SfCartesianChart WidthRequest="280" >
+                                        <chart:SfCartesianChart.Resources>
+                                            <DataTemplate x:Key="trackballLabelTemplate">
+                                                <HorizontalStackLayout>
+                                                    <Label Text="&#xe7b5;" FontFamily="MauiSampleFontIcon"  TextColor="White" BackgroundColor="CornflowerBlue" />
+                                                </HorizontalStackLayout>
+                                            </DataTemplate>
+                                        </chart:SfCartesianChart.Resources>
+
+                                        <chart:SfCartesianChart.Annotations>
+                                            <chart:TextAnnotation Text="{Binding TimeSpanForSunrise}" X1="3" Y1="4"  >
+                                                <chart:TextAnnotation.LabelStyle>
+                                                    <chart:ChartAnnotationLabelStyle TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                                </chart:TextAnnotation.LabelStyle>
+                                            </chart:TextAnnotation>
+                                            <chart:EllipseAnnotation x:Name="ellipseAnnotation" Stroke="{StaticResource EllipseStrokeColor}" Fill="{StaticResource solarEllipseFillColor}" X1="2" X2="2.5" Y1="20" Y2="32" StrokeWidth="3"  >
+                                                <chart:EllipseAnnotation.LabelStyle>
+                                                    <chart:ChartAnnotationLabelStyle Margin="5" TextColor="White" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" />
+                                                </chart:EllipseAnnotation.LabelStyle>
+                                            </chart:EllipseAnnotation>
+                                        </chart:SfCartesianChart.Annotations>
+
+
+                                        <chart:SfCartesianChart.XAxes>
+                                            <chart:CategoryAxis ShowMajorGridLines="False" IsVisible="False" x:Name="solarCycleXAxis"/>
+                                        </chart:SfCartesianChart.XAxes>
+
+                                        <chart:SfCartesianChart.YAxes>
+                                            <chart:NumericalAxis ShowMajorGridLines="False" ShowMinorGridLines="False" IsVisible="False" x:Name="solarCycleYAxis" >
+                                                <chart:NumericalAxis.PlotBands>
+                                                    <chart:NumericalPlotBandCollection>
+                                                        <chart:NumericalPlotBand Start="30" 
+                                             End="30" 
+                                             Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPearlGray}, Dark={StaticResource WeatherAnalysisGraphiteGray}}"
+                                             Stroke="{AppThemeBinding Light={StaticResource WeatherAnalysisPearlGray}, Dark={StaticResource WeatherAnalysisGraphiteGray}}"
+                                             StrokeWidth="1" />
+
+                                                    </chart:NumericalPlotBandCollection>
+                                                </chart:NumericalAxis.PlotBands>
+                                            </chart:NumericalAxis>
+                                        </chart:SfCartesianChart.YAxes>
+
+                                        <chart:SplineSeries ItemsSource="{Binding WeatherData}" XBindingPath="Time" YBindingPath="YAxis"  Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisLavenderGray}, Dark={StaticResource WeatherAnalysisDarkGraphite}}"  StrokeWidth="6" ShowMarkers="False">
+
+                                        </chart:SplineSeries>
+
+                                        <chart:SplineSeries ItemsSource="{Binding HighlightedData}" XBindingPath="Time" YBindingPath="YAxis" StrokeWidth="7" Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={StaticResource WeatherAnalysisMulberryPink}}"/>
+
+                                    </chart:SfCartesianChart>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,*" Grid.Row="2" >
+                                    <Grid.BindingContext>
+                                        <local:DayWeatherInfoViewModel />
+                                    </Grid.BindingContext>
+                                    <Grid ColumnDefinitions="*,*" HorizontalOptions="Center" RowDefinitions="*,*" Grid.Column="0">
+                                        <Label Text="{Binding SunRiseTime,StringFormat='{}{0:h:mm }'}" Margin="10" FontSize="24" VerticalOptions="Center" FontFamily="RobotoMedium" Grid.RowSpan="2" Grid.Column="0" />
+                                        <Label Text="AM" VerticalOptions="End" FontSize="16" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" FontFamily="RobotoMedium" />
+                                        <Label Text="Sunrise" VerticalOptions="Start" FontSize="14" HorizontalOptions="Start" Grid.Column="1" Grid.Row="1" />
+                                    </Grid>
+
+                                    <Grid ColumnDefinitions="*,*" HorizontalOptions="Center" RowDefinitions="*,*" Grid.Column="1">
+                                        <Label Text="{Binding SunSetTime,StringFormat='{}{0:h:mm }'}" Margin="10" FontSize="24" VerticalOptions="Center" FontFamily="RobotoMedium" Grid.RowSpan="2" Grid.Column="0" />
+                                        <Label Text="PM" VerticalOptions="End" FontSize="16" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" FontFamily="RobotoMedium" />
+                                        <Label Text="Sunset" VerticalOptions="Start" FontSize="14" HorizontalOptions="Start" Grid.Column="1" Grid.Row="1" />
+                                    </Grid>
+
+                                </Grid>
+                            </Grid>
+
+                        </Border>
+
+                        <!--Lunar cycle-->
+                        <Border StrokeThickness="0" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}" HorizontalOptions="Fill" VerticalOptions="Start" Grid.Row="1" Grid.Column="1" HeightRequest="264" StrokeShape="RoundRectangle 20">
+
+                            <Grid RowDefinitions="40,*,50" Margin="10">
+                                <Grid.BindingContext>
+                                    <local:DayWeatherInfoViewModel />
+                                </Grid.BindingContext>
+                                <Label Margin="16,16,0,0" Text="Lunar Cycles" FontFamily="RobotoMedium" Grid.Row="0" />
+
+
+                                <Grid Padding="25" Grid.Row="1">
+                                    <chart:SfCartesianChart WidthRequest="280">
+
+                                        <chart:SfCartesianChart.Resources>
+                                            <DataTemplate x:Key="trackballLabelTemplate">
+                                                <HorizontalStackLayout>
+                                                    <Label Text="&#xe7b5;" FontFamily="MauiSampleFontIcon.ttf#MauiSampleFontIcon" TextColor="White" BackgroundColor="CornflowerBlue" />
+                                                </HorizontalStackLayout>
+                                            </DataTemplate>
+                                        </chart:SfCartesianChart.Resources>
+
+                                        <chart:SfCartesianChart.Annotations>
+                                            <chart:TextAnnotation Text="{Binding TimeSpanForMoonrise}" X1="3" Y1="4" >
+                                                <chart:TextAnnotation.LabelStyle>
+                                                    <chart:ChartAnnotationLabelStyle TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                                </chart:TextAnnotation.LabelStyle>
+                                            </chart:TextAnnotation>
+                                            <chart:EllipseAnnotation X1="2" X2="2.5" Y1="20" Y2="32" Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource  LunarEllipseFillColor}" >
+                                                <chart:EllipseAnnotation.LabelStyle>
+                                                    <chart:ChartAnnotationLabelStyle Margin="5" TextColor="White" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="MauiSampleFontIcon.ttf#MauiSampleFontIcon" />
+                                                </chart:EllipseAnnotation.LabelStyle>
+                                            </chart:EllipseAnnotation>
+                                        </chart:SfCartesianChart.Annotations>
+
+
+                                        <chart:SfCartesianChart.XAxes>
+                                            <chart:CategoryAxis LabelPlacement="BetweenTicks" IsVisible="False"  ShowMajorGridLines="False"/>
+                                        </chart:SfCartesianChart.XAxes>
+
+                                        <!-- Y-Axis (Elevation) -->
+                                        <chart:SfCartesianChart.YAxes>
+                                            <chart:NumericalAxis ShowMajorGridLines="False" IsVisible="False">
+                                                <chart:NumericalAxis.PlotBands>
+                                                    <chart:NumericalPlotBandCollection>
+                                                        <chart:NumericalPlotBand Start="30" End="30" Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisAzureBlue}, Dark={StaticResource  WeatherAnalysisBackgroundDark}}" Stroke="{AppThemeBinding Light={StaticResource WeatherAnalysisPearlGray}, Dark={StaticResource WeatherAnalysisGraphiteGray}}" StrokeWidth="1" />
+
+                                                    </chart:NumericalPlotBandCollection>
+                                                </chart:NumericalAxis.PlotBands>
+                                            </chart:NumericalAxis>
+                                        </chart:SfCartesianChart.YAxes>
+
+
+                                        <chart:SplineSeries ItemsSource="{Binding WeatherData}"
+XBindingPath="Time" YBindingPath="YAxis" Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisLavenderGray}, Dark={StaticResource WeatherAnalysisDarkGraphite}}" StrokeWidth="6" ShowMarkers="False">
+
+                                        </chart:SplineSeries>
+
+                                        <chart:SplineSeries ItemsSource="{Binding HighlightedData}"
+XBindingPath="Time"
+YBindingPath="YAxis"
+StrokeWidth="7"
+Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisRoyalBlue}, Dark={StaticResource WeatherAnalysisCrimsonRed}}"/>
+
+                                        <!--<chart:SfCartesianChart.TrackballBehavior>
+                                <chart:ChartTrackballBehavior ShowLine="False"
+                                                              ShowLabel="True"
+                                                              ActivationMode="TouchMove"
+                                                                DisplayMode="NearestPoint"/>
+                            </chart:SfCartesianChart.TrackballBehavior>-->
+
+
+                                        <!--<chart:SplineSeries.MarkerSettings>
+                                    <chart:ChartMarkerSettings Type="Circle" Fill="CadetBlue" StrokeWidth="5" >
+                
+                                    </chart:ChartMarkerSettings>
+                                </chart:SplineSeries.MarkerSettings>-->
+
+
+                                    </chart:SfCartesianChart>
+                                </Grid>
+
+
+                                <Grid ColumnDefinitions="*,*" VerticalOptions="Center" Grid.Row="2">
+                                    <Grid ColumnDefinitions="*,*" HorizontalOptions="Center" RowDefinitions="*,*" Grid.Column="0">
+                                        <Label Text="{Binding MoonRiseTime,StringFormat='{}{0:h:mm }'}" Margin="10" FontSize="24" VerticalOptions="Center" FontFamily="RobotoMedium" Grid.RowSpan="2" Grid.Column="0" />
+                                        <Label Text="AM" VerticalOptions="End" FontSize="16" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" FontFamily="RobotoMedium" />
+                                        <Label Text="Moonrise" VerticalOptions="Start" FontSize="14" HorizontalOptions="Start" Grid.Column="1" Grid.Row="1" />
+                                    </Grid>
+
+                                    <Grid ColumnDefinitions="*,*" HorizontalOptions="Center" RowDefinitions="*,*" Grid.Column="1">
+                                        <Label Text="{Binding MoonSetTime,StringFormat='{}{0:h:mm }'}" Margin="10" FontSize="24" VerticalOptions="Center" FontFamily="RobotoMedium" Grid.RowSpan="2" Grid.Column="0" />
+                                        <Label Text="PM" VerticalOptions="End" FontSize="16" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" FontFamily="RobotoMedium" />
+                                        <Label Text="Moonset" VerticalOptions="Start" FontSize="14" HorizontalOptions="Start" Grid.Column="1" Grid.Row="1" />
+                                    </Grid>
+
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+                </Grid>
+            </ScrollView>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

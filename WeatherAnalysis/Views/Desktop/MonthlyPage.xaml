@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherAnalysis.MonthlyPage"
+             xmlns:syncTheme="clr-namespace:Syncfusion.Maui.Themes;assembly=Syncfusion.Maui.Core"
+             xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:local="clr-namespace:WeatherAnalysis">
+
+    <ContentView.Resources>
+        <local:DatetimeToStringConverter x:Key="datetimeToStringConverter" Format="dd" />
+        <local:DatetimeToStringConverter x:Key="datetimeConverter" Format="ddd" />
+        <local:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" Format="h:mm tt" />
+        <local:CelsiusToFahrenheitConverter x:Key="CelsiusToFahrenheitConverter" />
+        <local:StringToImageConverter x:Key="StringToImageConverter"/>
+
+        <Style TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}"/>
+            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"/>
+            <Setter Property="StrokeShape" Value="Rectangle"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+
+        <Style TargetType="listview:ListViewItem">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="Background"
+                                Value= "Transparent"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentView.Resources>
+
+    <ContentView.BindingContext>
+        <local:HistoricalWeatherViewModel />
+    </ContentView.BindingContext>
+
+    <Grid RowDefinitions="110,*" Padding="0,16,0,16" RowSpacing="12">
+
+        <!--Month tile-->
+        <listview:SfListView Grid.Row="0"
+                     VerticalOptions="Center"
+                     x:Name="forcastList"
+                     ItemSize="92"
+                     ItemsSource="{Binding HistoricalWeatherData}"
+                     SelectedItem="{Binding SelectedTile}"
+                     HeightRequest="115"
+                     Orientation="Horizontal"
+                     ItemSpacing="0,0,12,0" 
+                     SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                     ScrollBarVisibility="Never">
+
+            <listview:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Border WidthRequest="92" HeightRequest="100" StrokeThickness="0" StrokeShape="RoundRectangle 15">
+
+                        <Grid RowDefinitions="*,*,*">
+                            <Label Grid.Row="0" Text="{Binding Month}" 
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center" 
+                           FontFamily="RobotoMedium"
+                           FontSize="14"/>
+                            <Image Grid.Row="1" 
+                           WidthRequest="36" HeightRequest="36"
+                           Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=36}"/>
+                            <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center">
+                                <Label Text="{Binding AvgHighTemperature, StringFormat='{}{0:0}°'}" 
+                                   HorizontalTextAlignment="Center" 
+                                   VerticalTextAlignment="Center"
+                                   FontSize="16"
+                                   FontFamily="RobotoMedium"/>
+                                <Label Grid.Row="2" Text="{Binding AvgLowTemperature, StringFormat='{}{0:/0}°'}" 
+                                   HorizontalTextAlignment="Start" 
+                                   VerticalTextAlignment="Center" 
+                                   FontSize="16"
+                                   FontFamily="RobotoMedium"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </listview:SfListView.ItemTemplate>
+
+            <listview:SfListView.SelectedItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisSelectionColor}, Dark={StaticResource WeatherAnalysisSelectionDark}}" 
+                     WidthRequest="92" HeightRequest="100"
+                    StrokeThickness="0" StrokeShape="RoundRectangle 15">
+
+                        <Grid RowDefinitions="*,*,*">
+                            <Label Grid.Row="0" Text="{Binding Month}" 
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center" 
+                           FontFamily="RobotoMedium"
+                           FontSize="14"
+                           TextColor="{StaticResource White}"/>
+                            <Image Grid.Row="1" 
+                           WidthRequest="36" HeightRequest="36"
+                           Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=36}"/>
+                            <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center">
+                                <Label  Text="{Binding AvgHighTemperature, StringFormat='{}{0:0}°'}" 
+                                   HorizontalTextAlignment="Center" 
+                                   VerticalTextAlignment="Center" 
+                                   FontSize="14"
+                                   TextColor="{StaticResource White}"
+                                   FontFamily="RobotoMedium"/>
+                                <Label Grid.Row="2" Text="{Binding AvgLowTemperature, StringFormat='{}{0:/0}°'}" 
+                                   HorizontalTextAlignment="Start" 
+                                   VerticalTextAlignment="Center" 
+                                   FontSize="16"
+                                   TextColor="{StaticResource White}"
+                                   FontFamily="RobotoMedium"/>
+                            </HorizontalStackLayout>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </listview:SfListView.SelectedItemTemplate>
+
+        </listview:SfListView>
+
+        <!--Calendar View-->
+
+        <ScrollView Grid.Row="1">
+            <Border HeightRequest="500" StrokeThickness="0" StrokeShape="RoundRectangle 10" VerticalOptions="StartAndExpand">
+
+                <CollectionView ItemsSource="{Binding MonthlyWeatherData}"
+                ItemsLayout="VerticalGrid, 7"
+                VerticalScrollBarVisibility="Never">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate >
+                                <Border StrokeThickness="0">
+                                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" 
+                  Padding="5" HeightRequest="88" WidthRequest="150">
+                                        <Label Grid.Row="0" 
+                                           Grid.Column="0" 
+                                           Text="{Binding Date, Converter={StaticResource datetimeToStringConverter}}" 
+                                           FontFamily="Roboto" 
+                                           FontSize="16" 
+                                           HorizontalOptions="Center"
+                                           VerticalTextAlignment="Center"/>
+                                        <Label Grid.Row="0" 
+                           Grid.Column="1" 
+                           Text="{Binding Date, Converter={StaticResource datetimeConverter}}" 
+                           TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundDark}, Dark={StaticResource White}}"
+                           FontFamily="Roboto"
+                           FontSize="14"  
+                           VerticalTextAlignment="Center"
+                                           HorizontalOptions="Center"/>
+                                        <Image Grid.Row="1" 
+                           Grid.Column="0" 
+                           HorizontalOptions="Center"
+                           WidthRequest="48"
+                           HeightRequest="48"
+                           Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=25}"/>
+                                        <VerticalStackLayout Grid.Row="1"
+                                     Grid.Column="1"
+                                     VerticalOptions="Center"
+                                                         HorizontalOptions="Center">
+                                            <Label Text="{Binding TempMaximum, StringFormat='{}{0:0}°'}"
+                               FontFamily="Roboto" 
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundDark}, Dark={StaticResource White}}"
+                               HorizontalTextAlignment="Center">
+                                            </Label>
+                                            <Label Text="{Binding TempMinimum, StringFormat='{}{0:0}°'}"
+                               FontFamily="Roboto" 
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundDark}, Dark={StaticResource White}}"
+                               HorizontalTextAlignment="Center">
+                                        </Label>
+                                    </VerticalStackLayout>
+
+                                </Grid>
+                            </Border>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+        </ScrollView>
+
+
+    </Grid>
+
+</ContentView>

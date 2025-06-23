@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherAnalysis.HourlyView"
+             xmlns:datagrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:local="clr-namespace:WeatherAnalysis"
+             xmlns:converter="clr-namespace:WeatherAnalysis"
+             xmlns:viewModel="clr-namespace:WeatherAnalysis"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts">
+
+    <ContentView.Resources>
+        <local:DatetimeToStringConverter x:Key="datetimeToStringConverter" Format="ddd d" />
+        <local:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" Format="h:mm tt" />
+        <local:CelsiusToFahrenheitConverter x:Key="CelsiusToFahrenheitConverter" />
+        <local:StringToImageConverter x:Key="StringToImageConverter"/>
+
+        <Style TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}"/>
+            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"/>
+            <Setter Property="StrokeShape" Value="Rectangle"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+    </ContentView.Resources>
+
+    <ScrollView>
+        <Grid RowDefinitions="270,120,*" Padding="16">
+
+            <!--Summary-->
+            <Border StrokeThickness="0" HeightRequest="260"  StrokeShape="RoundRectangle 10"
+                >
+
+                <Grid RowDefinitions="60,*">
+                    <Grid.BindingContext>
+                        <local:DayWeatherInfoViewModel />
+                    </Grid.BindingContext>
+
+                    <Grid ColumnDefinitions="*,*"  >
+
+                        <Grid.BindingContext>
+                            <viewModel:SummaryViewModel />
+                        </Grid.BindingContext>
+                        <Label Text="Summary" Margin="16,20,0,0" VerticalOptions="Start" FontFamily="RobotoMedium" FontSize="14"  HorizontalOptions="Start" Grid.Column="0" />
+                        <Border Stroke="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" StrokeShape="RoundRectangle 10" StrokeThickness="0.3" HeightRequest="35" Margin="16,0,16,0"  MinimumWidthRequest="150" Grid.Column="1">
+                            <editors:SfComboBox x:Name="comboBox"
+                     Grid.Column="1"
+                     HorizontalOptions="Center"
+                     HeightRequest="38"
+                     VerticalOptions="Center"
+                     IsDropDownOpen="False"                                           
+                     HorizontalTextAlignment="Center"
+                     IsClearButtonVisible="False"
+                    Stroke="Transparent"
+                     IsEditable="False"                    
+                    FontSize="16"
+                    DisplayMemberPath="Name"
+                    TextMemberPath="Name"
+                     SelectionChanged="comboBox_SelectionChanged"
+                     ItemsSource="{Binding SummaryLists}"
+                     Text="Temperature">
+
+                                <editors:SfComboBox.BindingContext>
+                                    <local:SummaryViewModel />
+                                </editors:SfComboBox.BindingContext>
+                            </editors:SfComboBox>
+                        </Border>
+
+                    </Grid>
+                    <chart:SfCartesianChart Grid.Row="1" Margin="16" x:Name="TemperatureChart" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" >
+
+                        <!--X Axis (Time)-->
+                        <chart:SfCartesianChart.XAxes>
+                            <chart:DateTimeAxis Interval="5" TickPosition="Outside"   EdgeLabelsDrawingMode="Shift" ShowMajorGridLines="False">
+                                <chart:DateTimeAxis.LabelStyle>
+                                    <chart:ChartAxisLabelStyle TextColor="{AppThemeBinding Light=Black, Dark=White}" LabelFormat="h tt" />
+                                </chart:DateTimeAxis.LabelStyle>
+                                <chart:DateTimeAxis.MinorTickStyle>
+                                    <chart:ChartAxisTickStyle Stroke="Transparent" StrokeWidth="0" />
+                                </chart:DateTimeAxis.MinorTickStyle>
+                            </chart:DateTimeAxis>
+                        </chart:SfCartesianChart.XAxes>
+
+                        <!--Y Axis (Temperature)-->
+                        <chart:SfCartesianChart.YAxes>
+                            <chart:NumericalAxis IsVisible="False" x:Name="summaryYAxis" EdgeLabelsVisibilityMode="Visible" Minimum="{Binding MinimumYValueChart}" Maximum="{Binding MaxYValue}" Interval="{Binding ChartInterval}" ShowMajorGridLines="True"/>
+                        </chart:SfCartesianChart.YAxes>
+
+                        <!--Gradient Spline Series-->
+                        <chart:SplineAreaSeries x:Name="splineAreaSummary" ItemsSource="{Binding HourlyWeatherData}"
+XBindingPath="DateTime"
+YBindingPath="Temperature"
+StrokeWidth="2"        
+EnableTooltip="False"
+ShowTrackballLabel="True"
+Type="Cardinal"
+ShowDataLabels="True" >
+                            <chart:SplineAreaSeries.Fill>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Color="Orange" Offset="0.0" />
+                                    <GradientStop Color="Yellow" Offset="0.4" />
+                                    <GradientStop Color="LightYellow" Offset="0.7" />
+                                    <GradientStop Color="Transparent" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </chart:SplineAreaSeries.Fill>
+
+                            <chart:SplineAreaSeries.DataLabelSettings>
+
+                                <chart:CartesianDataLabelSettings   BarAlignment="Middle" UseSeriesPalette="False"  LabelPlacement="Outer">
+                                    <chart:CartesianDataLabelSettings.LabelStyle>
+                                        <chart:ChartDataLabelStyle  Stroke="Transparent" Background="Transparent" />
+                                    </chart:CartesianDataLabelSettings.LabelStyle>
+                                </chart:CartesianDataLabelSettings>
+                            </chart:SplineAreaSeries.DataLabelSettings>
+
+                            <chart:SplineAreaSeries.LabelTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Label HorizontalOptions="End" Margin="20,0,0,0" IsVisible="{Binding Item.DateTime, Converter={converter:LabelVisibilityConverter}, Mode=OneWay}"  Text="{Binding Item.Temperature, StringFormat='{0:0}°'}" FontSize="10" />
+                                    </Grid>
+                                </DataTemplate>
+                            </chart:SplineAreaSeries.LabelTemplate>
+                        </chart:SplineAreaSeries>
+
+                        <chart:SfCartesianChart.TrackballBehavior>
+                            <chart:ChartTrackballBehavior ActivationMode="LongPress"/>
+                        </chart:SfCartesianChart.TrackballBehavior>
+
+                    </chart:SfCartesianChart>
+
+                </Grid>
+
+            </Border>
+
+            <!--Date Tile-->
+            <listview:SfListView Grid.Row="1"
+                             x:Name="forcastList"
+                             ItemSize="64"
+                             ItemsSource="{Binding HourlyForecasts}"
+                             SelectedItem="{Binding SelectedTile}" 
+                             HeightRequest="100"
+                             Orientation="Horizontal"
+                             ItemSpacing="0,0,10,0" 
+                             ScrollBarVisibility="Never"
+                             SelectionChangedCommand="{Binding SelectionChangedCommand}">
+
+                <listview:SfListView.BindingContext>
+                    <local:HourlyForecastViewModel />
+                </listview:SfListView.BindingContext>
+
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border WidthRequest="70" HeightRequest="96" StrokeThickness="0" StrokeShape="RoundRectangle 15">
+
+                            <Grid RowDefinitions="*,*,*">
+                                <Label Grid.Row="0" Text="{Binding Date, Converter={StaticResource datetimeToStringConverter}}"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center" 
+                                   FontFamily="RobotoMedium"
+                                   FontSize="12"/>
+                                <Image Grid.Row="1" WidthRequest="36" HeightRequest="36" Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=16}"/>
+                                <Label Grid.Row="2"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   FontFamily="RobotoMedium"
+                                   FontSize="14"
+                                       Text="{Binding Temperature,StringFormat='{}{0:0}°'}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+
+                <listview:SfListView.SelectedItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisSelectionColor}, Dark={StaticResource WeatherAnalysisSelectionDark}}" 
+                            WidthRequest="64" 
+                            HeightRequest="96"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8">
+
+                            <Grid RowDefinitions="*,*,*">
+                                <Label Grid.Row="0" Text="{Binding Date, Converter={StaticResource datetimeToStringConverter}}" 
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center" 
+                                   TextColor="{StaticResource White}"
+                                   FontFamily="RobotoMedium"
+                                   FontSize="12" />
+                                <Image Grid.Row="1" WidthRequest="36" HeightRequest="36" Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=16}" />
+                                <Label Grid.Row="2" 
+                                   HorizontalTextAlignment="Center" 
+                                   FontAttributes="Bold"
+                                   VerticalTextAlignment="Center" 
+                                   TextColor="{StaticResource White}"
+                                   FontFamily="Roboto"
+                                   FontSize="13"
+                                       Text="{Binding Temperature,StringFormat='{}{0:0}°'}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </listview:SfListView.SelectedItemTemplate>
+
+            </listview:SfListView>
+
+            <!--DataGrid-->
+            <Border Grid.Row="2" 
+                StrokeThickness="0"
+                    StrokeShape="RoundRectangle 10">
+                <datagrid:SfDataGrid x:Name="dataGrid" 
+                     ItemsSource="{Binding HourlyWeatherData}"
+                     Margin="5,0,5,0"
+                     AutoGenerateColumnsMode="None"
+                     ColumnWidthMode="Fill"
+                     HeaderRowHeight="50"
+                     BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}">
+                    <datagrid:SfDataGrid.BindingContext>
+                        <local:DayWeatherInfoViewModel x:Name="viewModel"/>
+                    </datagrid:SfDataGrid.BindingContext>
+
+                    <datagrid:SfDataGrid.DefaultStyle>
+                        <datagrid:DataGridStyle RowFontSize="14"
+                                HeaderRowFontSize="14"
+                               GridLineColor="{StaticResource Gray200}"
+                                HeaderRowFontAttributes="Bold"
+                                GridLineStrokeThickness="{OnPlatform Android=2}"/>
+                    </datagrid:SfDataGrid.DefaultStyle>
+
+                    <datagrid:SfDataGrid.Columns>
+                        <datagrid:DataGridTextColumn MappingName="DateTime"
+                                                     HeaderText="Time"
+                                                     x:DataType="local:HourlyWeatherInfoModel"
+                                                     DisplayBinding="{Binding DateTime, Converter={StaticResource TimeSpanToStringConverter}}"
+                                                     CellTextAlignment="Center" 
+                                                     HeaderTextAlignment="Center"/>
+                        <datagrid:DataGridTemplateColumn MappingName="Weather"
+                                                         HeaderTextAlignment="Center">
+                            <datagrid:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Horizontal" Spacing="5">
+                                        <Image WidthRequest="24" HeightRequest="24" 
+                                                Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=24}" />
+                                        <Label Text="{Binding Weather}" 
+                                               VerticalTextAlignment="Center"
+                                               FontSize="14"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </datagrid:DataGridTemplateColumn.CellTemplate>
+                        </datagrid:DataGridTemplateColumn>
+                        <datagrid:DataGridTemplateColumn MappingName="Temperature"
+                                 HeaderTextAlignment="Center">
+                            <datagrid:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
+                                    <Label FontSize="14" HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <MultiBinding Converter="{StaticResource CelsiusToFahrenheitConverter}" ConverterParameter="{}{0:0}°">
+                                                <Binding Path="Temperature"/>
+                                                <Binding Path="IsCelsius"/>
+                                            </MultiBinding>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </DataTemplate>
+                            </datagrid:DataGridTemplateColumn.CellTemplate>
+                        </datagrid:DataGridTemplateColumn>
+                    </datagrid:SfDataGrid.Columns>
+
+                </datagrid:SfDataGrid>
+
+            </Border>
+
+        </Grid>
+    </ScrollView>
+   
+</ContentView>

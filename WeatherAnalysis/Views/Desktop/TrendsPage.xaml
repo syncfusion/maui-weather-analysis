@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherAnalysis.Views.Desktop.TrendsPage"
+             xmlns:local="clr-namespace:WeatherAnalysis"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="precipitationFillColor">
+                <SolidColorBrush.Color>
+                    <AppThemeBinding Light="#FF4E4E" Dark="#9B4848" />
+                </SolidColorBrush.Color>
+            </SolidColorBrush>
+
+            <Color x:Key="strokeLight">#5F5E60</Color>
+            <Color x:Key="strokeDark">#E5E1E3</Color>
+            <Color x:Key="gridLineLight">#E7E0EC</Color>
+            <Color x:Key="gridLineDark">#36323B</Color>
+            <Color x:Key="Trendsdarkbacground">#1C1B1D</Color>
+            <Color x:Key="TrendslightBackgroud">#FCF8FA</Color>
+            <Color x:Key="TrendsPagebackgroundDark">#1C1C1E</Color>
+            <Color x:Key="ChartBackground">#1F1F21</Color>
+
+            <LinearGradientBrush x:Key="TemperatureGradient" StartPoint="0,1" EndPoint="0,0">
+                <GradientStop Color="#00FFFFFF" Offset="0.0" />
+                <GradientStop Color="#00FFFFFF" Offset="0.6" />
+                <GradientStop Color="#66FF4500" Offset="0.8" />
+                <GradientStop Color="#CCFF4500" Offset="0.9" />
+                <GradientStop Color="#FFFF4500" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="HumidityGradientBrush"
+                     StartPoint="0.5,0"
+                     EndPoint="0.5,1">
+                <GradientStop Color="LightBlue" Offset="0.0" />
+                <GradientStop Color="#99ADD8E6" Offset="0.4" />
+                <GradientStop Color="#4DD8E6F0" Offset="0.7" />
+                <GradientStop Color="Transparent" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <DoubleCollection x:Key="dashArray">
+                <x:Double>5</x:Double>
+                <x:Double>2</x:Double>
+            </DoubleCollection>
+
+            <LinearGradientBrush x:Key="MinTemperatureGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#F4890B" Offset="0.0" />
+                <GradientStop Color="#00F4890B" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="MaxTemperatureGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#8000E190" Offset="0.0" />
+                <GradientStop Color="#0000E190" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="PurpleGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#809215F3" Offset="0.0" />
+                <GradientStop Color="#009215F3" Offset="1.0" />
+            </LinearGradientBrush>
+        </ResourceDictionary>
+
+        <Style TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}"/>
+            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"/>
+            <Setter Property="StrokeShape" Value="Rectangle 20"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+    </ContentView.Resources>
+
+    <Grid RowDefinitions="Auto,*" BackgroundColor="{AppThemeBinding Light={StaticResource TrendslightBackgroud}, Dark={StaticResource WeatherAnalysisBackgroundDark}}"
+          Padding="24" >
+        <!-- Trends Title -->
+        <Label Text="Trends" 
+               FontFamily="RobotoMedium"
+               FontSize="16" 
+               TextColor="{AppThemeBinding Light=Black, Dark=White}"
+               Grid.Row="0" />
+
+        <Grid Grid.Row="1" RowDefinitions="*,*" ColumnDefinitions="*,*" RowSpacing="8" ColumnSpacing="16" 
+              BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}" >
+
+            <Border StrokeThickness="0"  BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Trendsdarkbacground}}"  Grid.Row="0" Grid.Column="0" Margin="0,12,0,0" HorizontalOptions="FillAndExpand"  StrokeShape="RoundRectangle 10" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label FontFamily="RobotoMedium"  Text="Temperature" Margin="16,20,0,0"  FontSize="14"  HorizontalOptions="Start" Grid.Row="0" />
+
+                    <Grid Grid.Row="1" >
+                        <Grid.BindingContext>
+                            <local:DayWeatherInfoViewModel x:Name="dayWeatherInfoForChart2" />
+                        </Grid.BindingContext>
+                        <chart:SfCartesianChart Margin="16"
+                        BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
+
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:DateTimeAxis  TickPosition="Outside"   EdgeLabelsDrawingMode="Shift" ShowMajorGridLines="False">
+                                    <chart:DateTimeAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle  LabelFormat="h tt" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray}, Dark={StaticResource White}}" />
+                                    </chart:DateTimeAxis.LabelStyle>
+                                    <chart:DateTimeAxis.MinorTickStyle>
+                                        <chart:ChartAxisTickStyle Stroke="Transparent" StrokeWidth="0" />
+                                    </chart:DateTimeAxis.MinorTickStyle>
+                                </chart:DateTimeAxis>
+                            </chart:SfCartesianChart.XAxes>
+
+                            <!--Y Axis (Temperature)-->
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis  IsVisible="False" Interval="20" Minimum="7" EdgeLabelsVisibilityMode="Visible"  ShowMajorGridLines="True">
+                                    <chart:NumericalAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle Stroke="{AppThemeBinding Light={StaticResource gridLineLight},Dark={StaticResource gridLineDark}}" />
+                                    </chart:NumericalAxis.MajorGridLineStyle>
+                                </chart:NumericalAxis>
+                            </chart:SfCartesianChart.YAxes>
+
+                            <chart:StackingAreaSeries ItemsSource="{Binding HourlyWeatherData}"
+                              XBindingPath="DateTime" Fill="{StaticResource MaxTemperatureGradient}" Stroke="#00E190" StrokeWidth="2.5"
+                              YBindingPath="Temperature"/>
+                            <chart:StackingAreaSeries ItemsSource="{Binding HourlyWeatherData}"
+                                XBindingPath="DateTime" Fill="{StaticResource MinTemperatureGradient}" Stroke="#F4890B" StrokeWidth="2.5"
+                                YBindingPath="Temperature"/>
+                        </chart:SfCartesianChart>
+                    </Grid>
+
+                </Grid>
+
+            </Border>
+
+            <Border StrokeThickness="0" Grid.Row="0"  Grid.Column="1" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Trendsdarkbacground}}"   Margin="0,12,0,0"  HorizontalOptions="FillAndExpand"  StrokeShape="RoundRectangle 10" >
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label FontFamily="RobotoMedium"  Text="Precipitation" Margin="16,20,0,0"  FontSize="14"  HorizontalOptions="Start" Grid.Row="0" />
+
+                    <Grid Grid.Row="1" >
+                        <Grid.BindingContext>
+                            <local:DayWeatherInfoViewModel  />
+                        </Grid.BindingContext>
+                        <chart:SfCartesianChart Margin="16"  BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" >
+
+                            <!--X Axis (Time)-->
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:DateTimeAxis Interval="5" TickPosition="Outside"   EdgeLabelsDrawingMode="Shift" ShowMajorGridLines="False">
+                                    <chart:DateTimeAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="{AppThemeBinding Light=Black, Dark=White}" LabelFormat="h tt" />
+                                    </chart:DateTimeAxis.LabelStyle>
+                                    <chart:DateTimeAxis.MinorTickStyle>
+                                        <chart:ChartAxisTickStyle Stroke="Transparent" StrokeWidth="0" />
+                                    </chart:DateTimeAxis.MinorTickStyle>
+                                </chart:DateTimeAxis>
+                            </chart:SfCartesianChart.XAxes>
+
+                            <!--Y Axis (Temperature)-->
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis IsVisible="False" ShowMajorGridLines="True">
+                                    <chart:NumericalAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle Stroke="{AppThemeBinding Light={StaticResource gridLineLight},Dark={StaticResource gridLineDark}}" />
+                                    </chart:NumericalAxis.MajorGridLineStyle>
+                                </chart:NumericalAxis>
+                            </chart:SfCartesianChart.YAxes>
+
+                            <!--Gradient Spline Series-->
+
+                            <chart:FastLineSeries ItemsSource="{Binding HourlyWeatherData}"
+                                                                      XBindingPath="DateTime"
+                                                                      Fill="{StaticResource precipitationFillColor}"
+                                                                      StrokeWidth="3"
+                                                                      YBindingPath="Precipitation"/>
+
+                        </chart:SfCartesianChart>
+                    </Grid>
+
+                </Grid>
+
+            </Border>
+
+            <Border StrokeThickness="0" Grid.Row="1" Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Trendsdarkbacground}}"   Margin="0,12,0,0"  HorizontalOptions="FillAndExpand"  StrokeShape="RoundRectangle 10" >
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label FontFamily="RobotoMedium"  Text="Humidity" Margin="16,20,0,0"  FontSize="14"  HorizontalOptions="Start" Grid.Row="0" />
+
+                    <Grid Grid.Row="1" >
+                        <Grid.BindingContext>
+                            <local:DayWeatherInfoViewModel  />
+                        </Grid.BindingContext>
+                        <chart:SfCartesianChart Margin="16"  BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" >
+
+                            <!--X Axis (Time)-->
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:DateTimeAxis Interval="5" TickPosition="Outside"   EdgeLabelsDrawingMode="Shift" ShowMajorGridLines="False">
+                                    <chart:DateTimeAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="{AppThemeBinding Light=Black, Dark=White}" LabelFormat="h tt" />
+                                    </chart:DateTimeAxis.LabelStyle>
+                                    <chart:DateTimeAxis.MinorTickStyle>
+                                        <chart:ChartAxisTickStyle Stroke="Transparent" StrokeWidth="0" />
+                                    </chart:DateTimeAxis.MinorTickStyle>
+                                </chart:DateTimeAxis>
+                            </chart:SfCartesianChart.XAxes>
+
+                            <!--Y Axis (Temperature)-->
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis IsVisible="False"   EdgeLabelsVisibilityMode="Visible" Minimum="0" ShowMajorGridLines="True">
+                                    <chart:NumericalAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle Stroke="{AppThemeBinding Light={StaticResource gridLineLight},Dark={StaticResource gridLineDark}}" />
+                                    </chart:NumericalAxis.MajorGridLineStyle>
+                                </chart:NumericalAxis>
+                            </chart:SfCartesianChart.YAxes>
+
+                            <!--Gradient Spline Series-->
+                            <chart:SplineAreaSeries ShowDataLabels="False" Stroke="#116DF9" ItemsSource="{Binding HourlyWeatherData}" XBindingPath="DateTime" YBindingPath="Humidity" StrokeWidth="2" EnableTooltip="False" ShowTrackballLabel="True" Type="Cardinal" Fill="{StaticResource HumidityGradientBrush}"  />
+
+                            <chart:SplineAreaSeries ItemsSource="{Binding HourlyWeatherData}"
+                                                                             XBindingPath="DateTime"
+                                                                             YBindingPath="Feelslike"  
+                                                                             Stroke="{AppThemeBinding Light={StaticResource strokeLight}, Dark={StaticResource strokeDark}}"      
+                                                                            Fill="Transparent"
+                                                                             StrokeWidth="1.5"
+                                                                             StrokeDashArray="{StaticResource dashArray}"/>
+
+                        </chart:SfCartesianChart>
+                    </Grid>
+
+                </Grid>
+
+            </Border>
+
+            <Border StrokeThickness="0" Grid.Row="1" Grid.Column="1"  BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Trendsdarkbacground}}"  Margin="0,12,0,0" HorizontalOptions="FillAndExpand"  StrokeShape="RoundRectangle 10" >
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label FontFamily="RobotoMedium"  Text="Wind" Margin="16,20,0,0"  FontSize="14"  HorizontalOptions="Start" Grid.Row="0" />
+
+                    <Grid Grid.Row="1" >
+                        <Grid.BindingContext>
+                            <local:DayWeatherInfoViewModel  />
+                        </Grid.BindingContext>
+                        <chart:SfCartesianChart Margin="16"  BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" >
+
+                            <!--X Axis (Time)-->
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:DateTimeAxis Interval="5" TickPosition="Outside"   EdgeLabelsDrawingMode="Shift" ShowMajorGridLines="False">
+                                    <chart:DateTimeAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="{AppThemeBinding Light=Black, Dark=White}" LabelFormat="h tt" />
+                                    </chart:DateTimeAxis.LabelStyle>
+                                    <chart:DateTimeAxis.MinorTickStyle>
+                                        <chart:ChartAxisTickStyle Stroke="Transparent" StrokeWidth="0" />
+                                    </chart:DateTimeAxis.MinorTickStyle>
+                                </chart:DateTimeAxis>
+                            </chart:SfCartesianChart.XAxes>
+
+                            <!--Y Axis (Temperature)-->
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis IsVisible="False"   ShowMajorGridLines="True">
+                                    <chart:NumericalAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle Stroke="{AppThemeBinding Light={StaticResource gridLineLight},Dark={StaticResource gridLineDark}}" />
+                                    </chart:NumericalAxis.MajorGridLineStyle>
+                                </chart:NumericalAxis>
+                            </chart:SfCartesianChart.YAxes>
+
+                            <chart:AreaSeries ItemsSource="{Binding HourlyWeatherData}" XBindingPath="DateTime" YBindingPath="WindSpeed" Stroke="#9215F3" Fill="{StaticResource PurpleGradient}" />
+
+                        </chart:SfCartesianChart>
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Grid>
+
+
+</ContentView>
