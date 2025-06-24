@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherAnalysis.ForecastPage"
+             xmlns:segmentedControl="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+             Title="ForecastPage">
+    
+    <Grid BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}" 
+      Padding="24,24,24,0"
+      RowDefinitions="50,*">
+        <segmentedControl:SfSegmentedControl SegmentWidth="200" 
+                                             Grid.Row="0"
+                                             SegmentHeight="40"
+                                             HorizontalOptions="Start"
+                                             SelectionChanged="SfSegmentedControl_SelectionChanged"
+                                             Stroke="{AppThemeBinding Light={StaticResource WeatherAnalysisSelectionColor}, Dark={StaticResource WeatherAnalysisSelectionDark}}"
+                                             Background="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}"
+                                             SelectedIndex="0"
+                                             Padding="0">
+            <segmentedControl:SfSegmentedControl.TextStyle>
+                <segmentedControl:SegmentTextStyle FontSize="14" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+            </segmentedControl:SfSegmentedControl.TextStyle>
+            <segmentedControl:SfSegmentedControl.SelectionIndicatorSettings>
+                <segmentedControl:SelectionIndicatorSettings 
+                     SelectionIndicatorPlacement="Fill"
+                     Background="{AppThemeBinding Light={StaticResource WeatherAnalysisSegementColor}, Dark={StaticResource WeatherAnalysisSegmentDark}}"
+                     TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+            </segmentedControl:SfSegmentedControl.SelectionIndicatorSettings>
+            <segmentedControl:SfSegmentedControl.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Hourly</x:String>
+                    <x:String>Monthly</x:String>
+                </x:Array>
+            </segmentedControl:SfSegmentedControl.ItemsSource>
+        </segmentedControl:SfSegmentedControl>
+
+        <ContentView x:Name="layoutPage" 
+                         Grid.Row="1">
+
+        </ContentView>
+    </Grid>
+
+</ContentPage>
