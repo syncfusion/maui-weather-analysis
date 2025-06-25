@@ -58,7 +58,8 @@
     <Color x:Key="WeatherAnalysisDarkGraphite">#36323b</Color>
     <Color x:Key="WeatherAnalysisGraphiteGray">#474648</Color>
 
-
+    <Color x:Key="PrimaryForegroundLight">#FFFFFF</Color>    
+    
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>

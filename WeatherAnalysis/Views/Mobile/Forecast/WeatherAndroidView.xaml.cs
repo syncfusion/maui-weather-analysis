@@ -5,8 +5,8 @@ namespace WeatherAnalysis;
 
 public partial class WeatherAndroidView : ContentView
 {
-	public WeatherAndroidView()
-	{
+    public WeatherAndroidView()
+    {
         DataStore.Initialize(this.GetType().Assembly, BaseConfig.IsIndividualSB);
         InitializeComponent();
     }
@@ -15,7 +15,7 @@ public partial class WeatherAndroidView : ContentView
     {
         if (e.NewValue.Text == "Hourly")
         {
-           
+
             layoutPage.Content = new HourlyView();
         }
         else if (e.NewValue.Text == "Monthly")
@@ -57,7 +57,7 @@ public partial class WeatherAndroidView : ContentView
         {
             darkthemebutton.IsChecked = true;
 
-            if (themeLabel!= null)
+            if (themeLabel != null)
                 themeLabel.Text = "Dark";
         }
         else
@@ -92,8 +92,8 @@ public partial class WeatherAndroidView : ContentView
 
                     var gradientBrush = new LinearGradientBrush
                     {
-                        StartPoint = new Point(0.5, 0), 
-                        EndPoint = new Point(0.5, 1)  
+                        StartPoint = new Point(0.5, 0),
+                        EndPoint = new Point(0.5, 1)
                     };
 
                     gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.LightBlue, Offset = 0.0F });  // Fully blue at the top
@@ -114,8 +114,8 @@ public partial class WeatherAndroidView : ContentView
                     splineAreaSummary.Stroke = new SolidColorBrush(Colors.Purple);
                     var gradientBrush = new LinearGradientBrush
                     {
-                        StartPoint = new Point(0.5, 0), 
-                        EndPoint = new Point(0.5, 1)   
+                        StartPoint = new Point(0.5, 0),
+                        EndPoint = new Point(0.5, 1)
                     };
 
                     gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.MediumPurple, Offset = 0.0F });  // Fully blue at the top
@@ -196,11 +196,14 @@ public partial class WeatherAndroidView : ContentView
     private void SfRadioButton_StateChanging_1(object sender, Syncfusion.Maui.Buttons.StateChangingEventArgs e)
     {
         ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-        var theme = mergedDictionaries.OfType<SyncfusionThemeResourceDictionary>().FirstOrDefault();
-        if (theme != null )
+        if (mergedDictionaries != null)
         {
-            theme.VisualTheme = SfVisuals.MaterialDark;
-            Application.Current.UserAppTheme = AppTheme.Dark;
+            var theme = mergedDictionaries.OfType<SyncfusionThemeResourceDictionary>().FirstOrDefault();
+            if (theme != null)
+            {
+                theme.VisualTheme = SfVisuals.MaterialDark;
+                Application.Current.UserAppTheme = AppTheme.Dark;
+            }
         }
 
         if (themeLabel != null)

@@ -218,10 +218,10 @@ ShowDataLabels="True" >
 
                     <datagrid:SfDataGrid.DefaultStyle>
                         <datagrid:DataGridStyle RowFontSize="14"
-                                HeaderRowFontSize="14"
-                               GridLineColor="{StaticResource Gray200}"
-                                HeaderRowFontAttributes="Bold"
-                                GridLineStrokeThickness="{OnPlatform Android=2}"/>
+                                                HeaderRowFontSize="14" 
+                                                HeaderRowFontFamily="RobotoMedium" 
+                                                GridLineColor="{StaticResource Gray200}"
+                                                GridLineStrokeThickness="{OnPlatform Android=2}"/>
                     </datagrid:SfDataGrid.DefaultStyle>
 
                     <datagrid:SfDataGrid.Columns>
@@ -229,10 +229,15 @@ ShowDataLabels="True" >
                                                      HeaderText="Time"
                                                      x:DataType="local:HourlyWeatherInfoModel"
                                                      DisplayBinding="{Binding DateTime, Converter={StaticResource TimeSpanToStringConverter}}"
-                                                     CellTextAlignment="Center" 
-                                                     HeaderTextAlignment="Center"/>
-                        <datagrid:DataGridTemplateColumn MappingName="Weather"
-                                                         HeaderTextAlignment="Center">
+                                                     CellTextAlignment="Start"                                                      
+                                                     HeaderTextAlignment="Start">
+
+                        </datagrid:DataGridTextColumn>
+
+
+                        <datagrid:DataGridTemplateColumn MappingName="Weather" Width="140"
+                                                         HeaderTextAlignment="Start" CellTextAlignment="Start">
+
                             <datagrid:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackLayout Orientation="Horizontal" Spacing="5">
@@ -245,11 +250,14 @@ ShowDataLabels="True" >
                                 </DataTemplate>
                             </datagrid:DataGridTemplateColumn.CellTemplate>
                         </datagrid:DataGridTemplateColumn>
+
+
                         <datagrid:DataGridTemplateColumn MappingName="Temperature"
-                                 HeaderTextAlignment="Center">
+                                 HeaderTextAlignment="Start" CellTextAlignment="Start">
+
                             <datagrid:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
-                                    <Label FontSize="14" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label FontSize="14" HorizontalOptions="Start" Padding="15,0,0,0" VerticalOptions="Center">
                                         <Label.FormattedText>
                                             <MultiBinding Converter="{StaticResource CelsiusToFahrenheitConverter}" ConverterParameter="{}{0:0}°">
                                                 <Binding Path="Temperature"/>
@@ -268,5 +276,5 @@ ShowDataLabels="True" >
 
         </Grid>
     </ScrollView>
-   
+
 </ContentView>

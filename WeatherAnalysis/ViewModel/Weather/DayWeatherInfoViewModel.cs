@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace WeatherAnalysis
 {
-    public class DayWeatherInfoViewModel :  ObservableObject , INotifyPropertyChanged
+    public class DayWeatherInfoViewModel : ObservableObject, INotifyPropertyChanged
     {
         private ObservableCollection<MoonPhaseModel> _moonPhases;
         public ObservableCollection<MoonPhaseModel> MoonPhases
@@ -60,8 +60,8 @@ namespace WeatherAnalysis
 
         private void FormatChanged(TempFormatChangedEventArgs args)
         {
-            if (args.Payload != null) 
-                 IsCelsius = args.Payload.Contains("C");
+            if (args.Payload != null)
+                IsCelsius = args.Payload.Contains("C");
         }
 
         private void UpdateWeatherLife(DayWeatherInfoModel datamodel)
@@ -109,7 +109,7 @@ namespace WeatherAnalysis
             //Unit
             if (isCelsius)
                 Unit = "C";
-            else 
+            else
                 Unit = "F";
         }
 
@@ -143,14 +143,16 @@ namespace WeatherAnalysis
             TimeSpanForSunrise = $"{duration.Hours} hrs {duration.Minutes} mins";
             TimeSpan moonRiseDuration = moonSetTime - moonRiseTime;
             TimeSpanForMoonrise = $"{moonRiseDuration.Hours} hrs {moonRiseDuration.Minutes} mins";
-            HourlyWeatherData = datamodel?.HourlyWeatherData != null ? new ObservableCollection<HourlyWeatherInfoModel>(datamodel.HourlyWeatherData): new ObservableCollection<HourlyWeatherInfoModel>(); 
+            HourlyWeatherData = datamodel?.HourlyWeatherData != null ? new ObservableCollection<HourlyWeatherInfoModel>(datamodel.HourlyWeatherData) : new ObservableCollection<HourlyWeatherInfoModel>();
             WeatherCollection = datamodel?.WeatherCollection;
             UpdateMoonPhasesCollection(MoonPhase);
             UpdateWeatherLife(datamodel);
             MaximumYValueChart = double.NaN;
             MinimumYValueChart = double.NaN;
-            ChartInterval = double.NaN ;
+            ChartInterval = double.NaN;
             PrecipitationInMM = Math.Round(datamodel.Precipitation * 25.4, 2);
+            CurrentTime = DateTime.Now.ToString("hh tt");
+            labelYValue = Temperature + 3;
         }
 
         private void UpdateMoonPhasesCollection(string currentMoonPhase)
@@ -262,12 +264,14 @@ namespace WeatherAnalysis
         public string? City
         {
             get { return city; }
-            set {
+            set
+            {
                 if (city != null)
                 {
                     city = value;
                 }
-                RaisePropertyChanged(nameof(City)); }
+                RaisePropertyChanged(nameof(City));
+            }
         }
 
         private float temperature;
@@ -325,6 +329,20 @@ namespace WeatherAnalysis
             get { return rainChance; }
             set { rainChance = value; RaisePropertyChanged(nameof(RainChance)); }
         }
+
+
+        private string _currentTime;
+        public string CurrentTime
+        {
+            get => _currentTime;
+            set
+            {
+                _currentTime = value;
+                OnPropertyChanged(nameof(CurrentTime));
+            }
+        }
+
+
 
         private ImageSource? weatherIcon;
 
@@ -394,12 +412,14 @@ namespace WeatherAnalysis
         public string? MoonPhase
         {
             get { return moonPhase; }
-            set {
+            set
+            {
                 if (value != null)
                 {
                     moonPhase = value;
                 }
-                    RaisePropertyChanged(nameof(MoonPhase)); }
+                RaisePropertyChanged(nameof(MoonPhase));
+            }
         }
 
         public string formattedTemperature;
@@ -452,7 +472,7 @@ namespace WeatherAnalysis
             get { return umbrellaRequired; }
             set { umbrellaRequired = value; RaisePropertyChanged(nameof(UmbrellaRequired)); }
         }
-        
+
         private string? clothingSuggestion;
 
         public string? ClothingSuggestion
@@ -512,6 +532,14 @@ namespace WeatherAnalysis
             set { cloudiness = value; RaisePropertyChanged(nameof(Cloudiness)); }
         }
 
+        private float labelYValue;
+
+        public float LabelYValue
+        {
+            get { return labelYValue; }
+            set { labelYValue = value; RaisePropertyChanged(nameof(LabelYValue)); }
+        }
+
         private ObservableCollection<HourlyWeatherInfoModel>? hourlyWeatherData;
 
         public ObservableCollection<HourlyWeatherInfoModel>? HourlyWeatherData
@@ -537,7 +565,7 @@ namespace WeatherAnalysis
 
         public double MaximumYValueChart;
         public double MinimumYValueChart;
-        public double ChartInterval; 
+        public double ChartInterval;
 
     }
 }

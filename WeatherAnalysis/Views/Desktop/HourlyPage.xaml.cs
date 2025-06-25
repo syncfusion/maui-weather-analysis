@@ -7,10 +7,10 @@ namespace WeatherAnalysis;
 
 public partial class HourlyPage : ContentView
 {
-	public HourlyPage()
-	{
-		InitializeComponent();
-        
+    public HourlyPage()
+    {
+        InitializeComponent();
+
         categoryList.SelectedItem = summaryViewModel.Categories[0];
         scrollView.Scrolled += OnScrollViewScrolled;
     }
@@ -151,6 +151,16 @@ public partial class HourlyPage : ContentView
                     grid.Add(label);
                     return grid;
                 });
+
+            verticalLineAnnotation.Y2 = dayWeatherInfoViewModel.Temperature;
+            textAnnotation.Y1 = dayWeatherInfoViewModel.Temperature + 3;
+            textAnnotation.Text = "Now";
+        }
+
+        if (e.AddedItems[0].ToString() != "Temperature")
+        {
+            verticalLineAnnotation.Y2 = 0;
+            textAnnotation.Text = string.Empty;
         }
     }
 
