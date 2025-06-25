@@ -36,13 +36,13 @@
                         <local:DayWeatherInfoViewModel />
                     </Grid.BindingContext>
 
-                    <Grid ColumnDefinitions="*,*"  >
+                    <Grid ColumnDefinitions="*,155"  >
 
                         <Grid.BindingContext>
                             <viewModel:SummaryViewModel />
                         </Grid.BindingContext>
                         <Label Text="Summary" Margin="16,20,0,0" VerticalOptions="Start" FontFamily="RobotoMedium" FontSize="14"  HorizontalOptions="Start" Grid.Column="0" />
-                        <Border Stroke="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" StrokeShape="RoundRectangle 10" StrokeThickness="0.3" HeightRequest="35" Margin="16,0,16,0"  MinimumWidthRequest="150" Grid.Column="1">
+                        <Border Stroke="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" StrokeShape="RoundRectangle 10" StrokeThickness="0.3" HeightRequest="35" Margin="16,0,16,0" WidthRequest="132" Grid.Column="1">
                             <editors:SfComboBox x:Name="comboBox"
                      Grid.Column="1"
                      HorizontalOptions="Center"
@@ -53,7 +53,7 @@
                      IsClearButtonVisible="False"
                     Stroke="Transparent"
                      IsEditable="False"                    
-                    FontSize="16"
+                    FontSize="14"
                     DisplayMemberPath="Name"
                     TextMemberPath="Name"
                      SelectionChanged="comboBox_SelectionChanged"

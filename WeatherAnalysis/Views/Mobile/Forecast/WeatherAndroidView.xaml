@@ -115,7 +115,7 @@
     <ContentView.Content>
         <tabView:SfTabView IndicatorWidthMode="Stretch" IndicatorCornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}" x:Name="tabView" TabBarPlacement="Bottom">
             <tabView:SfTabView.Items>
-                <tabView:SfTabItem Header="&#xe795;" FontSize="28" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
+                <tabView:SfTabItem Header="&#xe795;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
                     <tabView:SfTabItem.Content>
                         <Grid Padding="16"  BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}">
                             <Grid.RowDefinitions>
@@ -966,7 +966,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                         </Grid>
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>
-                <tabView:SfTabItem Header="&#xe757;" FontSize="28" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
+                <tabView:SfTabItem Header="&#xe757;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
                     <Grid RowDefinitions="56,Auto,*" BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}" 
                                           RowSpacing="10">
                         <Label Text="Forecast" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Start" Padding="16,0,0,0" FontFamily="RobotoMedium" FontSize="16" />
@@ -997,7 +997,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                         </ContentView>
                     </Grid>
                 </tabView:SfTabItem>
-                <tabView:SfTabItem Header="&#xe705;" FontSize="28" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="Weather Analysis Font Icon">
+                <tabView:SfTabItem Header="&#xe705;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="Weather Analysis Font Icon">
                     <tabView:SfTabItem.Content>
 
                         <ScrollView>
@@ -1209,7 +1209,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>
 
-                <tabView:SfTabItem Header="&#xe73b;" FontSize="28" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
+                <tabView:SfTabItem Header="&#xe73b;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
 
                     <tabView:SfTabItem.Content>
                         <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}">
