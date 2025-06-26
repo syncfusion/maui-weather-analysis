@@ -24,7 +24,7 @@
             <Setter Property="StrokeShape" Value="Rectangle"/>
             <Setter Property="StrokeThickness" Value="1"/>
         </Style>
-        
+
         <Style TargetType="listview:ListViewItem">
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
@@ -32,13 +32,13 @@
                         <VisualState x:Name="PointerOver">
                             <VisualState.Setters>
                                 <Setter Property="Background"
-                                        Value= "Transparent"/>
+                                    Value= "Transparent"/>
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="Background"
-                                        Value= "Transparent"/>
+                                    Value= "Transparent"/>
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -53,11 +53,11 @@
             <!--Summary-->
             <Border 
             StrokeThickness="0" 
-            HeightRequest="410"
+            HeightRequest="442"
             StrokeShape="RoundRectangle 10"
             Padding="16">
 
-                <Grid RowDefinitions="20,32,278" RowSpacing="16">
+                <Grid RowDefinitions="20,32,*" RowSpacing="16">
                     <Grid.BindingContext>
                         <local:DayWeatherInfoViewModel />
                     </Grid.BindingContext>
@@ -109,6 +109,12 @@
                                 <chart:DateTimeAxis.MinorTickStyle>
                                     <chart:ChartAxisTickStyle Stroke="Transparent" StrokeWidth="0" />
                                 </chart:DateTimeAxis.MinorTickStyle>
+                                <chart:DateTimeAxis.AxisLineStyle>
+                                    <chart:ChartLineStyle Stroke="Transparent" />
+                                </chart:DateTimeAxis.AxisLineStyle>
+                                <chart:DateTimeAxis.MajorTickStyle>
+                                    <chart:ChartAxisTickStyle Stroke="Transparent" />
+                                </chart:DateTimeAxis.MajorTickStyle>
                             </chart:DateTimeAxis>
                         </chart:SfCartesianChart.XAxes>
 
@@ -124,6 +130,16 @@
 
                         </chart:SfCartesianChart.YAxes>
 
+                        <chart:SfCartesianChart.Annotations>
+                            <chart:VerticalLineAnnotation StrokeDashArray="5" Stroke="{AppThemeBinding Dark=#C9C6C8, Light=#474648}" X1="{Binding CurrentTime}" Y2="{Binding Temperature}" x:Name="verticalLineAnnotation">
+
+                            </chart:VerticalLineAnnotation>
+                            <chart:TextAnnotation X1="{Binding CurrentTime}" Y1="{Binding LabelYValue}" Text="Now" x:Name="textAnnotation" >
+                                <chart:TextAnnotation.LabelStyle>
+                                    <chart:ChartAnnotationLabelStyle FontSize="11" TextColor="{AppThemeBinding Dark=#C9C6C8, Light=#474648}" FontAttributes="Bold"  />
+                                </chart:TextAnnotation.LabelStyle>
+                            </chart:TextAnnotation>
+                        </chart:SfCartesianChart.Annotations>
 
                         <!--Gradient Spline Series-->
 
@@ -265,267 +281,312 @@ FontSize="14"/>
 
                     </listview:SfListView>
                 </ScrollView>
-                
-                
+
+
 
                 <Grid RowDefinitions="*" HorizontalOptions="Start" Padding="4,0,4,0" x:Name="forecastLeftArrow" IsVisible="False" Grid.Row="0">
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Tapped="forecastLeftArrow_Clicked" />
                     </Grid.GestureRecognizers>
-                    <Border Stroke="Black" Grid.Row="0" StrokeThickness="0.2" VerticalOptions="Center"  WidthRequest="23" HeightRequest="23" Opacity="1" StrokeShape="RoundRectangle 20" BackgroundColor="{AppThemeBinding Light=#6750A4, Dark=#D0BCFF}" />
-                    <Label Grid.Row="0" Text="&#xe707;" Margin="0,0,2,0" TextColor="{AppThemeBinding Light=#FFFFFF, Dark=#381E72}" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Fill" FontSize="24"  VerticalOptions="Center"  />
+                    <Border Stroke="Black" Grid.Row="0" StrokeThickness="0.2" VerticalOptions="Center"  WidthRequest="28" HeightRequest="40" Opacity="1" StrokeShape="RoundRectangle 20" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#3C3B3D}" >
+                        <Border.Shadow>
+                            <Shadow 
+                                 Brush="#000000"
+                                 Offset="1,2"
+                                 Radius="4"
+                                 Opacity="0.45" />
+                        </Border.Shadow>
+                    </Border>
+                    <Label Grid.Row="0" Text="&#xe707;" Margin="0,0,2,0" TextColor="{AppThemeBinding Light=#474648, Dark=#C9C6C8}" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Fill" FontSize="24"  VerticalOptions="Center"  />
                 </Grid>
-                
+
                 <Grid RowDefinitions="*" HorizontalOptions="End" Padding="4,0,0,0" x:Name="forecastRightArrow" Grid.Row="0">
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                     </Grid.GestureRecognizers>
-                    <Border Stroke="Black" Grid.Row="0" StrokeThickness="0.2" VerticalOptions="Center"  WidthRequest="23" HeightRequest="23" Opacity="1" StrokeShape="RoundRectangle 20" BackgroundColor="{AppThemeBinding Light=#6750A4, Dark=#D0BCFF}" />
-                    <Label Grid.Row="0" Text="&#xe706;" TextColor="{AppThemeBinding Light=#FFFFFF, Dark=#381E72}" Margin="1.8,0,0,0"  FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Fill" FontSize="24"  VerticalOptions="Center"  />
+                    <Border Stroke="Black" Grid.Row="0" StrokeThickness="0.2" VerticalOptions="Center"  WidthRequest="28" HeightRequest="40" Opacity="1" StrokeShape="RoundRectangle 24" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#3C3B3D}" >
+                        <Border.Shadow>
+                            <Shadow 
+                            Brush="#000000"
+                            Offset="1,2"
+                            Radius="4"
+                            Opacity="0.45" />
+                        </Border.Shadow>
+                    </Border>
+                    <Label Grid.Row="0" Text="&#xe706;" TextColor="{AppThemeBinding Light=#474648, Dark=#C9C6C8}" Margin="1.8,0,0,0"  FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Fill" FontSize="24"  VerticalOptions="Center"  />
                 </Grid>
 
             </Grid>
 
-            
+
 
             <!--DataGrid-->
             <Border StrokeThickness="0"
                     StrokeShape="RoundRectangle 10">
-                <datagrid:SfDataGridContentView>
-                    <datagrid:SfDataGrid ItemsSource="{Binding HourlyWeatherData}"
-                                         x:Name="dataGrid"
-                                         HeightRequest="1000"
-                                         InputTransparent="True"
-                                         Margin="5,-2,5,0"
-                                         AutoGenerateColumnsMode="None"
-                                         ColumnWidthMode="Fill"
-                                         HeaderRowHeight="40"
-                                         RowHeight="40"
-                                         VerticalScrollBarVisibility="Never"
-                                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}">
-                        <datagrid:SfDataGrid.BindingContext>
-                            <local:DayWeatherInfoViewModel x:Name="viewModel"/>
-                        </datagrid:SfDataGrid.BindingContext>
 
-                        <datagrid:SfDataGrid.DefaultStyle>
-                            <datagrid:DataGridStyle RowFontSize="14" HeaderRowFontSize="14"/>
-                        </datagrid:SfDataGrid.DefaultStyle>
+                <Grid Margin="24,0,0,0" RowDefinitions="84,*">
+                    <Grid RowDefinitions="auto,auto" Grid.Row="0" Padding="16" >
+                        <Grid.BindingContext>
+                            <local:DayWeatherInfoViewModel />
+                        </Grid.BindingContext>
+                        <HorizontalStackLayout Grid.Row="0" >
+                            <HorizontalStackLayout.BindingContext>
+                                <local:DayWeatherInfoViewModel x:Name="dayWeatherViewModel" />
+                            </HorizontalStackLayout.BindingContext>
+                            <Label Text="Today" FontFamily="RobotoMedium" FontSize="16" />
+                            <Image Source="{Binding WeatherCollection, Converter={StaticResource stringToImageConverter}, ConverterParameter=76 , Source={x:Reference dayWeatherViewModel}}"
+WidthRequest="24" HeightRequest="24" Margin="12,0,8,0" VerticalOptions="Center"/>
+                            <Grid ColumnSpacing="8" ColumnDefinitions="*,*,*">
+                                <Label Text="{Binding MaxTemperature, StringFormat='{}{0:0}°'}" FontSize="16" Grid.Column="0" />
+                                <Label Text="|" Grid.Column="1" />
+                                <Label Text="{Binding MinTemperature, StringFormat='{}{0:0}°'}" FontSize="16" Grid.Column="2" />
+                            </Grid>
 
-                        <datagrid:SfDataGrid.Columns>
-                            <datagrid:DataGridTemplateColumn MappingName="DateTime"
-                                                             HeaderText="Time"
-                                                             HeaderTextAlignment="Start"
-                                                             CellTextAlignment="Start"
-                                                             HeaderLineBreakMode="NoWrap"
-                                                             CellPadding="0"                           
-                                                             LineBreakMode="NoWrap">
-                                <datagrid:DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
-                                        <Label Text="{Binding DateTime, StringFormat='{0:h:mm tt}'}" 
-                        VerticalTextAlignment="Center"
-                        FontSize="14"
-                        HorizontalTextAlignment="Center"/>
-                                    </DataTemplate>
-                                </datagrid:DataGridTemplateColumn.CellTemplate>
-                                <datagrid:DataGridTemplateColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                        <Setter Property="FontSize" Value="14"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTemplateColumn.HeaderStyle>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Row="1" Spacing="5" Margin="0,8,0,0" >
+                            <Label Text="Daytime:" FontSize="14" />
+                            <Label Text="{Binding WeatherCollection[0] }" FontSize="14" />
+                            <Label Text="Nighttime:"  Margin="7,0,0,0" FontSize="14" />
+                            <Label Text="{Binding WeatherCollection[1] }" FontSize="14"  />
+                        </HorizontalStackLayout>
+                    </Grid>
+                    <datagrid:SfDataGridContentView Grid.Row="1">
+                        <datagrid:SfDataGrid ItemsSource="{Binding HourlyWeatherData}"
+                         x:Name="dataGrid"       
+                         HeightRequest="1000"
+                         InputTransparent="True"
+                         Margin="5,-2,5,0"
+                         AutoGenerateColumnsMode="None"
+                         ColumnWidthMode="Fill"
+                         HeaderRowHeight="40"
+                         RowHeight="40"
+                         VerticalScrollBarVisibility="Never"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}">
+                            <datagrid:SfDataGrid.BindingContext>
+                                <local:DayWeatherInfoViewModel x:Name="viewModel"/>
+                            </datagrid:SfDataGrid.BindingContext>
 
-                            </datagrid:DataGridTemplateColumn>
+                            <datagrid:SfDataGrid.DefaultStyle>
+                                <datagrid:DataGridStyle RowFontSize="14" HeaderRowFontSize="14"/>
+                            </datagrid:SfDataGrid.DefaultStyle>
 
-                            <datagrid:DataGridTemplateColumn HeaderText="Weather"
-                                     HeaderTextAlignment="Start"
-                                     CellTextAlignment="Start"
-                                     HeaderPadding="0"
-                                     CellPadding="0"
-                                     MinimumWidth="120"
-                                     HeaderLineBreakMode="NoWrap">
-                                <datagrid:DataGridTemplateColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTemplateColumn.HeaderStyle>
-                                <datagrid:DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
-                                        <StackLayout Orientation="Horizontal" Spacing="5">
-                                            <Image WidthRequest="20" HeightRequest="20"
-                                                   Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=24}" />
-                                            <Label Text="{Binding Weather}" 
-                                                   VerticalTextAlignment="Center"
-                                                   FontSize="13"/>
-                                        </StackLayout>
-                                    </DataTemplate>
-                                </datagrid:DataGridTemplateColumn.CellTemplate>
-                            </datagrid:DataGridTemplateColumn>
+                            <datagrid:SfDataGrid.Columns>
+                                <datagrid:DataGridTemplateColumn MappingName="DateTime"
+                                             HeaderText="Time"
+                                             HeaderTextAlignment="Start"
+                                             CellTextAlignment="Start"
+                                             HeaderLineBreakMode="NoWrap"
+                                             CellPadding="0"                           
+                                             LineBreakMode="NoWrap">
+                                    <datagrid:DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
+                                            <Label Text="{Binding DateTime, StringFormat='{0:h:mm tt}'}" 
+        VerticalTextAlignment="Center"
+        FontSize="14"
+        HorizontalTextAlignment="Center"/>
+                                        </DataTemplate>
+                                    </datagrid:DataGridTemplateColumn.CellTemplate>
+                                    <datagrid:DataGridTemplateColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                            <Setter Property="FontSize" Value="14"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTemplateColumn.HeaderStyle>
 
-                            <datagrid:DataGridTemplateColumn MappingName="Temperature"
-                                 HeaderText="Temperature"
-                                 CellTextAlignment="Start"
-                                 HeaderTextAlignment="Start"
-                                 HeaderLineBreakMode="NoWrap"
-                                 HeaderPadding="0"
-                                 CellPadding="0"
-                                 LineBreakMode="NoWrap">
-                                <datagrid:DataGridTemplateColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTemplateColumn.HeaderStyle>
-                                <datagrid:DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
-                                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
-                                            <Label.FormattedText>
-                                                <MultiBinding Converter="{StaticResource CelsiusToFahrenheitConverter}" ConverterParameter="{}{0:0}°">
-                                                    <Binding Path="Temperature"/>
-                                                    <Binding Path="IsCelsius"/>
-                                                </MultiBinding>
-                                            </Label.FormattedText>
-                                        </Label>
-                                    </DataTemplate>
-                                </datagrid:DataGridTemplateColumn.CellTemplate>
-                            </datagrid:DataGridTemplateColumn>
+                                </datagrid:DataGridTemplateColumn>
 
-                            <datagrid:DataGridTextColumn MappingName="DewPoint"
-                                 x:DataType="local:HourlyWeatherInfoModel"
-                                 HeaderText="Dew"
-                                 HeaderTextAlignment="Start"
-                                 CellTextAlignment="Start"
-                                 HeaderPadding="0"
-                                 CellPadding="0"
-                                 HeaderLineBreakMode="NoWrap"
-                                 DisplayBinding="{Binding DewPoint, StringFormat='{}{0:0}°'}">
-                                <datagrid:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTextColumn.HeaderStyle>
-                            </datagrid:DataGridTextColumn>
+                                <datagrid:DataGridTemplateColumn HeaderText="Weather"
+                     HeaderTextAlignment="Start"
+                     CellTextAlignment="Start"
+                     HeaderPadding="0"
+                     CellPadding="0"
+                     MinimumWidth="120"
+                     HeaderLineBreakMode="NoWrap">
+                                    <datagrid:DataGridTemplateColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTemplateColumn.HeaderStyle>
+                                    <datagrid:DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
+                                            <StackLayout Orientation="Horizontal" Spacing="5">
+                                                <Image WidthRequest="20" HeightRequest="20"
+                                   Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=24}" />
+                                                <Label Text="{Binding Weather}" 
+                                   VerticalTextAlignment="Center"
+                                   FontSize="13"/>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </datagrid:DataGridTemplateColumn.CellTemplate>
+                                </datagrid:DataGridTemplateColumn>
 
-                            <datagrid:DataGridTextColumn MappingName="Humidity"
-                                 HeaderText="Humidity"
-                                 x:DataType="local:HourlyWeatherInfoModel"
-                                 HeaderTextAlignment="Start"
-                                 CellTextAlignment="Start"
-                                 HeaderLineBreakMode="NoWrap"
-                                 HeaderPadding="0"
-                                 CellPadding="0"
-                                 DisplayBinding="{Binding Humidity, StringFormat='{}{0:0}%'}">
-                                <datagrid:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTextColumn.HeaderStyle>
-                            </datagrid:DataGridTextColumn>
+                                <datagrid:DataGridTemplateColumn MappingName="Temperature"
+                 HeaderText="Temperature"
+                 CellTextAlignment="Start"
+                 HeaderTextAlignment="Start"
+                 HeaderLineBreakMode="NoWrap"
+                 HeaderPadding="0"
+                 CellPadding="0"
+                 LineBreakMode="NoWrap">
+                                    <datagrid:DataGridTemplateColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTemplateColumn.HeaderStyle>
+                                    <datagrid:DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate x:DataType="local:HourlyWeatherInfoModel">
+                                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                                <Label.FormattedText>
+                                                    <MultiBinding Converter="{StaticResource CelsiusToFahrenheitConverter}" ConverterParameter="{}{0:0}°">
+                                                        <Binding Path="Temperature"/>
+                                                        <Binding Path="IsCelsius"/>
+                                                    </MultiBinding>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </DataTemplate>
+                                    </datagrid:DataGridTemplateColumn.CellTemplate>
+                                </datagrid:DataGridTemplateColumn>
 
-                            <datagrid:DataGridTextColumn MappingName="Feelslike"
-                                 HeaderText="Feelslike"
-                                 x:DataType="local:HourlyWeatherInfoModel"
-                                 HeaderTextAlignment="Start"
-                                 CellTextAlignment="Start"
-                                 HeaderPadding="0"
-                                 CellPadding="0"
-                                 HeaderLineBreakMode="NoWrap"
-                                 DisplayBinding="{Binding Feelslike, StringFormat='{}{0:0}°'}">
-                                <datagrid:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTextColumn.HeaderStyle>
-                            </datagrid:DataGridTextColumn>
+                                <datagrid:DataGridTextColumn MappingName="DewPoint"
+                 x:DataType="local:HourlyWeatherInfoModel"
+                 HeaderText="Dew"
+                 HeaderTextAlignment="Start"
+                 CellTextAlignment="Start"
+                 HeaderPadding="0"
+                 CellPadding="0"
+                 HeaderLineBreakMode="NoWrap"
+                 DisplayBinding="{Binding DewPoint, StringFormat='{}{0:0}°'}">
+                                    <datagrid:DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTextColumn.HeaderStyle>
+                                </datagrid:DataGridTextColumn>
 
-                            <datagrid:DataGridTextColumn MappingName="Precipitation"
-                                 HeaderText="Precipitation"
-                                 x:DataType="local:HourlyWeatherInfoModel"
-                                 HeaderTextAlignment="Start"
-                                 CellTextAlignment="Start"
-                                 HeaderLineBreakMode="NoWrap"
-                                 HeaderPadding="0"
-                                 CellPadding="0"
-                                 DisplayBinding="{Binding Precipitation, StringFormat='{}{0:0.##} mm'}">
-                                <datagrid:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTextColumn.HeaderStyle>
-                            </datagrid:DataGridTextColumn>
+                                <datagrid:DataGridTextColumn MappingName="Humidity"
+                 HeaderText="Humidity"
+                 x:DataType="local:HourlyWeatherInfoModel"
+                 HeaderTextAlignment="Start"
+                 CellTextAlignment="Start"
+                 HeaderLineBreakMode="NoWrap"
+                 HeaderPadding="0"
+                 CellPadding="0"
+                 DisplayBinding="{Binding Humidity, StringFormat='{}{0:0}%'}">
+                                    <datagrid:DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTextColumn.HeaderStyle>
+                                </datagrid:DataGridTextColumn>
 
-                            <datagrid:DataGridTextColumn MappingName="Pressure"
-                                 HeaderText="Pressure"
-                                 x:DataType="local:HourlyWeatherInfoModel"
-                                 DisplayBinding="{Binding Pressure, StringFormat='{}{0:0} mb'}"
-                                 HeaderTextAlignment="Start"
-                                 CellTextAlignment="Start"
-                                 HeaderPadding="0"
-                                 CellPadding="0"
-                                 HeaderLineBreakMode="NoWrap">
-                                <datagrid:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTextColumn.HeaderStyle>
-                            </datagrid:DataGridTextColumn>
+                                <datagrid:DataGridTextColumn MappingName="Feelslike"
+                 HeaderText="Feelslike"
+                 x:DataType="local:HourlyWeatherInfoModel"
+                 HeaderTextAlignment="Start"
+                 CellTextAlignment="Start"
+                 HeaderPadding="0"
+                 CellPadding="0"
+                 HeaderLineBreakMode="NoWrap"
+                 DisplayBinding="{Binding Feelslike, StringFormat='{}{0:0}°'}">
+                                    <datagrid:DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTextColumn.HeaderStyle>
+                                </datagrid:DataGridTextColumn>
 
-                            <datagrid:DataGridTextColumn MappingName="Visibility"
-                                 HeaderText="Visibility"
-                                 x:DataType="local:HourlyWeatherInfoModel"
-                                 DisplayBinding="{Binding Visibility, StringFormat='{}{0:0} mi'}"
-                                 HeaderTextAlignment="Center"
-                                 CellTextAlignment="Center"
-                                 HeaderPadding="0"
-                                 CellPadding="0"
-                                 HeaderLineBreakMode="NoWrap">
-                                <datagrid:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTextColumn.HeaderStyle>
-                            </datagrid:DataGridTextColumn>
+                                <datagrid:DataGridTextColumn MappingName="Precipitation"
+                 HeaderText="Precipitation"
+                 x:DataType="local:HourlyWeatherInfoModel"
+                 HeaderTextAlignment="Start"
+                 CellTextAlignment="Start"
+                 HeaderLineBreakMode="NoWrap"
+                 HeaderPadding="0"
+                 CellPadding="0"
+                 DisplayBinding="{Binding Precipitation, StringFormat='{}{0:0.##} mm'}">
+                                    <datagrid:DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTextColumn.HeaderStyle>
+                                </datagrid:DataGridTextColumn>
 
-                            <datagrid:DataGridTextColumn HeaderText="UVIndex"
-                                 MappingName="UVIndex"
-                                 x:DataType="local:HourlyWeatherInfoModel"
-                                 HeaderTextAlignment="Start"
-                                 CellTextAlignment="Start" 
-                                 HeaderPadding="0"
-                                 HeaderLineBreakMode="NoWrap"
-                                 CellPadding="0"
-                                 LineBreakMode="NoWrap">
-                                <datagrid:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTextColumn.HeaderStyle>
-                            </datagrid:DataGridTextColumn>
+                                <datagrid:DataGridTextColumn MappingName="Pressure"
+                 HeaderText="Pressure"
+                 x:DataType="local:HourlyWeatherInfoModel"
+                 DisplayBinding="{Binding Pressure, StringFormat='{}{0:0} mb'}"
+                 HeaderTextAlignment="Start"
+                 CellTextAlignment="Start"
+                 HeaderPadding="0"
+                 CellPadding="0"
+                 HeaderLineBreakMode="NoWrap">
+                                    <datagrid:DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTextColumn.HeaderStyle>
+                                </datagrid:DataGridTextColumn>
 
-                            <datagrid:DataGridTextColumn MappingName="WindSpeed"
-                                 HeaderText="WindSpeed"
-                                 x:DataType="local:HourlyWeatherInfoModel"
-                                 HeaderTextAlignment="Start"
-                                 CellTextAlignment="Start"
-                                 HeaderPadding="0"
-                                 CellPadding="0"
-                                 HeaderLineBreakMode="NoWrap"
-                                 DisplayBinding="{Binding WindSpeed, StringFormat='{}{0:0} km/h'}">
-                                <datagrid:DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="datagrid:DataGridHeaderCell">
-                                        <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
-                                    </Style>
-                                </datagrid:DataGridTextColumn.HeaderStyle>
-                            </datagrid:DataGridTextColumn>
-                        </datagrid:SfDataGrid.Columns>
+                                <datagrid:DataGridTextColumn MappingName="Visibility"
+                 HeaderText="Visibility"
+                 x:DataType="local:HourlyWeatherInfoModel"
+                 DisplayBinding="{Binding Visibility, StringFormat='{}{0:0} mi'}"
+                 HeaderTextAlignment="Center"
+                 CellTextAlignment="Center"
+                 HeaderPadding="0"
+                 CellPadding="0"
+                 HeaderLineBreakMode="NoWrap">
+                                    <datagrid:DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTextColumn.HeaderStyle>
+                                </datagrid:DataGridTextColumn>
 
-                    </datagrid:SfDataGrid>
-                </datagrid:SfDataGridContentView>
-                
+                                <datagrid:DataGridTextColumn HeaderText="UVIndex"
+                 MappingName="UVIndex"
+                 x:DataType="local:HourlyWeatherInfoModel"
+                 HeaderTextAlignment="Start"
+                 CellTextAlignment="Start" 
+                 HeaderPadding="0"
+                 HeaderLineBreakMode="NoWrap"
+                 CellPadding="0"
+                 LineBreakMode="NoWrap">
+                                    <datagrid:DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTextColumn.HeaderStyle>
+                                </datagrid:DataGridTextColumn>
+
+                                <datagrid:DataGridTextColumn MappingName="WindSpeed"
+                 HeaderText="WindSpeed"
+                 x:DataType="local:HourlyWeatherInfoModel"
+                 HeaderTextAlignment="Start"
+                 CellTextAlignment="Start"
+                 HeaderPadding="0"
+                 CellPadding="0"
+                 HeaderLineBreakMode="NoWrap"
+                 DisplayBinding="{Binding WindSpeed, StringFormat='{}{0:0} km/h'}">
+                                    <datagrid:DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="datagrid:DataGridHeaderCell">
+                                            <Setter Property="FontFamily" Value="RobotoMedium"></Setter>
+                                        </Style>
+                                    </datagrid:DataGridTextColumn.HeaderStyle>
+                                </datagrid:DataGridTextColumn>
+                            </datagrid:SfDataGrid.Columns>
+
+                        </datagrid:SfDataGrid>
+                    </datagrid:SfDataGridContentView>
+                </Grid>
+
+
             </Border>
 
         </VerticalStackLayout>
     </ScrollView>
-    
-    
+
+
 
 
 </ContentView>

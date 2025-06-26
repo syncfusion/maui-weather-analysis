@@ -77,9 +77,8 @@
                                 <Label Grid.Row="0" Text="{Binding Month}" 
                                        HorizontalOptions="Center" 
                                        VerticalOptions="Center" 
-                                       FontFamily="Roboto"
-                                       FontAttributes="Bold"
-                                       FontSize="13"
+                                       FontFamily="RobotoMedium"
+                                       FontSize="12"
                                        TextColor="{StaticResource White}"/>
                                 <Image Grid.Row="1" 
                                        WidthRequest="36" HeightRequest="36"
@@ -87,10 +86,9 @@
                                 <Label Grid.Row="2" Text="{Binding AvgHighTemperature, StringFormat='{}{0:0}°'}" 
                                        HorizontalOptions="Center" 
                                        VerticalOptions="Center" 
-                                       FontAttributes="Bold"
-                                       FontSize="13"
+                                       FontSize="12"
                                        TextColor="{StaticResource White}"
-                                       FontFamily="Roboto"/>
+                                       FontFamily="RobotoMedium"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

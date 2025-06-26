@@ -126,25 +126,25 @@
         <!--Calendar View-->
 
         <ScrollView Grid.Row="1">
-            <Border HeightRequest="500" StrokeThickness="0" StrokeShape="RoundRectangle 10" VerticalOptions="StartAndExpand">
+            <Border Grid.Row="1" StrokeThickness="0" StrokeShape="RoundRectangle 10"  VerticalOptions="FillAndExpand">
 
                 <CollectionView ItemsSource="{Binding MonthlyWeatherData}"
-                ItemsLayout="VerticalGrid, 7"
+                ItemsLayout="VerticalGrid, 7"                                
                 VerticalScrollBarVisibility="Never">
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate >
-                                <Border StrokeThickness="0">
-                                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" 
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate >
+                            <Border StrokeThickness="0">
+                                <Grid RowDefinitions="*,*"  ColumnDefinitions="*,*" 
                   Padding="5" HeightRequest="88" WidthRequest="150">
-                                        <Label Grid.Row="0" 
+                                    <Label Grid.Row="0" 
                                            Grid.Column="0" 
                                            Text="{Binding Date, Converter={StaticResource datetimeToStringConverter}}" 
                                            FontFamily="Roboto" 
                                            FontSize="16" 
                                            HorizontalOptions="Center"
                                            VerticalTextAlignment="Center"/>
-                                        <Label Grid.Row="0" 
+                                    <Label Grid.Row="0" 
                            Grid.Column="1" 
                            Text="{Binding Date, Converter={StaticResource datetimeConverter}}" 
                            TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundDark}, Dark={StaticResource White}}"
@@ -152,23 +152,23 @@
                            FontSize="14"  
                            VerticalTextAlignment="Center"
                                            HorizontalOptions="Center"/>
-                                        <Image Grid.Row="1" 
+                                    <Image Grid.Row="1" 
                            Grid.Column="0" 
                            HorizontalOptions="Center"
                            WidthRequest="48"
                            HeightRequest="48"
                            Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=25}"/>
-                                        <VerticalStackLayout Grid.Row="1"
+                                    <VerticalStackLayout Grid.Row="1"
                                      Grid.Column="1"
                                      VerticalOptions="Center"
                                                          HorizontalOptions="Center">
-                                            <Label Text="{Binding TempMaximum, StringFormat='{}{0:0}°'}"
+                                        <Label Text="{Binding TempMaximum, StringFormat='{}{0:0}°'}"
                                FontFamily="Roboto" 
                                FontSize="12"
                                TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundDark}, Dark={StaticResource White}}"
                                HorizontalTextAlignment="Center">
-                                            </Label>
-                                            <Label Text="{Binding TempMinimum, StringFormat='{}{0:0}°'}"
+                                        </Label>
+                                        <Label Text="{Binding TempMinimum, StringFormat='{}{0:0}°'}"
                                FontFamily="Roboto" 
                                FontSize="12"
                                TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundDark}, Dark={StaticResource White}}"
@@ -177,6 +177,7 @@
                                     </VerticalStackLayout>
 
                                 </Grid>
+
                             </Border>
 
                         </DataTemplate>

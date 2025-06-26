@@ -7,7 +7,7 @@ namespace WeatherAnalysis;
 public partial class WeatherView : ContentPage
 {
     public WeatherView()
-	{
+    {
         DataStore.Initialize(this.GetType().Assembly, BaseConfig.IsIndividualSB);
         InitializeComponent();
 
@@ -28,7 +28,7 @@ public partial class WeatherView : ContentPage
 
     private void categoryCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection[0].ToString() == "Humidity") 
+        if (e.CurrentSelection[0].ToString() == "Humidity")
         {
             splineAreaSummary.ShowDataLabels = false;
             splineAreaSummary.YBindingPath = "Humidity";
@@ -49,7 +49,7 @@ public partial class WeatherView : ContentPage
             splineAreaSummary.Fill = gradientBrush;
         }
 
-        else if(e.CurrentSelection[0].ToString() == "Wind") 
+        else if (e.CurrentSelection[0].ToString() == "Wind")
         {
             splineAreaSummary.ShowDataLabels = false;
             splineAreaSummary.YBindingPath = "Wind";
@@ -70,7 +70,7 @@ public partial class WeatherView : ContentPage
             splineAreaSummary.Fill = gradientBrush;
         }
 
-        else if(e.CurrentSelection[0].ToString() == "Temperature") 
+        else if (e.CurrentSelection[0].ToString() == "Temperature")
         {
             //splineAreaSummary.Stroke = new SolidColorBrush(Colors.Transparent);
             //splineAreaSummary.YBindingPath = "Temperature";
@@ -89,7 +89,7 @@ public partial class WeatherView : ContentPage
 
     private void SfListView_SelectionChanged(object sender, Syncfusion.Maui.ListView.ItemSelectionChangedEventArgs e)
     {
-        if (e.AddedItems[0].ToString() == "Humidity") 
+        if (e.AddedItems[0].ToString() == "Humidity")
         {
             summaryYAxis.Maximum = double.NaN;
             summaryYAxis.Minimum = double.NaN;
@@ -100,8 +100,8 @@ public partial class WeatherView : ContentPage
 
             var gradientBrush = new LinearGradientBrush
             {
-                StartPoint = new Point(0.5, 0), 
-                EndPoint = new Point(0.5, 1) 
+                StartPoint = new Point(0.5, 0),
+                EndPoint = new Point(0.5, 1)
             };
 
             // Adjusting gradient stops to match the image
@@ -111,8 +111,9 @@ public partial class WeatherView : ContentPage
             gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.Transparent, Offset = 1.0F });  // Fully transparent at the bottom
 
             splineAreaSummary.Fill = gradientBrush;
+
         }
-        else if (e.AddedItems[0].ToString() == "Precipitation") 
+        else if (e.AddedItems[0].ToString() == "Precipitation")
         {
             summaryYAxis.Maximum = double.NaN;
             summaryYAxis.Minimum = double.NaN;
@@ -135,12 +136,12 @@ public partial class WeatherView : ContentPage
 
             splineAreaSummary.Fill = gradientBrush;
         }
-        else if (e.AddedItems[0].ToString() == "UV") 
+        else if (e.AddedItems[0].ToString() == "UV")
         {
             summaryYAxis.Maximum = double.NaN;
             summaryYAxis.Minimum = double.NaN;
             summaryYAxis.Interval = double.NaN;
-            splineAreaSummary.ShowDataLabels = false;        
+            splineAreaSummary.ShowDataLabels = false;
             splineAreaSummary.YBindingPath = "UVIndex";
             splineAreaSummary.Stroke = new SolidColorBrush(Colors.Green);
 
@@ -167,8 +168,8 @@ public partial class WeatherView : ContentPage
             splineAreaSummary.Stroke = new SolidColorBrush(Colors.Purple);
             var gradientBrush = new LinearGradientBrush
             {
-                StartPoint = new Point(0.5, 0), 
-                EndPoint = new Point(0.5, 1)   
+                StartPoint = new Point(0.5, 0),
+                EndPoint = new Point(0.5, 1)
             };
 
             // Adjusting gradient stops to match the image
@@ -197,10 +198,10 @@ public partial class WeatherView : ContentPage
                 EndPoint = new Point(0.5, 1)
             };
 
-            gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.Orange, Offset = 0.0F });  
-            gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.Yellow, Offset = 0.4F }); 
-            gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.LightYellow, Offset = 0.7F });  
-            gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.Transparent, Offset = 1.0F });  
+            gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.Orange, Offset = 0.0F });
+            gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.Yellow, Offset = 0.4F });
+            gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.LightYellow, Offset = 0.7F });
+            gradientBrush.GradientStops.Add(new GradientStop { Color = Colors.Transparent, Offset = 1.0F });
 
             splineAreaSummary.Fill = gradientBrush;
 
@@ -223,7 +224,15 @@ public partial class WeatherView : ContentPage
                     return grid;
                 });
 
+            verticalLineAnnotation.Y2 = dayWeatherInfoViewModel.Temperature;
+            textAnnotation.Y1 = dayWeatherInfoViewModel.Temperature + 3;
+            textAnnotation.Text = "Now";
+        }
 
+        if (e.AddedItems[0].ToString() != "Temperature")
+        {
+            verticalLineAnnotation.Y2 = 0;
+            textAnnotation.Text = string.Empty;
         }
     }
 

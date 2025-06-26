@@ -2,13 +2,13 @@ namespace WeatherAnalysis;
 
 public partial class HourlyView : ContentView
 {
-	public HourlyView()
-	{
-		InitializeComponent();
+    public HourlyView()
+    {
+        InitializeComponent();
 
-        if(viewModel.HourlyWeatherData != null)
+        if (viewModel.HourlyWeatherData != null)
             dataGrid.HeightRequest = (double)viewModel.HourlyWeatherData.Count * dataGrid.RowHeight + dataGrid.HeaderRowHeight;
-	}
+    }
 
     private void comboBox_SelectionChanged(object sender, Syncfusion.Maui.Inputs.SelectionChangedEventArgs e)
     {
@@ -110,6 +110,8 @@ public partial class HourlyView : ContentView
                                 return grid;
                             });
                     }
+
+
                 }
             }
         }

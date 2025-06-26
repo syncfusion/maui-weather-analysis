@@ -57,7 +57,7 @@
             <Color x:Key="strokeDark">#E5E1E3</Color>
             <Color x:Key="gridLineLight">#E7E0EC</Color>
             <Color x:Key="gridLineDark">#36323B</Color>
-           
+
             <LinearGradientBrush x:Key="HumidityGradientBrush"
                      StartPoint="0.5,0"
                      EndPoint="0.5,1">
@@ -80,7 +80,7 @@
                 <x:Double>5</x:Double>
                 <x:Double>2</x:Double>
             </DoubleCollection>
-            
+
             <LinearGradientBrush x:Key="MinTemperatureGradient" StartPoint="0,0" EndPoint="0,1">
                 <GradientStop Color="#F4890B" Offset="0.0" />
                 <GradientStop Color="#00F4890B" Offset="1.0" />
@@ -100,7 +100,7 @@
                 <GradientStop Color="#80116DF9" Offset="0.0" />
                 <GradientStop Color="#00116DF9" Offset="1.0" />
             </LinearGradientBrush>
-            
+
         </ResourceDictionary>
 
         <Style TargetType="Border">
@@ -113,9 +113,9 @@
     </ContentView.Resources>
 
     <ContentView.Content>
-        <tabView:SfTabView BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}" x:Name="tabView" TabBarPlacement="Bottom">
+        <tabView:SfTabView IndicatorWidthMode="Stretch" IndicatorCornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}" x:Name="tabView" TabBarPlacement="Bottom">
             <tabView:SfTabView.Items>
-                <tabView:SfTabItem Header="&#xe795;" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
+                <tabView:SfTabItem Header="&#xe795;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
                     <tabView:SfTabItem.Content>
                         <Grid Padding="16"  BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}">
                             <Grid.RowDefinitions>
@@ -125,7 +125,7 @@
 
                             <!--Weather Tile-->
                             <Grid  Grid.Row="0">
-                                <Border StrokeThickness="0" VerticalOptions="Start" HorizontalOptions="FillAndExpand" StrokeShape="RoundRectangle 20"  HeightRequest="216"  >
+                                <Border StrokeThickness="0" VerticalOptions="Center" Margin="0,16,0,16" HorizontalOptions="FillAndExpand" StrokeShape="RoundRectangle 20"  HeightRequest="216"  >
 
                                     <!-- Background with Gradient -->
                                     <Border.Background>
@@ -194,7 +194,7 @@
                                 </Border>
                             </Grid>
 
-                            <ScrollView Grid.Row="1">
+                            <ScrollView Margin="0,10,0,0" Grid.Row="1">
 
                                 <VerticalStackLayout>
 
@@ -465,7 +465,7 @@
                                     </Grid>
 
                                     <!--Summmary-->
-                                    <Border StrokeThickness="0" Margin="0,12,0,0" HeightRequest="264" HorizontalOptions="FillAndExpand"  StrokeShape="RoundRectangle 10" >
+                                    <Border StrokeThickness="0" Margin="0,12,0,0" HeightRequest="304" HorizontalOptions="FillAndExpand"  StrokeShape="RoundRectangle 10" >
 
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -473,13 +473,13 @@
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
 
-                                            <Grid ColumnDefinitions="*,*" >
+                                            <Grid Grid.Row="0" ColumnDefinitions="*,155" >
 
                                                 <Grid.BindingContext>
                                                     <viewModel:SummaryViewModel />
                                                 </Grid.BindingContext>
-                                                <Label FontFamily="RobotoMedium"  Text="Summary" Margin="16,20,0,0"  FontSize="14"  HorizontalOptions="Start" Grid.Column="0" />
-                                                <Border Stroke="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" StrokeThickness="0.3" Padding="0" HeightRequest="35" Margin="16,0,16,0"  MinimumWidthRequest="150" StrokeShape="RoundRectangle 10" Grid.Column="1">
+                                                <Label FontFamily="RobotoMedium"  Text="Summary" Margin="16,20,0,0"  FontSize="14"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="0" />
+                                                <Border Stroke="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" StrokeThickness="0.3" Padding="0" HeightRequest="35" Margin="16,0,16,0"  MinimumWidthRequest="132" StrokeShape="RoundRectangle 10" Grid.Row="0" Grid.Column="1">
                                                     <editors:SfComboBox x:Name="comboBox"
                                                                          Grid.Column="1"
                                                                          IsDropDownOpen="False"                                                                        
@@ -492,6 +492,8 @@
                                                                          IsEditable="False"                                                                        
                                                                         FontSize="14"
                                                                         DisplayMemberPath="Name"
+                                                                        WidthRequest="132"
+                                                                        HorizontalOptions="Fill"
                                                                         TextMemberPath="Name"
                                                                          SelectionChanged="comboBox_SelectionChanged"
                                                                          ItemsSource="{Binding SummaryLists}"
@@ -503,11 +505,11 @@
                                                 </Border>
 
                                             </Grid>
-                                            <Grid Grid.Row="1" >
+                                            <Grid Grid.Row="1"  >
                                                 <Grid.BindingContext>
                                                     <local:DayWeatherInfoViewModel x:Name="dayWeatherInfoForChart" />
                                                 </Grid.BindingContext>
-                                                <chart:SfCartesianChart Margin="16" x:Name="TemperatureChart" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" >
+                                                <chart:SfCartesianChart  Margin="16" x:Name="TemperatureChart" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" >
 
                                                     <!--X Axis (Time)-->
                                                     <chart:SfCartesianChart.XAxes>
@@ -518,6 +520,12 @@
                                                             <chart:DateTimeAxis.MinorTickStyle>
                                                                 <chart:ChartAxisTickStyle Stroke="Transparent" StrokeWidth="0" />
                                                             </chart:DateTimeAxis.MinorTickStyle>
+                                                            <chart:DateTimeAxis.AxisLineStyle>
+                                                                <chart:ChartLineStyle Stroke="Transparent" />
+                                                            </chart:DateTimeAxis.AxisLineStyle>
+                                                            <chart:DateTimeAxis.MajorTickStyle>
+                                                                <chart:ChartAxisTickStyle Stroke="Transparent" />
+                                                            </chart:DateTimeAxis.MajorTickStyle>
                                                         </chart:DateTimeAxis>
                                                     </chart:SfCartesianChart.XAxes>
 
@@ -792,9 +800,9 @@
                                                                 <chart:ChartAnnotationLabelStyle TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
                                                             </chart:TextAnnotation.LabelStyle>
                                                         </chart:TextAnnotation>
-                                                        <chart:EllipseAnnotation X1="2" X2="2.5" Y1="20" Y2="32" Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource solarEllipseFillColor}" >
+                                                        <chart:EllipseAnnotation X1="2.1" X2="2.55" Y1="22.5" Y2="34.5" Text="&#xe78e;" VerticalAlignment="Center"  Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource solarEllipseFillColor}" >
                                                             <chart:EllipseAnnotation.LabelStyle>
-                                                                <chart:ChartAnnotationLabelStyle Margin="5" TextColor="White" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="MauiSampleFontIcon" />
+                                                                <chart:ChartAnnotationLabelStyle  TextColor="White" FontSize="14" Margin="3" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" FontFamily="MauiSampleFontIcon" />
                                                             </chart:EllipseAnnotation.LabelStyle>
                                                         </chart:EllipseAnnotation>
                                                     </chart:SfCartesianChart.Annotations>
@@ -881,9 +889,9 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                                                                 <chart:ChartAnnotationLabelStyle TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
                                                             </chart:TextAnnotation.LabelStyle>
                                                         </chart:TextAnnotation>
-                                                        <chart:EllipseAnnotation X1="2" X2="2.5" Y1="20" Y2="32" Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource LunarEllipseFillColor}" >
+                                                        <chart:EllipseAnnotation X1="2" X2="2.5" Y1="20" Y2="32" Text="&#xe775;" Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource LunarEllipseFillColor}" >
                                                             <chart:EllipseAnnotation.LabelStyle>
-                                                                <chart:ChartAnnotationLabelStyle Margin="5" TextColor="White" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="MauiSampleFontIcon" />
+                                                                <chart:ChartAnnotationLabelStyle  TextColor="White" FontSize="15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="MauiSampleFontIcon" />
                                                             </chart:EllipseAnnotation.LabelStyle>
                                                         </chart:EllipseAnnotation>
                                                     </chart:SfCartesianChart.Annotations>
@@ -915,7 +923,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                         XBindingPath="Time"
                         YBindingPath="YAxis"
                         StrokeWidth="7"
-                        Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisRoyalBlue}, Dark={StaticResource WeatherAnalysisCrimsonRed}}"/>
+                        Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisRoyalBlue}, Dark=#BF3B49}"/>
 
                                                     <!--<chart:SfCartesianChart.TrackballBehavior>
                                                         <chart:ChartTrackballBehavior ShowLine="False"
@@ -958,18 +966,17 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                         </Grid>
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>
-                <tabView:SfTabItem Header="&#xe757;" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
-                    <Grid RowDefinitions="Auto,*" BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}" 
-                                          Padding="0,10,0,0"
+                <tabView:SfTabItem Header="&#xe757;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
+                    <Grid RowDefinitions="56,Auto,*" BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}" 
                                           RowSpacing="10">
-                        <segmentedControl:SfSegmentedControl Grid.Row="0" SegmentWidth="180" 
+                        <Label Text="Forecast" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Start" Padding="16,0,0,0" FontFamily="RobotoMedium" FontSize="16" />
+                        <segmentedControl:SfSegmentedControl Grid.Row="1" SegmentWidth="180" 
                                                              SelectionChanged="SfSegmentedControl_SelectionChanged"
                                                              Stroke="{AppThemeBinding Light={StaticResource WeatherAnalysisSelectionColor}, Dark={StaticResource WeatherAnalysisSelectionDark}}"
                                                              Background="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}"
-                                                             SelectedIndex="0"
-                                                             Padding="0">
+                                                             SelectedIndex="0" >
                             <segmentedControl:SfSegmentedControl.TextStyle>
-                                <segmentedControl:SegmentTextStyle FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                <segmentedControl:SegmentTextStyle FontFamily="RobotoMedium" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
                             </segmentedControl:SfSegmentedControl.TextStyle>
                             <segmentedControl:SfSegmentedControl.SelectionIndicatorSettings>
                                 <segmentedControl:SelectionIndicatorSettings 
@@ -985,12 +992,12 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                             </segmentedControl:SfSegmentedControl.ItemsSource>
                         </segmentedControl:SfSegmentedControl>
 
-                        <ContentView x:Name="layoutPage" Grid.Row="1">
+                        <ContentView x:Name="layoutPage" Grid.Row="2">
 
                         </ContentView>
                     </Grid>
                 </tabView:SfTabItem>
-                <tabView:SfTabItem Header="&#xe705;" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="Weather Analysis Font Icon">
+                <tabView:SfTabItem Header="&#xe705;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="Weather Analysis Font Icon">
                     <tabView:SfTabItem.Content>
 
                         <ScrollView>
@@ -1198,11 +1205,11 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
 
                             </Grid>
                         </ScrollView>
-                        
+
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>
 
-                <tabView:SfTabItem Header="&#xe73b;" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
+                <tabView:SfTabItem Header="&#xe73b;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
 
                     <tabView:SfTabItem.Content>
                         <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}">
@@ -1259,7 +1266,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
 
                                     </Grid>
                                 </effectsView:SfEffectsView>
-                                
+
                             </Grid>
 
                             <bottomSheet:SfBottomSheet Background="{AppThemeBinding Dark={StaticResource WeatherAnalysisBackgroundDark}, Light={StaticResource WeatherAnalysisLavenderBlush}}" x:Name="themeBottomSheet" CornerRadius="15, 15, 0, 0" HalfExpandedRatio="0.35" ContentPadding="10">
