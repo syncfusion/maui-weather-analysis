@@ -876,7 +876,7 @@ HorizontalTextAlignment="Center"/>
                                         <chart:SfCartesianChart.Resources>
                                             <DataTemplate x:Key="trackballLabelTemplate">
                                                 <HorizontalStackLayout>
-                                                    <Label Text="&#xe7b5;" FontFamily="MauiSampleFontIcon"  TextColor="White" BackgroundColor="CornflowerBlue" />
+                                                    <Label Text="&#xe7b5;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   TextColor="White" BackgroundColor="CornflowerBlue" />
                                                 </HorizontalStackLayout>
                                             </DataTemplate>
                                         </chart:SfCartesianChart.Resources>
