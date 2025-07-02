@@ -87,7 +87,7 @@
                             VerticalOptions="Center"
                             StrokeShape="RoundRectangle 20">
                             <Label Text="&#xe795;"
-                               FontFamily="MauiSampleFontIcon"
+                               FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" 
                                FontSize="24"
                                HeightRequest="32"
                                VerticalTextAlignment="Center"
@@ -112,7 +112,7 @@
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
                             <Label Text="&#xe757;"
-                               FontFamily="MauiSampleFontIcon"
+                               FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" 
                                FontSize="24"
                                HeightRequest="32"
                                VerticalTextAlignment="Center"
@@ -136,8 +136,8 @@
                                 StrokeShape="RoundRectangle 20"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center">
-                            <Label Text="&#xe705;"
-                                   FontFamily="Weather Analysis Font Icon"
+                            <Label Text="&#xe808;"
+                                   FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" 
                                    FontSize="24"
                                    HeightRequest="32"
                                    VerticalTextAlignment="Center"
@@ -162,7 +162,7 @@
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
                             <Label Text="&#xe73b;"
-                               FontFamily="MauiSampleFontIcon"
+                               FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" 
                                FontSize="24"
                                HeightRequest="32"
                                VerticalTextAlignment="Center"
@@ -200,7 +200,7 @@
 
                         <effectsView:SfEffectsView>
                             <Grid ColumnSpacing="12" ColumnDefinitions="auto,*,auto" Margin="16,0,0,12">
-                                <Label Text="&#xe707;" HorizontalOptions="Start" FontFamily="Weather Analysis Font Icon" FontSize="24" 
+                                <Label Text="&#xE7FA;" HorizontalOptions="Start" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  FontSize="24" 
            VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray}, Dark=#C9C6C8}" Grid.Column="0" />
                                 <StackLayout Grid.Column="1" HorizontalOptions="Start">
                                     <Label Text="Theme" FontSize="16" TextColor="{AppThemeBinding Light=#313032, Dark=#FFFFFF}" />
@@ -218,7 +218,7 @@
                     <VerticalStackLayout Margin="16,0,16,0">
                         <effectsView:SfEffectsView>
                             <Grid ColumnDefinitions="auto,*,auto"  ColumnSpacing="12" Margin="16,12,0,12">
-                                <Label Text="&#xe75e;" Grid.Column="0" FontFamily="MauiSampleFontIcon" FontSize="24"
+                                <Label Text="&#xe75e;" Grid.Column="0" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  FontSize="24"
          VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray}, Dark=#C9C6C8}" />
                                 <StackLayout Grid.Column="1">
                                     <Label Text="Notification"
@@ -244,7 +244,7 @@
 
                         <effectsView:SfEffectsView>
                             <Grid ColumnDefinitions="auto,*,auto"  ColumnSpacing="12"  Margin="16,12,0,12">
-                                <Label Grid.Column="0" Text="&#xe71f;" FontFamily="MauiSampleFontIcon" FontSize="24" VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray}, Dark=#C9C6C8}" />
+                                <Label Grid.Column="0" Text="&#xe71f;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  FontSize="24" VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray}, Dark=#C9C6C8}" />
                                 <StackLayout Grid.Column="1">
                                     <Label Text="Help and Support"
                                         FontSize="16"
@@ -299,7 +299,7 @@
                                 <Grid>
                                     <Label Text="&#xe755;"
                                FontSize="24"
-                               FontFamily="MauiSampleFontIcon"
+                               FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" 
                                VerticalTextAlignment="Center"
                                HorizontalTextAlignment="Center"
                                Style="{StaticResource IconStyle}">
@@ -421,9 +421,6 @@
                 </Border>
             </Grid>
         </Grid>
-
-
     </Grid>
-
 
 </ContentView>

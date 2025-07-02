@@ -110,12 +110,15 @@
             <Setter Property="StrokeThickness" Value="1"/>
         </Style>
 
+        <Color x:Key="LunarEllipseFillColorLight">#116DF9</Color>
+        <Color x:Key="LunarEllipseFillColorDark">#BF3B49</Color>
+        
     </ContentView.Resources>
 
     <ContentView.Content>
         <tabView:SfTabView IndicatorWidthMode="Stretch" IndicatorCornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}" x:Name="tabView" TabBarPlacement="Bottom">
             <tabView:SfTabView.Items>
-                <tabView:SfTabItem Header="&#xe795;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
+                <tabView:SfTabItem Header="&#xe795;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" >
                     <tabView:SfTabItem.Content>
                         <Grid Padding="16"  BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}">
                             <Grid.RowDefinitions>
@@ -154,7 +157,7 @@
 
                                             <Grid Grid.Row="0" VerticalOptions="Start" >
                                                 <HorizontalStackLayout>
-                                                    <Label Text="&#xe76e;" VerticalOptions="Center" Margin="0,0,10,0"  HorizontalOptions="Start" FontFamily="MauiSampleFontIcon"  FontSize="25" TextColor="White" />
+                                                    <Label Text="&#xe76e;" VerticalOptions="Center" Margin="0,0,10,0"  HorizontalOptions="Start" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   FontSize="25" TextColor="White" />
                                                     <Label Text="New York" FontSize="16" FontFamily="RobotoMedium" TextColor="White" />
                                                 </HorizontalStackLayout>
 
@@ -223,7 +226,7 @@
                                                 <Grid.BindingContext>
                                                     <local:DayWeatherInfoViewModel x:Name="dayWeatherinfoViewModelForHumidity"/>
                                                 </Grid.BindingContext>
-                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe703;" FontFamily="Weather Analysis Font Icon" WidthRequest="20" FontSize="25" VerticalOptions="Center" />
+                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe806;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  WidthRequest="20" FontSize="25" VerticalOptions="Center" />
 
                                                 <Label FontFamily="RobotoMedium" FontSize="14" Text="Humidity" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label FontFamily="Roboto" FontSize="12" Text="{Binding Humidity ,StringFormat='{}{0:0}%', Source={x:Reference dayWeatherinfoViewModelForHumidity}}" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
@@ -248,7 +251,7 @@
                                                     <local:DayWeatherInfoViewModel x:Name="dayWeatherinfoViewModelForRain"/>
                                                 </Grid.BindingContext>
 
-                                                <Label Text="&#xe793;" FontFamily="MauiSampleFontIcon" FontSize="25" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.RowSpan="2"  />
+                                                <Label Text="&#xe793;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  FontSize="25" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.RowSpan="2"  />
                                                 <Label FontFamily="RobotoMedium" FontSize="14" Text="Rain" Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label FontFamily="Roboto" FontSize="12" Text="{Binding PrecipitationInMM, StringFormat='{}{0:0}° mm', Source={x:Reference dayWeatherinfoViewModelForRain}}"  Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
                                             </Grid>
@@ -271,7 +274,7 @@
                                                     <local:DayWeatherInfoViewModel />
                                                 </Grid.BindingContext>
 
-                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe78f;" FontFamily="MauiSampleFontIcon"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
+                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe78f;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
 
                                                 <Label FontFamily="RobotoMedium" FontSize="14" Text="Wind"  Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label FontFamily="Roboto" FontSize="12" Text="{Binding WindSpeed, StringFormat='{}{0:0} km/h'}"  Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
@@ -295,7 +298,7 @@
                                                     <local:DayWeatherInfoViewModel />
                                                 </Grid.BindingContext>
 
-                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe702;" FontFamily="Weather Analysis Font Icon"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
+                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe805;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
 
 
                                                 <Label FontFamily="RobotoMedium" FontSize="14" Text="Dew"  Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
@@ -321,7 +324,7 @@
                                                     <local:DayWeatherInfoViewModel />
                                                 </Grid.BindingContext>
 
-                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe78e;" FontFamily="MauiSampleFontIcon"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
+                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe78e;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
                                                 <Label FontFamily="RobotoMedium" FontSize="14" Text="UV Index"  Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label FontFamily="Roboto" FontSize="12" Text="{Binding UVIndex}"  Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
 
@@ -345,7 +348,7 @@
                                                     <local:DayWeatherInfoViewModel />
                                                 </Grid.BindingContext>
 
-                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe701;" FontFamily="Weather Analysis Font Icon"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
+                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe804;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
                                                 <Label FontFamily="RobotoMedium" FontSize="14" Text="Pressure" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label FontFamily="Roboto" FontSize="12" Text="{Binding HourlyWeatherData[0].Pressure , StringFormat='{}{0:0}° mb'}"  Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
 
@@ -370,7 +373,7 @@
                                                     <local:DayWeatherInfoViewModel />
                                                 </Grid.BindingContext>
 
-                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe752;" FontFamily="MauiSampleFontIcon"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
+                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe752;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
                                                 <Label FontFamily="RobotoMedium" FontSize="14" Text="Visibility"  Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label FontFamily="Roboto" FontSize="12" Text="{Binding HourlyWeatherData[0].Visibility, StringFormat='{}{0:0}° km'}"  Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
 
@@ -394,7 +397,7 @@
                                                     <local:DayWeatherInfoViewModel />
                                                 </Grid.BindingContext>
 
-                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe795;" FontFamily="MauiSampleFontIcon" HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
+                                                <Label Grid.Column="0" Grid.RowSpan="2" Text="&#xe795;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  HorizontalOptions="Center" FontSize="25" VerticalOptions="Center" />
                                                 <Label FontFamily="RobotoMedium" FontSize="14" Text="Cloudiness"  Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label FontFamily="Roboto" FontSize="12" Text="{Binding Humidity ,StringFormat='{}{0:0}%'}"  Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
                                             </Grid>
@@ -616,7 +619,7 @@
                                                 <Border Margin="12,0,0,0" x:Name="umberallaBorder" StrokeThickness="0" Opacity="0.15" VerticalOptions="Center" HorizontalOptions="Start" Grid.RowSpan="2" WidthRequest="36" HeightRequest="36" Grid.Column="0"  Background="{DynamicResource SeriesColor7}" StrokeShape="RoundRectangle 20">
 
                                                 </Border>
-                                                <Label Text="&#xe78f;" Margin="20,0,0,0" Grid.Column="0" Grid.RowSpan="2" FontFamily="MauiSampleFontIcon"  HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor7}" />
+                                                <Label Text="&#xe78f;" Margin="20,0,0,0" Grid.Column="0" Grid.RowSpan="2" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor7}" />
 
                                                 <Label Text="Umbrella" FontSize="12" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label Text="{Binding UmbrellaRequired}"  Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" FontFamily="RobotoMedium" FontSize="14" Grid.Row="1"  />
@@ -637,7 +640,7 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <Border StrokeThickness="0" Margin="12,0,0,0" VerticalOptions="Center" Grid.RowSpan="2" HorizontalOptions="Start" WidthRequest="40" HeightRequest="40" Grid.Column="0"  Background="{DynamicResource SeriesColor5}" Opacity="0.15" StrokeShape="RoundRectangle 20" />
-                                                <Label Grid.RowSpan="2" Grid.Column="0" Margin="20,0,0,0" Text="&#xe778;" FontFamily="MauiSampleFontIcon"  HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor5}" />
+                                                <Label Grid.RowSpan="2" Grid.Column="0" Margin="20,0,0,0" Text="&#xe778;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor5}" />
 
                                                 <Label Text="Outdoors" FontSize="12"  Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label Text="{Binding Outdoors}"  FontFamily="RobotoMedium" FontSize="14" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
@@ -661,7 +664,7 @@
                                                 <Border StrokeThickness="0" Margin="12,0,0,0"  VerticalOptions="Center" Grid.RowSpan="2" WidthRequest="40" HeightRequest="40" Grid.Column="0" HorizontalOptions="Start"   Background="{DynamicResource WeatherAnalysisMulberryPink}" Opacity="0.15" StrokeShape="RoundRectangle 20">
 
                                                 </Border>
-                                                <Label Grid.RowSpan="2" Margin="20,0,0,0"  Grid.Column="0" Text="&#xe7a8;" FontFamily="MauiSampleFontIcon"  HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource WeatherAnalysisPinkishRed}" />
+                                                <Label Grid.RowSpan="2" Margin="20,0,0,0"  Grid.Column="0" Text="&#xe7a8;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource WeatherAnalysisPinkishRed}" />
                                                 <Label Text="Clothing" FontSize="12"  Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label Text="{Binding ClothingSuggestion}"  FontFamily="RobotoMedium" FontSize="14" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
 
@@ -684,7 +687,7 @@
                                                 <Border StrokeThickness="0" Margin="12,0,0,0"  VerticalOptions="Center" Grid.RowSpan="2" WidthRequest="40" HorizontalOptions="Start"  HeightRequest="40" Grid.Column="0"  Background="{DynamicResource SeriesColor3}" Opacity="0.15" StrokeShape="RoundRectangle 20">
 
                                                 </Border>
-                                                <Label Text="&#xe78e;" Margin="20,0,0,0"  FontFamily="MauiSampleFontIcon" Grid.Column="0" Grid.RowSpan="2"  HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor3}" />
+                                                <Label Text="&#xe78e;" Margin="20,0,0,0"  FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  Grid.Column="0" Grid.RowSpan="2"  HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor3}" />
                                                 <Label Text="UV Index" FontSize="12" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label Text="{Binding UVIndexState}" FontFamily="RobotoMedium" FontSize="14" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
 
@@ -708,7 +711,7 @@
                                                 <Border StrokeThickness="0" Margin="12,0,0,0"  VerticalOptions="Center" Grid.RowSpan="2" WidthRequest="40" HeightRequest="40" Grid.Column="0"  Background="{DynamicResource SeriesColor3}" Opacity="0.15" HorizontalOptions="Start"  StrokeShape="RoundRectangle 20">
 
                                                 </Border>
-                                                <Label Text="&#xe700;" Margin="20,0,0,0"  FontFamily="Weather Analysis Font Icon" Grid.Column="0" Grid.RowSpan="2"  HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor3}" />
+                                                <Label Text="&#xe803;" Margin="20,0,0,0"  FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  Grid.Column="0" Grid.RowSpan="2"  HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor3}" />
                                                 <Label Text="Wind Chill" FontSize="12"  Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label Text="{Binding WindChill}" FontSize="14" FontFamily="RobotoMedium"  Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
 
@@ -728,7 +731,7 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <Border StrokeThickness="0" Margin="12,0,0,0"  VerticalOptions="Center" Grid.RowSpan="2" WidthRequest="40" HeightRequest="40" Grid.Column="0" HorizontalOptions="Start"  Background="{DynamicResource SeriesColor6}" Opacity="0.15" StrokeShape="RoundRectangle 20" />
-                                                <Label Text="&#xe78f;" Margin="20,0,0,0"  Grid.Column="0" Grid.RowSpan="2" FontFamily="MauiSampleFontIcon"  HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor6}" />
+                                                <Label Text="&#xe78f;" Margin="20,0,0,0"  Grid.Column="0" Grid.RowSpan="2" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"   HorizontalOptions="Start" FontSize="25" VerticalOptions="Center" TextColor="{DynamicResource SeriesColor6}" />
                                                 <Label Text="Air Quality" FontSize="12" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0"  />
                                                 <Label Text="{Binding AirQuality}" FontFamily="RobotoMedium" FontSize="14" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start"  Grid.Row="1"  />
 
@@ -789,7 +792,7 @@
                                                     <chart:SfCartesianChart.Resources>
                                                         <DataTemplate x:Key="trackballLabelTemplate">
                                                             <HorizontalStackLayout>
-                                                                <Label Text="&#xe7b5;" FontFamily="MauiSampleFontIcon" TextColor="White" BackgroundColor="CornflowerBlue" />
+                                                                <Label Text="&#xe7b5;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  TextColor="White" BackgroundColor="CornflowerBlue" />
                                                             </HorizontalStackLayout>
                                                         </DataTemplate>
                                                     </chart:SfCartesianChart.Resources>
@@ -802,7 +805,7 @@
                                                         </chart:TextAnnotation>
                                                         <chart:EllipseAnnotation X1="2.1" X2="2.55" Y1="22.5" Y2="34.5" Text="&#xe78e;" VerticalAlignment="Center"  Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource solarEllipseFillColor}" >
                                                             <chart:EllipseAnnotation.LabelStyle>
-                                                                <chart:ChartAnnotationLabelStyle  TextColor="White" FontSize="14" Margin="3" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" FontFamily="MauiSampleFontIcon" />
+                                                                <chart:ChartAnnotationLabelStyle  TextColor="White" FontSize="14" Margin="3" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  />
                                                             </chart:EllipseAnnotation.LabelStyle>
                                                         </chart:EllipseAnnotation>
                                                     </chart:SfCartesianChart.Annotations>
@@ -878,7 +881,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                                                     <chart:SfCartesianChart.Resources>
                                                         <DataTemplate x:Key="trackballLabelTemplate">
                                                             <HorizontalStackLayout>
-                                                                <Label Text="&#xe7b5;" FontFamily="MauiSampleFontIcon" TextColor="White" BackgroundColor="CornflowerBlue" />
+                                                                <Label Text="&#xe7b5;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  TextColor="White" BackgroundColor="CornflowerBlue" />
                                                             </HorizontalStackLayout>
                                                         </DataTemplate>
                                                     </chart:SfCartesianChart.Resources>
@@ -891,7 +894,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                                                         </chart:TextAnnotation>
                                                         <chart:EllipseAnnotation X1="2" X2="2.5" Y1="20" Y2="32" Text="&#xe775;" Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource LunarEllipseFillColor}" >
                                                             <chart:EllipseAnnotation.LabelStyle>
-                                                                <chart:ChartAnnotationLabelStyle  TextColor="White" FontSize="15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="MauiSampleFontIcon" />
+                                                                <chart:ChartAnnotationLabelStyle  TextColor="White" FontSize="15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  />
                                                             </chart:EllipseAnnotation.LabelStyle>
                                                         </chart:EllipseAnnotation>
                                                     </chart:SfCartesianChart.Annotations>
@@ -966,9 +969,8 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                         </Grid>
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>
-                <tabView:SfTabItem Header="&#xe757;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
-                    <Grid RowDefinitions="56,Auto,*" BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}" 
-                                          RowSpacing="10">
+                <tabView:SfTabItem Header="&#xe757;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" >
+                    <Grid RowDefinitions="56,Auto,*" BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisBackgroundLight}, Dark={StaticResource WeatherAnalysisBackgroundDark}}"                                           RowSpacing="10">
                         <Label Text="Forecast" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Start" Padding="16,0,0,0" FontFamily="RobotoMedium" FontSize="16" />
                         <segmentedControl:SfSegmentedControl Grid.Row="1" SegmentWidth="180" 
                                                              SelectionChanged="SfSegmentedControl_SelectionChanged"
@@ -997,7 +999,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                         </ContentView>
                     </Grid>
                 </tabView:SfTabItem>
-                <tabView:SfTabItem Header="&#xe705;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="Weather Analysis Font Icon">
+                <tabView:SfTabItem Header="&#xe808;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" >
                     <tabView:SfTabItem.Content>
 
                         <ScrollView>
@@ -1209,7 +1211,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>
 
-                <tabView:SfTabItem Header="&#xe73b;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="MauiSampleFontIcon">
+                <tabView:SfTabItem Header="&#xe73b;" FontSize="26" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}" >
 
                     <tabView:SfTabItem.Content>
                         <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource WeatherAnalysisElementBackground}}">
@@ -1230,7 +1232,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Label Grid.Column="0"  VerticalOptions="Center" HorizontalOptions="Start" Grid.RowSpan="2" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" Text="&#xe707;" FontFamily="Weather Analysis Font Icon" WidthRequest="24" HeightRequest="24" />
+                                        <Label Grid.Column="0"  VerticalOptions="Center" HorizontalOptions="Start" Grid.RowSpan="2" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" Text="&#xE7FA;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  WidthRequest="24" HeightRequest="24" />
                                         <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" Grid.Row="0" Text="Theme" TextColor="{AppThemeBinding Light=#313032, Dark=#FFFFFF}" FontSize="16"/>
                                         <Label Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Grid.Row="1" Text="Light" x:Name="themeLabel" FontSize="14" TextColor="{AppThemeBinding Light=#5F5E60, Dark=#929092}"/>
 
@@ -1245,7 +1247,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Grid.RowSpan="2" Text="&#xe75e;" FontSize="25" FontFamily="MauiSampleFontIcon" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" WidthRequest="34" HeightRequest="34" />
+                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Grid.RowSpan="2" Text="&#xe75e;" FontSize="25" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" WidthRequest="34" HeightRequest="34" />
                                         <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" Grid.Row="0" Text="Notification" TextColor="{AppThemeBinding Light=#313032, Dark=#FFFFFF}" FontSize="16" />
                                         <Label Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Grid.Row="1" Text="Daily forecast, alerts" FontSize="14" TextColor="{AppThemeBinding Light=#5F5E60, Dark=#929092}"/>
 
@@ -1260,7 +1262,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" FontSize="25" Grid.RowSpan="2" Text="&#xe71f;" FontFamily="MauiSampleFontIcon" TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" WidthRequest="34" HeightRequest="34" />
+                                        <Label Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" FontSize="25" Grid.RowSpan="2" Text="&#xe71f;" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  TextColor="{AppThemeBinding Light={StaticResource WeatherAnalysisGraphiteGray},Dark={StaticResource White}}" WidthRequest="34" HeightRequest="34" />
                                         <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" Grid.Row="0" Text="Help &amp; Support" TextColor="{AppThemeBinding Light=#313032, Dark=#FFFFFF}" FontSize="16" />
                                         <Label Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Grid.Row="1" Text="Syncfusion MAUI Controls" FontSize="14" TextColor="{AppThemeBinding Light=#5F5E60, Dark=#929092}"/>
 
@@ -1319,8 +1321,6 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                                     </Border>
                                 </Grid>
                             </Grid>
-
-
                         </Grid>
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>

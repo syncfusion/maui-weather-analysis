@@ -23,7 +23,7 @@ namespace WeatherAnalysis
                     fonts.AddFont("MauiMaterialAssets.ttf", "MaterialAssets");
                     fonts.AddFont("Roboto-Medium.ttf", "RobotoMedium");
                     fonts.AddFont("Roboto-Regular.ttf", "Roboto");
-                    fonts.AddFont("Weather Analysis Font Icon.ttf", "WeatherAnalysis");
+                    fonts.AddFont("MauiSampleFontIcon.ttf", "MauiSampleFontIcon");
                 });
             builder.ConfigureSampleBrowserBase();
 
