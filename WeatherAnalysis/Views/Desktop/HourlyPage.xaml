@@ -226,7 +226,7 @@
 
                         <listview:SfListView.ItemTemplate>
                             <DataTemplate>
-                                <Border WidthRequest="76" HeightRequest="100" StrokeThickness="0" Style="{StaticResource tileBorder}" Padding="0">
+                                <Border WidthRequest="76" HeightRequest="100" StrokeThickness="0" Padding="0">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="10"/>
                                     </Border.StrokeShape>
