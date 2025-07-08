@@ -1,8 +1,4 @@
 
-using Syncfusion.Maui.ListView;
-using Syncfusion.Maui.Themes;
-using System;
-
 namespace WeatherAnalysis;
 
 public partial class HourlyPage : ContentView
@@ -146,7 +142,7 @@ public partial class HourlyPage : ContentView
                     };
 
                     label.SetBinding(Label.IsVisibleProperty, new Binding("Item.DateTime", BindingMode.OneWay, new LabelVisibilityConverter()));
-                    label.SetBinding(Label.TextProperty, new Binding("Item.Temperature", BindingMode.OneWay, stringFormat: "{0:0}°"));
+                    label.SetBinding(Label.TextProperty, new Binding("Item.Temperature", BindingMode.OneWay, stringFormat: "{0:0}Â°"));
 
                     grid.Add(label);
                     return grid;
@@ -169,7 +165,7 @@ public partial class HourlyPage : ContentView
         await scrollView.ScrollToAsync(scrollView.ScrollX + 100, 0, true);
     }
 
-    private async void forecastLeftArrow_Clicked(object sender, TappedEventArgs e)
+    private async void ForecastLeftArrow_Clicked(object sender, TappedEventArgs e)
     {
         await scrollView.ScrollToAsync(scrollView.ScrollX - 100, 0, true);
     }
