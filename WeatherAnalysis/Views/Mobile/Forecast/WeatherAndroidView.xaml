@@ -803,7 +803,7 @@
                                                                 <chart:ChartAnnotationLabelStyle TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
                                                             </chart:TextAnnotation.LabelStyle>
                                                         </chart:TextAnnotation>
-                                                        <chart:EllipseAnnotation X1="2.1" X2="2.55" Y1="22.5" Y2="34.5" Text="&#xe78e;" VerticalAlignment="Center"  Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource solarEllipseFillColor}" >
+                                                        <chart:EllipseAnnotation x:Name="solarEllipse" X1="2.1" X2="2.55" Y1="22.5" Y2="34.5" Text="&#xe78e;" VerticalAlignment="Center"  Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource solarEllipseFillColor}" >
                                                             <chart:EllipseAnnotation.LabelStyle>
                                                                 <chart:ChartAnnotationLabelStyle  TextColor="White" FontSize="14" Margin="3" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  />
                                                             </chart:EllipseAnnotation.LabelStyle>
@@ -892,7 +892,7 @@ Fill="{AppThemeBinding Light={StaticResource WeatherAnalysisPinkishRed}, Dark={S
                                                                 <chart:ChartAnnotationLabelStyle TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
                                                             </chart:TextAnnotation.LabelStyle>
                                                         </chart:TextAnnotation>
-                                                        <chart:EllipseAnnotation X1="2" X2="2.5" Y1="20" Y2="32" Text="&#xe775;" Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource LunarEllipseFillColor}" >
+                                                        <chart:EllipseAnnotation x:Name="lunarEllipse" X1="2" X2="2.5" Y1="20" Y2="32" Text="&#xe775;" Stroke="{StaticResource EllipseStrokeColor}" StrokeWidth="3" Fill="{StaticResource LunarEllipseFillColor}" >
                                                             <chart:EllipseAnnotation.LabelStyle>
                                                                 <chart:ChartAnnotationLabelStyle  TextColor="White" FontSize="15" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="{OnPlatform Default ='MauiSampleFontIcon', WinUI ='MauiSampleFontIcon.ttf#MauiSampleFontIcon'}"  />
                                                             </chart:EllipseAnnotation.LabelStyle>

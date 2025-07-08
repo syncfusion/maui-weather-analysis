@@ -184,6 +184,12 @@ public partial class WeatherAndroidView : ContentView
             {
                 theme.VisualTheme = SfVisuals.MaterialLight;
                 Application.Current.UserAppTheme = AppTheme.Light;
+
+                //Manually changing the Ellipse color, as setting it directly in the XAML page throws an error
+                solarEllipse.Stroke = new SolidColorBrush(Microsoft.Maui.Graphics.Color.FromArgb("#FFFFFF"));
+                solarEllipse.Fill = new SolidColorBrush(Microsoft.Maui.Graphics.Color.FromArgb("#E2227E"));
+                lunarEllipse.Stroke = new SolidColorBrush(Microsoft.Maui.Graphics.Color.FromArgb("#FFFFFF"));
+                lunarEllipse.Fill = new SolidColorBrush(Microsoft.Maui.Graphics.Color.FromArgb("#116DF9"));
             }
         }
 
@@ -203,6 +209,12 @@ public partial class WeatherAndroidView : ContentView
             {
                 theme.VisualTheme = SfVisuals.MaterialDark;
                 Application.Current.UserAppTheme = AppTheme.Dark;
+
+                //Manually changing the Ellipse color, as setting it directly in the XAML page throws an error
+                solarEllipse.Stroke = new SolidColorBrush(Microsoft.Maui.Graphics.Color.FromArgb("#1C1B1D"));
+                solarEllipse.Fill = new SolidColorBrush(Microsoft.Maui.Graphics.Color.FromArgb("#C9588E"));
+                lunarEllipse.Stroke = new SolidColorBrush(Microsoft.Maui.Graphics.Color.FromArgb("#1C1B1D"));
+                lunarEllipse.Fill = new SolidColorBrush(Microsoft.Maui.Graphics.Color.FromArgb("#BF3B49"));
             }
         }
 
