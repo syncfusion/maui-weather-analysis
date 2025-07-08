@@ -14,7 +14,7 @@
         <local:DatetimeToStringConverter x:Key="datetimeToStringConverter" Format="ddd d" />
         <local:CelsiusToFahrenheitConverter x:Key="CelsiusToFahrenheitConverter" />
         <local:StringToImageConverter x:Key="StringToImageConverter"/>
-
+        <local:StringToImageConverter x:Key="stringToImageConverter" />
         <Color x:Key="gridLineLight">#E7E0EC</Color>
         <Color x:Key="gridLineDark">#36323B</Color>
 
@@ -215,13 +215,13 @@
                                       HeightRequest="120"
                                       Orientation="Horizontal"
                                          IsScrollingEnabled="False"
-                                     HorizontalOptions="CenterAndExpand"
+                                     HorizontalOptions="Center"
                                       ItemSpacing="0,0,12,0"
                                       ScrollBarVisibility="Never"
                                       SelectionChangedCommand="{Binding SelectionChangedCommand}">
 
                         <listview:SfListView.BindingContext>
-                            <local:HourlyForecastViewModel />
+                            <local:HourlyForecastViewModel x:Name="ho" />
                         </listview:SfListView.BindingContext>
 
                         <listview:SfListView.ItemTemplate>
@@ -233,10 +233,10 @@
 
                                     <Grid RowDefinitions="*,*,*">
                                         <Label Grid.Row="0" Text="{Binding Date, Converter={StaticResource datetimeToStringConverter}}"
-HorizontalTextAlignment="Center" 
-VerticalTextAlignment="Center" 
-FontFamily="RobotoMedium"
-FontSize="14"/>
+                                                HorizontalTextAlignment="Center" 
+                                                VerticalTextAlignment="Center" 
+                                                FontFamily="RobotoMedium"
+                                                FontSize="14"/>
                                         <Image Grid.Row="1" WidthRequest="36" HeightRequest="36" Source="{Binding Weather, Converter={StaticResource StringToImageConverter}, ConverterParameter=16}"/>
                                         <Label Grid.Row="2"
                                     HorizontalTextAlignment="Center" 
@@ -252,9 +252,9 @@ FontSize="14"/>
                         <listview:SfListView.SelectedItemTemplate>
                             <DataTemplate>
                                 <Border BackgroundColor="{AppThemeBinding Light={StaticResource WeatherAnalysisSelectionColor}, Dark={StaticResource WeatherAnalysisSelectionDark}}" 
-         WidthRequest="76" 
-         HeightRequest="100"
-         StrokeThickness="0">
+                                         WidthRequest="76" 
+                                         HeightRequest="100"
+                                         StrokeThickness="0">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="10"/>
                                     </Border.StrokeShape>
@@ -286,7 +286,7 @@ FontSize="14"/>
 
                 <Grid RowDefinitions="*" HorizontalOptions="Start" Padding="4,0,4,0" x:Name="forecastLeftArrow" IsVisible="False" Grid.Row="0">
                     <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="forecastLeftArrow_Clicked" />
+                        <TapGestureRecognizer Tapped="ForecastLeftArrow_Clicked" />
                     </Grid.GestureRecognizers>
                     <Border Stroke="Black" Grid.Row="0" StrokeThickness="0.2" VerticalOptions="Center"  WidthRequest="28" HeightRequest="40" Opacity="1" StrokeShape="RoundRectangle 20" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#3C3B3D}" >
                         <Border.Shadow>
@@ -327,14 +327,14 @@ FontSize="14"/>
                 <Grid Margin="24,0,0,0" RowDefinitions="84,*">
                     <Grid RowDefinitions="auto,auto" Grid.Row="0" Padding="16" >
                         <Grid.BindingContext>
-                            <local:DayWeatherInfoViewModel />
+                            <local:DayWeatherInfoViewModel x:Name="dayWeatherViewModel2"  />
                         </Grid.BindingContext>
                         <HorizontalStackLayout Grid.Row="0" >
                             <HorizontalStackLayout.BindingContext>
                                 <local:DayWeatherInfoViewModel x:Name="dayWeatherViewModel" />
                             </HorizontalStackLayout.BindingContext>
                             <Label Text="Today" FontFamily="RobotoMedium" FontSize="16" />
-                            <Image Source="{Binding WeatherCollection, Converter={StaticResource stringToImageConverter}, ConverterParameter=76 , Source={x:Reference dayWeatherViewModel}}"
+                            <Image Source="{Binding WeatherCollection, Converter={StaticResource stringToImageConverter}, ConverterParameter=76 , Source={x:Reference dayWeatherViewModel2}}"
 WidthRequest="24" HeightRequest="24" Margin="12,0,8,0" VerticalOptions="Center"/>
                             <Grid ColumnSpacing="8" ColumnDefinitions="*,*,*">
                                 <Label Text="{Binding MaxTemperature, StringFormat='{}{0:0}°'}" FontSize="16" Grid.Column="0" />

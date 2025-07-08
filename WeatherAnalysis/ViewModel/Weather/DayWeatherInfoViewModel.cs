@@ -250,6 +250,22 @@ namespace WeatherAnalysis
             set { maxYValue = value; RaisePropertyChanged(nameof(MaxYValue)); }
         }
 
+        private double chartInterval;
+
+        public double ChartInterval 
+        {
+            get { return chartInterval; }
+            set { chartInterval = value; RaisePropertyChanged(nameof(ChartInterval)); }
+        }
+
+        private double minimumYValueChart;
+
+        public double MinimumYValueChart
+        {
+            get { return minimumYValueChart; }
+            set { minimumYValueChart = value; RaisePropertyChanged(nameof(MinimumYValueChart)); }
+        }
+
         private DateTime selectedDateTime = DateTime.Now;
 
         private void OnForecastDateChanged(ForecastChangedEventArgs obj)
@@ -563,9 +579,8 @@ namespace WeatherAnalysis
             set { weatherCollection = value; RaisePropertyChanged(nameof(WeatherCollection)); }
         }
 
-        public double MaximumYValueChart;
-        public double MinimumYValueChart;
-        public double ChartInterval;
+        public double MaximumYValueChart;     
+        
 
     }
 }
