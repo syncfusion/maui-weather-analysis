@@ -204,7 +204,7 @@
 
             <!--Date Tile-->
 
-            <Grid Padding="0,0,15,0" RowDefinitions="*"  Grid.Row="1" >
+            <Grid Padding="0,10,15,10"  RowDefinitions="*"  Grid.Row="1" >
 
                 <ScrollView x:Name="scrollView" Grid.Row="0" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                     <listview:SfListView x:Name="forcastList"
@@ -212,10 +212,10 @@
                                       Grid.Row="0"
                                       ItemsSource="{Binding HourlyForecasts}"
                                       SelectedItem="{Binding SelectedTile}" 
-                                      HeightRequest="120"
+                                      MaximumHeightRequest="120"
                                       Orientation="Horizontal"
-                                         IsScrollingEnabled="False"
-                                     HorizontalOptions="Center"
+                                      IsScrollingEnabled="False"
+                                      HorizontalOptions="StartAndExpand"
                                       ItemSpacing="0,0,12,0"
                                       ScrollBarVisibility="Never"
                                       SelectionChangedCommand="{Binding SelectionChangedCommand}">
